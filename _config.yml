@@ -1,6 +1,6 @@
 markdown: kramdown
 highlighter: rouge
-paginate: 8
+paginate: 9
 #permalink: /blog/:categories/:year/:month/:day/:title.html
 permalink: /blog/:year/:month/:day/:title.html
 
@@ -12,5 +12,5 @@ collections:
     authors:
         output: true
         permalink: /authors/:path/
-gems:
+plugins:
     - jekyll-paginate

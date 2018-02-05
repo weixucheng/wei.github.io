@@ -1,4 +1,4 @@
-<ul class='pagination pull-right'>{% if paginator.page == 1 %}
+<ul class='pagination '>{% if paginator.page == 1 %}
     <li class='disabled'>
         <a>
             <span class='glyphicon glyphicon-fast-backward'></span>
@@ -10,7 +10,8 @@
             <span class='glyphicon glyphicon-chevron-left'></span>
             <span class='sr-only'>前一页</span>
         </a>
-    </li>{% else %}
+    </li>
+    {% else %}
     <li>
         <a href='/' title='首页'>
             <span class='glyphicon glyphicon-fast-backward'></span>

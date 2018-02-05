@@ -15,9 +15,261 @@
     <link rel='stylesheet' type='text/css' href='/bootstrap/css/bootstrap.css'>
     <link rel='stylesheet' type='text/css' href='/bootstrap/css/bootstrap-theme.css'>
     <link rel='stylesheet' type='text/css' href='/css/app.css'>
+	<link rel="stylesheet" type="text/css" href='/bootstrap/style.css'>
     <script src='/bootstrap/js/bootstrap.js'></script>
     <script src='/js/app.js'></script>
     <script>
+        $(function(){
+            var authors="";
+           var author_path="";
+               
+             $.getJSON("/authors.json",function(o){
+                authors=o;
+        });
+ 
+           $("#menu_name,#menu_time").change(function(){
+                    $(".classify").css("display","none");
+                 var a=$("#menu_name option:checked").text();
+                 var b=$("#menu_time option:checked").text().replace(/\s+/g,"");
+                 if (a!="ALL"||b!="ALL") {
+                    $(".all").css("display","none");
+                 }
+                 if (a=="ALL"&&b=="ALL") {
+                    $(".all").css("display","block");
+                 }
+                 
+           
+           $.getJSON("/classify.json",function(o){
+
+                    
+                $.each( o, function( i , item ){
+                    $.each( authors, function( j , author ){
+                 
+                        if(item[2]==author.name.replace(" ","") || ""){
+                             author_path=author.path.replace(" ","") || "";
+                        }
+                   
+               
+            });
+                    
+                    if (item[1]==a&&"ALL"==b.substring(0,4)) {
+                    
+                    /*"<option class='menu_name' >"+item[1]+
+                        
+                    "</option>"*/
+                    var content =" <div class='col-xs-12 col-sm-4 classify' style=' margin-top: 12px;' >";
+                        content +="<div class='img-rounded' style='background-color:#dbdbdb;height: 216px; border: 1px solid #E0E0E0;'>";
+                        
+                        content +="<div class='img-rounded'  style='position:relative;' >";
+                        content +=   " <a class='' href='"+item[4]+"' target='_blank' title='"+item[0]+"'>";
+                                
+                            
+                            if (item[3]==""){
+                        content +=  "<img src='/images/blogways.png' alt='...' class='img-rounded img-main'  style='width: 100%;height: 160px;'>";
+                            }else{
+                        content +=   "<img src='"+item[3]+"' alt='...' class='img-rounded img-main' style='width: 100%;height: 160px;'>";
+                            }
+
+                        content +=  "<div   style='position:absolute;width:100%;height:30px;margin-top:132px; z-indent:2;left:0;top:0;color: #fff;background: #000; border-top-right-radius: 0em;border-top-left-radius: 0em;border-bottom-right-radius: 6px;border-bottom-left-radius: 6px;text-align: center;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;line-height: 30px;'>"+item[0]+"</div>";
+
+                        content +=  "</a>" ;
+
+                        content +=" </div>";
+
+                        
+                        content += "<div class='col-sm-12 col-xs-12' style='height: 28px; border-bottom: 1px solid #484848;line-height:28px;'>";
+                        content +=  " <div class='col-sm-6 col-xs-6 ' style='float: left;padding-left: 0px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'>";
+                        content +=      "<span class='glyphicon glyphicon-user'></span>";
+
+
+                        content +=    "<span class='sr-only'>{{ page.posted_by }}&nbsp;:&nbsp;</span>";
+                                        
+                        content +=           "<a href='"+author_path+"'>"+item[2]+"</a>";
+                        content +=  " </div>"
+                        content +=  "<div class='col-sm-6 col-xs-6 ' style='padding-left: 0px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;'>";
+                        content +=  "<div style='float: right;'>";
+                        content +=  "<span class='glyphicon glyphicon-tag'></span>";
+                        content +=  "<span class='sr-only' >{{ page.posted_on }}&nbsp;:&nbsp;</span>";
+                        content +=    "<a href='/categories/"+item[1]+"' >"+item[1]+ "</a>";
+                        content += "</div>"  ;   
+                        content += "</div>";
+                        content += " </div>";
+                        content += "<div class='col-sm-12 col-xs-12' style='line-height:28px; padding-left: 0px;padding-right: 0px;'>";
+                        content += "<div class='col-xs-4 col-sm-4'>";
+                        content +=  "<img src='/bootstrap/img/q.png'>";
+                        content +=  "<font>22</font>";
+                        content += "</div>";
+                        content += "<div class='col-xs-4 col-sm-4'>";
+                        content +="<img src='/bootstrap/img/w.png'>";
+                        content +=  "<font>17</font>";
+                        content += "</div>";
+                        content +=  "<div class='col-xs-4 col-sm-4'>";
+                        content +=   "<img src='/bootstrap/img/e.png'>";
+                        content += "</div>";
+                        content += "</div>";
+                        content += "</div>";
+
+                    $("#page_main").append(content);
+
+                    }
+                    if ("ALL"==a&&item[5]==b.substring(0,4)) {
+                    
+                    /*"<option class='menu_name' >"+item[1]+
+                        
+                    "</option>"*/
+                    var content =" <div class='col-xs-12 col-sm-4 classify' style=' margin-top: 12px;' >";
+                        content +="<div class='img-rounded' style='background-color:#dbdbdb;height: 216px; border: 1px solid #E0E0E0;'>";
+                        
+                        content +="<div class='img-rounded'  style='position:relative;' >";
+                        content +=   " <a class='' href='"+item[4]+"' target='_blank' title='"+item[0]+"'>";
+                                
+                            
+                            if (item[3]==""){
+                        content +=  "<img src='/images/blogways.png' alt='...' class='img-rounded img-main'  style='width: 100%;height: 160px;'>";
+                            }else{
+                        content +=   "<img src='"+item[3]+"' alt='...' class='img-rounded img-main' style='width: 100%;height: 160px;'>";
+                            }
+
+                        content +=  "<div   style='position:absolute;width:100%;height:30px;margin-top:132px; z-indent:2;left:0;top:0;color: #fff;background: #000; border-top-right-radius: 0em;border-top-left-radius: 0em;border-bottom-right-radius: 6px;border-bottom-left-radius: 6px;text-align: center;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;line-height: 30px;'>"+item[0]+"</div>";
+
+                        content +=  "</a>" ;
+
+                        content +=" </div>";
+
+                        
+                        content += "<div class='col-sm-12 col-xs-12' style='height: 28px; border-bottom: 1px solid #484848;line-height:28px;'>";
+                        content +=  " <div class='col-sm-6 col-xs-6 ' style='float: left;padding-left: 0px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'>";
+                        content +=      "<span class='glyphicon glyphicon-user'></span>";
+
+
+                        content +=    "<span class='sr-only'>{{ page.posted_by }}&nbsp;:&nbsp;</span>";
+                                        
+                        content +=           "<a href='"+author_path+"'>"+item[2]+"</a>";
+                        content +=  " </div>"
+                        content +=  "<div class='col-sm-6 col-xs-6 ' style='padding-left: 0px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;'>";
+                        content +=  "<div style='float: right;'>";
+                        content +=  "<span class='glyphicon glyphicon-tag'></span>";
+                        content +=  "<span class='sr-only' >{{ page.posted_on }}&nbsp;:&nbsp;</span>";
+                        content +=    "<a href='/categories/"+item[1]+"'>"+item[1]+ "</a>";
+                        content += "</div>"  ;   
+                        content += "</div>";
+                        content += " </div>";
+                        content += "<div class='col-sm-12 col-xs-12' style='line-height:28px; padding-left: 0px;padding-right: 0px;'>";
+                        content += "<div class='col-xs-4 col-sm-4'>";
+                        content +=  "<img src='/bootstrap/img/q.png'>";
+                        content +=  "<font>22</font>";
+                        content += "</div>";
+                        content += "<div class='col-xs-4 col-sm-4'>";
+                        content +="<img src='/bootstrap/img/w.png'>";
+                        content +=  "<font>17</font>";
+                        content += "</div>";
+                        content +=  "<div class='col-xs-4 col-sm-4'>";
+                        content +=   "<img src='/bootstrap/img/e.png'>";
+                        content += "</div>";
+                        content += "</div>";
+                        content += "</div>";
+
+                    $("#page_main").append(content);
+
+                    }
+                    if (item[1]==a&&item[5]==b.substring(0,4)) {
+                    
+                    /*"<option class='menu_name' >"+item[1]+
+                        
+                    "</option>"*/
+                    var content =" <div class='col-xs-12 col-sm-4 classify' style=' margin-top: 12px;' >";
+                        content +="<div class='img-rounded' style='background-color:#dbdbdb;height: 216px; border: 1px solid #E0E0E0;'>";
+                        
+                        content +="<div class='img-rounded'  style='position:relative;' >";
+                        content +=   " <a class='' href='"+item[4]+"' target='_blank' title='"+item[0]+"'>";
+                                
+                            
+                            if (item[3]==""){
+                        content +=  "<img src='/images/blogways.png' alt='...' class='img-rounded img-main'  style='width: 100%;height: 160px;'>";
+                            }else{
+                        content +=   "<img src='"+item[3]+"' alt='...' class='img-rounded img-main' style='width: 100%;height: 160px;'>";
+                            }
+
+                        content +=  "<div   style='position:absolute;width:100%;height:30px;margin-top:132px; z-indent:2;left:0;top:0;color: #fff;background: #000; border-top-right-radius: 0em;border-top-left-radius: 0em;border-bottom-right-radius: 6px;border-bottom-left-radius: 6px;text-align: center;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;line-height: 30px;'>"+item[0]+"</div>";
+
+                        content +=  "</a>" ;
+
+                        content +=" </div>";
+
+                        
+                        content += "<div class='col-sm-12 col-xs-12' style='height: 28px; border-bottom: 1px solid #484848;line-height:28px;'>";
+                        content +=  " <div class='col-sm-6 col-xs-6 ' style='float: left;padding-left: 0px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'>";
+                        content +=      "<span class='glyphicon glyphicon-user'></span>";
+
+
+                        content +=    "<span class='sr-only'>{{ page.posted_by }}&nbsp;:&nbsp;</span>";
+                                        
+                        content +=           "<a href='"+author_path+"'>"+item[2]+"</a>";
+                        content +=  " </div>"
+                        content +=  "<div class='col-sm-6 col-xs-6 ' style='padding-left: 0px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;'>";
+                        content +=  "<div style='float: right;'>";
+                        content +=  "<span class='glyphicon glyphicon-tag'></span>";
+                        content +=  "<span class='sr-only' >{{ page.posted_on }}&nbsp;:&nbsp;</span>";
+                        content +=    "<a href='/categories/"+item[1]+"'>"+item[1]+ "</a>";
+                        content += "</div>"  ;   
+                        content += "</div>";
+                        content += " </div>";
+                        content += "<div class='col-sm-12 col-xs-12' style='line-height:28px; padding-left: 0px;padding-right: 0px;'>";
+                        content += "<div class='col-xs-4 col-sm-4'>";
+                        content +=  "<img src='/bootstrap/img/q.png'>";
+                        content +=  "<font>22</font>";
+                        content += "</div>";
+                        content += "<div class='col-xs-4 col-sm-4'>";
+                        content +="<img src='/bootstrap/img/w.png'>";
+                        content +=  "<font>17</font>";
+                        content += "</div>";
+                        content +=  "<div class='col-xs-4 col-sm-4'>";
+                        content +=   "<img src='/bootstrap/img/e.png'>";
+                        content += "</div>";
+                        content += "</div>";
+                        content += "</div>";
+
+                    $("#page_main").append(content);
+
+                    }
+                });
+            });
+        
+          });
+                   
+            $.getJSON("/authors.json",function(o){
+                    o.sort(function(a,b){
+                    return b.articles.length-a.articles.length 
+                     });
+                $.each( o, function( i , item ){
+                     var name = item.name.replace(" ","") || "";     
+                     var path = item.path.replace(" ","") || "";                    
+                        var num = item.articles.length || 0;
+
+                        if (i<=5) {
+                   var content =" <div style='height: 70px; background-color: #f3f3f3;box-shadow: 0px 2px 5px #bebdbd;line-height: 30px;vertical-align:middle;'> ";
+                        content +=" <a href='"+path+"'>";
+                        content +="<img src='/images/blogways.png' alt='...''  style='width:50px;height: 50px;border: 1px solid #E0E0E0;margin-top: 10px;margin-left: 10px;border:none; float:left; display:inline;''>";
+                        content +="</a>";
+                        content +=" <div style=' float:left; display:inline; margin-top:5px; margin-left:5px;'>";
+                        content +="     <div >"+name+"</div>";
+                        content +="  <div >";
+                        content +="     <span>上传:<u><a href='"+path+"'>"+num+"</a></u></span>";
+                        content +="    <span>人气:199</span>";
+                        content +=" </div>";
+                        content +=" </div>";
+                        content +=" </div>";
+
+                        $("#people_like").append(content);
+                        }
+
+                });
+        
+            });
+
+
+        });
+
         var _hmt = _hmt || [];
         (function() {
           var hm = document.createElement("script");
@@ -25,9 +277,12 @@
           var s = document.getElementsByTagName("script")[0]; 
           s.parentNode.insertBefore(hm, s);
         })();
+        
+ 	
+		
     </script>
 </head>
-<body style='background-color: #f5f5f5;'>
+<body style='background-color: #F5F5F5;'>
     <div class='totop visible-lg visible-md visible-sm hidden-xs'>
         <a id='to-top' href='javascript:void(0)'>
             <span id='to-top-title'>返回</br>顶部</span>
