@@ -15,63 +15,71 @@
 
     <div class='container'>
         <div class='main-content row'>
-            <div class='mainbar col-md-9 col-sm-12 col-xs-12'>
-                <div class='panel panel-info'>
-                    <div class='al-author-title panel-heading'>
-                        <h2 class='al-author-name panel-title'>{{ page.name }}</h2>
-                    </div>
-                </div>
+            <div class='mainbar col-md-12 col-sm-12 col-xs-12'>
+             <ol class=" breadcrumb " style="background: #fff;">
+                <span class="glyphicon glyphicon-home"></span>
+                <a href="/" style="color: #000;">首页</a>>
+                <a href="" style="color: #000;">博文</a>
 
+            </ol>
+        </div>
+<div class='mainbar col-md-9 col-sm-12 col-xs-12'>
                 <div class='al-article-list visible-lg visible-md visible-sm hidden-xs'>
                     {% for year in site.data.years %}
-                    {% assign flag = true %}
+                        {% assign yearcount=0 %}
+                        {% assign y=year.y %}
+                        {% for post in site.posts %}
+                            {% assign name=post.author | strip %}
+                            {% assign posty=post.date | date: "%Y" %}
+                            {% if name == page.name and y == posty %}
+                                {% assign yearcount=yearcount | plus:1 %}
+                            {% endif %}
+                        {% endfor %}
+                         <div class="col-sm-12 col-xs-12  " style=" margin-bottom: 10px;border:1px solid #E0E0E0;background-color:#fff;padding-left: 0px;padding-right: 0px;" >
+
+                        <div  class="col-sm-12 col-xs-12  " onclick="click_date({{y}})" style="height: 60px;background: #24292c; text-align:center;line-height: 60px;">
+                        
+                    
+                                <font style="color: #fff;">
+                               
+                               {{y}}年度
+                                     
+                                </font>
+                                <span  style="color: #fff;">
+                                   (共计{{yearcount}}篇）
+                                </span>
+                                <span class="glyphicon glyphicon-print pull-right" style="color: #fff;margin-top: 20px;">
+                                    
+                                </span>
+                    </div>
                     {% for post in site.posts %}
-                    {% if post.author == page.name %}
-                    {% capture y%}{{ post.date | date: "%Y" }}{% endcapture %}
-                    {% if year.y == y %}
-                    {% if flag == true %}
-                    <div class='panel panel-default'>
-                        <div class='panel-body'>
-                            <h2 class='al-year'>{{ year.y }}</h2>
-                            <hr class='al-hr'>{% assign flag = false %}{% endif %}
-                            <div class='al-article'>
-                                <a href='{{ post.url }}' target='_blank' title='{{ post.title }}'>{{ post.title | truncate: 30 }}</a>
-                                <span class='al-article-date'>&nbsp;(发布于：{{ post.date | date: '%Y.%m.%d' }})</span>
-                            </div>{% endif %}{% endif %}{% endfor %}
-                            {% if flag == false %}
+                            {% assign name=post.author | strip %}
+                            {% assign posty=post.date | date: "%Y" %}
+                            {% if name == page.name and y == posty %}
+                    <div class="menu_date_{{post.date| date: '%Y'}}" id="menu_date_{{post.date| date: '%Y'}}" style="display:none;" >
+                        <div class='col-sm-12 col-xs-12' style='height: 30px;line-height:30px;'>
+                            <span class="glyphicon glyphicon-list-alt"></span>
+                            <a href="{{post.url}}" style='width: 400px;color:#000;margin-left: 20px;'>{{post.title}}</a>
+                            <span style='float:right;'>发布于：{{post.date | date: "%Y.%m.%d"}}</span>
                         </div>
-                    </div><!--end of panel-->{% endif %}{% endfor %}
+                    </div>
+                         {% endif %}
+                        {% endfor %}
+                       </div><!--end of panel-->{% endfor %}     
+                           
+                            
+                            
+                       
+                    
                 </div><!--end of article-list-->
 
-                <div class='al-article-list-xs hidden-lg hidden-md hidden-sm visible-xs'>
-                    {% for year1 in site.data.years %}
-                    {% assign flag1 = true %}
-                    {% for post1 in site.posts %}
-                    {% if post1.author == page.name %}
-                    {% capture y1 %}{{ post1.date | date: '%Y' }}{% endcapture %}
-                    {% if year1.y == y1 %}
-                    {% if flag1 == true %}
-                    <div class='panel panel-default'>
-                        <div class='panel-heading'>
-                            <h2 class='panel-title al-year'>{{ year1.y }}</h2>
-                        </div>
-                        <div class='list-group'>{% assign flag1 = false %}{% endif %}
-                            <a class='list-group-item list-group-item-default' href='{{ post1.url }}' target='_blank'>
-                                <h4 class='list-group-item-heading al-title-xs'>{{ post1.title | truncate: 30 }}</h4>
-                                <div class='list-group-item-text'>
-                                    <span class='al-article-date-xs pull-right'>({{ post1.date | date: '%m.%d' }})</span>
-                                    <span class='badge'>{{ post1.category }}</span>
-                                </div>
-                            </a>{% endif %}{% endif %}{% endfor %}
-                            {% if flag1 == false %}
-                        </div><!--end of list-group-->
-                    </div><!--end of panel-->{% endif %}{% endfor %}
-                </div><!--end of list-xs-->
+                
             </div><!--end of mainbar-->
             <div class='sidebar col-md-3 hidden-sm hidden-xs'>
                 <div class='authorslistbar panel panel-default' id='authorslistbar'>
                     <div class='panel-heading'>
-                        <h4 class='panel-title'>作者列表</h4>
+                        <span class="glyphicon glyphicon-user"></span>
+                        <font style="font-weight: bold; color: #24292c;" >作者列表</font>
                     </div>
                     <div class='list-group'>{% for author in site.authors %}{% if page.name != author.name %}
                         <a class='list-group-item' href='{{ author.page_path }}'>{{ author.name | remove: ' ' }}

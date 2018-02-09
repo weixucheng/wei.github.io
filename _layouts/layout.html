@@ -19,235 +19,677 @@
     <script src='/bootstrap/js/bootstrap.js'></script>
     <script src='/js/app.js'></script>
     <script>
-        $(function(){
-            var authors="";
-           var author_path="";
-               
-             $.getJSON("/authors.json",function(o){
-                authors=o;
-        });
- 
-           $("#menu_name,#menu_time").change(function(){
-                    $(".classify").css("display","none");
-                 var a=$("#menu_name option:checked").text();
-                 var b=$("#menu_time option:checked").text().replace(/\s+/g,"");
-                 if (a!="ALL"||b!="ALL") {
-                    $(".all").css("display","none");
-                 }
-                 if (a=="ALL"&&b=="ALL") {
-                    $(".all").css("display","block");
-                 }
-                 
-           
-           $.getJSON("/classify.json",function(o){
 
-                    
-                $.each( o, function( i , item ){
-                    $.each( authors, function( j , author ){
-                 
-                        if(item[2]==author.name.replace(" ","") || ""){
-                             author_path=author.path.replace(" ","") || "";
+        function click_date(date){
+           var a= $(".menu_date_"+date+"").css("display");
+            if (a=="none") {
+                $(".menu_date_"+date+"").css("display","block");
+            }else{
+                $(".menu_date_"+date+"").css("display","none");
+            }
+        }
+        function click_year(year){
+            var obj = document.getElementById("menu_year_"+year+"");
+            var a = obj.getElementsByTagName("div");
+            if(a.length>0)
+            {
+                $("#menu_year_"+year+"").html("");
+            }
+            else
+            {
+                $.getJSON("/yearauthors.json",function(o){
+                    o.sort(function(a,b){
+                        return b.num-a.num
+                    });
+                    $.each( o, function( i , item ){
+                        var name = item.name.replace(" ","") || "";     
+                        var path = item.path.replace(" ","") || "";  
+                        var yearauthor=item.year.replace(" ","")||"";                  
+                        var num = item.num.replace(" ","") || "";
+                        if (year==yearauthor) {
+                            if (num!=0) {
+                                var content="<div class='col-sm-12 col-xs-12' style='height: 30px;line-height:30px;padding-left:0px;'>";
+                                content+="<span class='glyphicon glyphicon-user' ></span>";
+                                content+="<a href='"+path+"'  style='width: 400px;color:#000;margin-left: 20px;'>"+name+"</a>";
+                                content+="<span style='float:right;'>共计<font style='font-size:18px;'>"+num+"</font>篇</span>";
+                                content+="</div>";
+                                $("#menu_year_"+year+"").append(content);
+                            }
                         }
-                   
-               
+                    });
+                });
+            }   
+        }
+
+
+
+        $(function(){
+           
+            var m=$("#menu_name option:checked").text();
+            var n=$("#menu_time option:checked").text().replace(/\s+/g,"");
+
+            $('#username').keyup(function() { 
+                if($(this).val().length>0){
+                    $('.myli').css("display","none");
+                    $.getJSON("/authors.json",function(a){ 
+                        $.each( a, function( i , item1 ){
+                        var name=item1.name.replace(" ","") || "";
+                        var path=item1.path.replace(" ","") || "";
+                            if(name.indexOf($("#username").val())>-1){
+                            var data1="<li class='myli'  style='height:18px;'><a  href='"+path+"' style='color:#fff;'>"+name+"</a></li>";
+                                $("#groupid").append(data1);
+                            }
+                        });
+                    });
+
+                    $.getJSON("/categorycount.json",function(b){   
+                        $.each( b, function( i , item2 ){
+                            if(item2[1].indexOf($("#username").val())>-1){
+                                var  data2="<li class='myli'  style='height:18px;' ><a href='/categories/"+item2[0]+"' style='color:#fff;'>"+item2[1]+"</a></li>";
+                                            $("#groupid").append(data2);
+                            }
+                        });
+                    });
+                }else
+                {
+                    $('#groupid').html("");
+                }
+            });  
+             
+            var winH=$(window).height();
+            $(window).scroll(function(){
+                var pageH = $(document.body).height();    //滚动条距离顶部的高度
+                var scrollT = $(window).scrollTop();   //当前页面的总高度
+                var aa = (pageH-winH-scrollT)/winH;      //当前可视的页面高度
+                    if(aa<0.02){    
+                        var num=$("#page_main").children("div").length;            
+                        loaddata(num);
+                    }
             });
-                    
-                    if (item[1]==a&&"ALL"==b.substring(0,4)) {
-                    
-                    /*"<option class='menu_name' >"+item[1]+
-                        
-                    "</option>"*/
-                    var content =" <div class='col-xs-12 col-sm-4 classify' style=' margin-top: 12px;' >";
-                        content +="<div class='img-rounded' style='background-color:#dbdbdb;height: 216px; border: 1px solid #E0E0E0;'>";
-                        
-                        content +="<div class='img-rounded'  style='position:relative;' >";
-                        content +=   " <a class='' href='"+item[4]+"' target='_blank' title='"+item[0]+"'>";
-                                
-                            
-                            if (item[3]==""){
-                        content +=  "<img src='/images/blogways.png' alt='...' class='img-rounded img-main'  style='width: 100%;height: 160px;'>";
-                            }else{
-                        content +=   "<img src='"+item[3]+"' alt='...' class='img-rounded img-main' style='width: 100%;height: 160px;'>";
-                            }
-
-                        content +=  "<div   style='position:absolute;width:100%;height:30px;margin-top:132px; z-indent:2;left:0;top:0;color: #fff;background: #000; border-top-right-radius: 0em;border-top-left-radius: 0em;border-bottom-right-radius: 6px;border-bottom-left-radius: 6px;text-align: center;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;line-height: 30px;'>"+item[0]+"</div>";
-
-                        content +=  "</a>" ;
-
-                        content +=" </div>";
-
-                        
-                        content += "<div class='col-sm-12 col-xs-12' style='height: 28px; border-bottom: 1px solid #484848;line-height:28px;'>";
-                        content +=  " <div class='col-sm-6 col-xs-6 ' style='float: left;padding-left: 0px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'>";
-                        content +=      "<span class='glyphicon glyphicon-user'></span>";
 
 
-                        content +=    "<span class='sr-only'>{{ page.posted_by }}&nbsp;:&nbsp;</span>";
+
+
+            var authors="";
+            var author_path="";
+            $.getJSON("/authors.json",function(o){
+                authors=o;
+            });
+
+            function loaddata(num){
+                var a=$("#menu_name option:checked").text();
+                var b=$("#menu_time option:checked").text().replace(/\s+/g,"").substring(0,4);
+                if (a=="ALL"&&b=="ALL") {
+                    var countstart=$("#page_main").children("div").length;
+                    $.getJSON("/classify.json",function(o){
+                        var countmain=0;
+
+                            $.each( o, function( i , item ){
+                                $.each( authors, function( j , author ){
+                                    if(item[2]==author.name.replace(" ","") || ""){
+                                        author_path=author.path.replace(" ","") || "";
+                                    }
+                                });
+                                        countmain+=1;
+                                if (countmain>num&&countmain<=(num+9)) {
+                                    var content =" <div class='col-xs-12 col-sm-4 all' style=' margin-top: 12px;' >";
+                                    content +="<div class='img-rounded' style='background-color:#dbdbdb;height: 216px; border: 1px solid #E0E0E0;'>";
+                                    
+                                    content +="<div class='img-rounded'  style='position:relative;' >";
+                                    content +=   " <a class='' href='"+item[4]+"' target='_blank' title='"+item[0]+"'>";
+                                            
                                         
-                        content +=           "<a href='"+author_path+"'>"+item[2]+"</a>";
-                        content +=  " </div>"
-                        content +=  "<div class='col-sm-6 col-xs-6 ' style='padding-left: 0px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;'>";
-                        content +=  "<div style='float: right;'>";
-                        content +=  "<span class='glyphicon glyphicon-tag'></span>";
-                        content +=  "<span class='sr-only' >{{ page.posted_on }}&nbsp;:&nbsp;</span>";
-                        content +=    "<a href='/categories/"+item[1]+"' >"+item[1]+ "</a>";
-                        content += "</div>"  ;   
-                        content += "</div>";
-                        content += " </div>";
-                        content += "<div class='col-sm-12 col-xs-12' style='line-height:28px; padding-left: 0px;padding-right: 0px;'>";
-                        content += "<div class='col-xs-4 col-sm-4'>";
-                        content +=  "<img src='/bootstrap/img/q.png'>";
-                        content +=  "<font>22</font>";
-                        content += "</div>";
-                        content += "<div class='col-xs-4 col-sm-4'>";
-                        content +="<img src='/bootstrap/img/w.png'>";
-                        content +=  "<font>17</font>";
-                        content += "</div>";
-                        content +=  "<div class='col-xs-4 col-sm-4'>";
-                        content +=   "<img src='/bootstrap/img/e.png'>";
-                        content += "</div>";
-                        content += "</div>";
-                        content += "</div>";
+                                        if (item[3]==""){
+                                    content +=  "<img src='/images/blogways.png' alt='...' class='img-rounded img-main'  style='width: 100%;height: 160px;'>";
+                                        }else{
+                                    content +=   "<img src='"+item[3]+"' alt='...' class='img-rounded img-main' style='width: 100%;height: 160px;'>";
+                                        }
 
-                    $("#page_main").append(content);
+                                    content +=  "<div   style='position:absolute;width:100%;height:30px;margin-top:132px; z-indent:2;left:0;top:0;color: #fff;background: #000; border-top-right-radius: 0em;border-top-left-radius: 0em;border-bottom-right-radius: 6px;border-bottom-left-radius: 6px;text-align: center;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;line-height: 30px;'>"+item[0]+"</div>";
 
-                    }
-                    if ("ALL"==a&&item[5]==b.substring(0,4)) {
-                    
-                    /*"<option class='menu_name' >"+item[1]+
-                        
-                    "</option>"*/
-                    var content =" <div class='col-xs-12 col-sm-4 classify' style=' margin-top: 12px;' >";
-                        content +="<div class='img-rounded' style='background-color:#dbdbdb;height: 216px; border: 1px solid #E0E0E0;'>";
-                        
-                        content +="<div class='img-rounded'  style='position:relative;' >";
-                        content +=   " <a class='' href='"+item[4]+"' target='_blank' title='"+item[0]+"'>";
-                                
+                                    content +=  "</a>" ;
+
+                                    content +=" </div>";
+
+                                    
+                                    content += "<div class='col-sm-12 col-xs-12' style='height: 28px; '>";
+                                    content +="<div style='height: 100%;width:100%; border-bottom: 1px solid #959595;line-height:28px;'>";
+                                    content +=  " <div class='col-sm-6 col-xs-6 ' style='float: left;padding-left: 0px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'>";
+                                    content +=      "<span class='glyphicon glyphicon-user'></span>";
+
+
+                                    content +=    "<span class='sr-only'>{{ page.posted_by }}&nbsp;:&nbsp;</span>";
+                                                    
+                                    content +=           "<a href='"+author_path+"'>"+item[2]+"</a>";
+                                    content +=  " </div>"
+                                    content +=  "<div class='col-sm-6 col-xs-6 ' style='padding-left: 0px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;'>";
+                                    content +=  "<div style='float: right;'>";
+                                    content +=  "<span class='glyphicon glyphicon-tag'></span>";
+                                    content +=  "<span class='sr-only' >{{ page.posted_on }}&nbsp;:&nbsp;</span>";
+                                    content +=    "<a href='/categories/"+item[1]+"' >"+item[1]+ "</a>";
+                                    content += "</div>"  ;   
+                                    content += "</div>";
+                                    content += " </div>";
+                                    content +="</div>";
+                                    content += "<div class='col-sm-12 col-xs-12' style='line-height:28px; padding-left: 0px;padding-right: 0px;'>";
+                                    content += "<div class='col-xs-4 col-sm-4'>";
+                                    content +=  "<img src='/bootstrap/img/q.png'>";
+                                    content +=  "<font>22</font>";
+                                    content += "</div>";
+                                    content += "<div class='col-xs-4 col-sm-4'>";
+                                    content +="<img src='/bootstrap/img/w.png'>";
+                                    content +=  "<font>17</font>";
+                                    content += "</div>";
+                                    content +=  "<div class='col-xs-4 col-sm-4'>";
+                                    content +=   "<img src='/bootstrap/img/e.png'>";
+                                    content += "</div>";
+                                    content += "</div>";
+                                    content += "</div>";
+                                    $("#page_main").append(content);
+                                }
+                            });
+                            var countdiv=$("#page_main").children("div").length;
                             
-                            if (item[3]==""){
-                        content +=  "<img src='/images/blogways.png' alt='...' class='img-rounded img-main'  style='width: 100%;height: 160px;'>";
-                            }else{
-                        content +=   "<img src='"+item[3]+"' alt='...' class='img-rounded img-main' style='width: 100%;height: 160px;'>";
+                            if(countstart==countdiv){
+                                $("#loading").css("display","none");
                             }
-
-                        content +=  "<div   style='position:absolute;width:100%;height:30px;margin-top:132px; z-indent:2;left:0;top:0;color: #fff;background: #000; border-top-right-radius: 0em;border-top-left-radius: 0em;border-bottom-right-radius: 6px;border-bottom-left-radius: 6px;text-align: center;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;line-height: 30px;'>"+item[0]+"</div>";
-
-                        content +=  "</a>" ;
-
-                        content +=" </div>";
-
-                        
-                        content += "<div class='col-sm-12 col-xs-12' style='height: 28px; border-bottom: 1px solid #484848;line-height:28px;'>";
-                        content +=  " <div class='col-sm-6 col-xs-6 ' style='float: left;padding-left: 0px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'>";
-                        content +=      "<span class='glyphicon glyphicon-user'></span>";
-
-
-                        content +=    "<span class='sr-only'>{{ page.posted_by }}&nbsp;:&nbsp;</span>";
+                    });
+                }
+                if ("ALL"==a&&b!="ALL") {
+                    var countstart=$("#page_main").children("div").length;
+                    $.getJSON("/classify.json",function(o){
+                        var counttime=0;
+                            $.each( o, function( i , item ){
+                                $.each( authors, function( j , author ){
+                                    if(item[2]==author.name.replace(" ","") || ""){
+                                        author_path=author.path.replace(" ","") || "";
+                                    }
+                                });
+                                if (item[5]==b) {
+                                        counttime+=1;
+                                if (counttime>num&&counttime<=(num+9)) {
+                                    var content =" <div class='col-xs-12 col-sm-4 all' style=' margin-top: 12px;' >";
+                                    content +="<div class='img-rounded' style='background-color:#dbdbdb;height: 216px; border: 1px solid #E0E0E0;'>";
+                                    
+                                    content +="<div class='img-rounded'  style='position:relative;' >";
+                                    content +=   " <a class='' href='"+item[4]+"' target='_blank' title='"+item[0]+"'>";
+                                            
                                         
-                        content +=           "<a href='"+author_path+"'>"+item[2]+"</a>";
-                        content +=  " </div>"
-                        content +=  "<div class='col-sm-6 col-xs-6 ' style='padding-left: 0px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;'>";
-                        content +=  "<div style='float: right;'>";
-                        content +=  "<span class='glyphicon glyphicon-tag'></span>";
-                        content +=  "<span class='sr-only' >{{ page.posted_on }}&nbsp;:&nbsp;</span>";
-                        content +=    "<a href='/categories/"+item[1]+"'>"+item[1]+ "</a>";
-                        content += "</div>"  ;   
-                        content += "</div>";
-                        content += " </div>";
-                        content += "<div class='col-sm-12 col-xs-12' style='line-height:28px; padding-left: 0px;padding-right: 0px;'>";
-                        content += "<div class='col-xs-4 col-sm-4'>";
-                        content +=  "<img src='/bootstrap/img/q.png'>";
-                        content +=  "<font>22</font>";
-                        content += "</div>";
-                        content += "<div class='col-xs-4 col-sm-4'>";
-                        content +="<img src='/bootstrap/img/w.png'>";
-                        content +=  "<font>17</font>";
-                        content += "</div>";
-                        content +=  "<div class='col-xs-4 col-sm-4'>";
-                        content +=   "<img src='/bootstrap/img/e.png'>";
-                        content += "</div>";
-                        content += "</div>";
-                        content += "</div>";
+                                        if (item[3]==""){
+                                    content +=  "<img src='/images/blogways.png' alt='...' class='img-rounded img-main'  style='width: 100%;height: 160px;'>";
+                                        }else{
+                                    content +=   "<img src='"+item[3]+"' alt='...' class='img-rounded img-main' style='width: 100%;height: 160px;'>";
+                                        }
 
-                    $("#page_main").append(content);
+                                    content +=  "<div   style='position:absolute;width:100%;height:30px;margin-top:132px; z-indent:2;left:0;top:0;color: #fff;background: #000; border-top-right-radius: 0em;border-top-left-radius: 0em;border-bottom-right-radius: 6px;border-bottom-left-radius: 6px;text-align: center;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;line-height: 30px;'>"+item[0]+"</div>";
 
-                    }
-                    if (item[1]==a&&item[5]==b.substring(0,4)) {
-                    
-                    /*"<option class='menu_name' >"+item[1]+
-                        
-                    "</option>"*/
-                    var content =" <div class='col-xs-12 col-sm-4 classify' style=' margin-top: 12px;' >";
-                        content +="<div class='img-rounded' style='background-color:#dbdbdb;height: 216px; border: 1px solid #E0E0E0;'>";
-                        
-                        content +="<div class='img-rounded'  style='position:relative;' >";
-                        content +=   " <a class='' href='"+item[4]+"' target='_blank' title='"+item[0]+"'>";
-                                
+                                    content +=  "</a>" ;
+
+                                    content +=" </div>";
+
+                                    
+                                    content += "<div class='col-sm-12 col-xs-12' style='height: 28px; '>";
+                                    content +="<div style='height: 100%;width:100%; border-bottom: 1px solid #959595;line-height:28px;'>";
+                                    content +=  " <div class='col-sm-6 col-xs-6 ' style='float: left;padding-left: 0px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'>";
+                                    content +=      "<span class='glyphicon glyphicon-user'></span>";
+
+
+                                    content +=    "<span class='sr-only'>{{ page.posted_by }}&nbsp;:&nbsp;</span>";
+                                                    
+                                    content +=           "<a href='"+author_path+"'>"+item[2]+"</a>";
+                                    content +=  " </div>"
+                                    content +=  "<div class='col-sm-6 col-xs-6 ' style='padding-left: 0px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;'>";
+                                    content +=  "<div style='float: right;'>";
+                                    content +=  "<span class='glyphicon glyphicon-tag'></span>";
+                                    content +=  "<span class='sr-only' >{{ page.posted_on }}&nbsp;:&nbsp;</span>";
+                                    content +=    "<a href='/categories/"+item[1]+"' >"+item[1]+ "</a>";
+                                    content += "</div>"  ;   
+                                    content += "</div>";
+                                    content += " </div>";
+                                    content +="</div>";
+                                    content += "<div class='col-sm-12 col-xs-12' style='line-height:28px; padding-left: 0px;padding-right: 0px;'>";
+                                    content += "<div class='col-xs-4 col-sm-4'>";
+                                    content +=  "<img src='/bootstrap/img/q.png'>";
+                                    content +=  "<font>22</font>";
+                                    content += "</div>";
+                                    content += "<div class='col-xs-4 col-sm-4'>";
+                                    content +="<img src='/bootstrap/img/w.png'>";
+                                    content +=  "<font>17</font>";
+                                    content += "</div>";
+                                    content +=  "<div class='col-xs-4 col-sm-4'>";
+                                    content +=   "<img src='/bootstrap/img/e.png'>";
+                                    content += "</div>";
+                                    content += "</div>";
+                                    content += "</div>";
+                                    $("#page_main").append(content);
+                                }
+                                }
+                            });
+                        var countdiv=$("#page_main").children("div").length;
                             
-                            if (item[3]==""){
-                        content +=  "<img src='/images/blogways.png' alt='...' class='img-rounded img-main'  style='width: 100%;height: 160px;'>";
-                            }else{
-                        content +=   "<img src='"+item[3]+"' alt='...' class='img-rounded img-main' style='width: 100%;height: 160px;'>";
+                            if(countstart==countdiv){
+                                $("#loading").css("display","none");
                             }
-
-                        content +=  "<div   style='position:absolute;width:100%;height:30px;margin-top:132px; z-indent:2;left:0;top:0;color: #fff;background: #000; border-top-right-radius: 0em;border-top-left-radius: 0em;border-bottom-right-radius: 6px;border-bottom-left-radius: 6px;text-align: center;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;line-height: 30px;'>"+item[0]+"</div>";
-
-                        content +=  "</a>" ;
-
-                        content +=" </div>";
-
-                        
-                        content += "<div class='col-sm-12 col-xs-12' style='height: 28px; border-bottom: 1px solid #484848;line-height:28px;'>";
-                        content +=  " <div class='col-sm-6 col-xs-6 ' style='float: left;padding-left: 0px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'>";
-                        content +=      "<span class='glyphicon glyphicon-user'></span>";
-
-
-                        content +=    "<span class='sr-only'>{{ page.posted_by }}&nbsp;:&nbsp;</span>";
+                    });
+                }
+                if ("ALL"==b&&a!="ALL") {
+                    var countstart=$("#page_main").children("div").length;
+                    $.getJSON("/classify.json",function(o){
+                        var countname=0;
+                            $.each( o, function( i , item ){
+                                $.each( authors, function( j , author ){
+                                    if(item[2]==author.name.replace(" ","") || ""){
+                                        author_path=author.path.replace(" ","") || "";
+                                    }
+                                });
+                                if (item[1]==a) {
+                                        countname+=1;
+                                if (countname>num&&countname<=(num+9)) {
+                                    var content =" <div class='col-xs-12 col-sm-4 all' style=' margin-top: 12px;' >";
+                                    content +="<div class='img-rounded' style='background-color:#dbdbdb;height: 216px; border: 1px solid #E0E0E0;'>";
+                                    
+                                    content +="<div class='img-rounded'  style='position:relative;' >";
+                                    content +=   " <a class='' href='"+item[4]+"' target='_blank' title='"+item[0]+"'>";
+                                            
                                         
-                        content +=           "<a href='"+author_path+"'>"+item[2]+"</a>";
-                        content +=  " </div>"
-                        content +=  "<div class='col-sm-6 col-xs-6 ' style='padding-left: 0px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;'>";
-                        content +=  "<div style='float: right;'>";
-                        content +=  "<span class='glyphicon glyphicon-tag'></span>";
-                        content +=  "<span class='sr-only' >{{ page.posted_on }}&nbsp;:&nbsp;</span>";
-                        content +=    "<a href='/categories/"+item[1]+"'>"+item[1]+ "</a>";
-                        content += "</div>"  ;   
-                        content += "</div>";
-                        content += " </div>";
-                        content += "<div class='col-sm-12 col-xs-12' style='line-height:28px; padding-left: 0px;padding-right: 0px;'>";
-                        content += "<div class='col-xs-4 col-sm-4'>";
-                        content +=  "<img src='/bootstrap/img/q.png'>";
-                        content +=  "<font>22</font>";
-                        content += "</div>";
-                        content += "<div class='col-xs-4 col-sm-4'>";
-                        content +="<img src='/bootstrap/img/w.png'>";
-                        content +=  "<font>17</font>";
-                        content += "</div>";
-                        content +=  "<div class='col-xs-4 col-sm-4'>";
-                        content +=   "<img src='/bootstrap/img/e.png'>";
-                        content += "</div>";
-                        content += "</div>";
-                        content += "</div>";
+                                        if (item[3]==""){
+                                    content +=  "<img src='/images/blogways.png' alt='...' class='img-rounded img-main'  style='width: 100%;height: 160px;'>";
+                                        }else{
+                                    content +=   "<img src='"+item[3]+"' alt='...' class='img-rounded img-main' style='width: 100%;height: 160px;'>";
+                                        }
 
-                    $("#page_main").append(content);
+                                    content +=  "<div   style='position:absolute;width:100%;height:30px;margin-top:132px; z-indent:2;left:0;top:0;color: #fff;background: #000; border-top-right-radius: 0em;border-top-left-radius: 0em;border-bottom-right-radius: 6px;border-bottom-left-radius: 6px;text-align: center;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;line-height: 30px;'>"+item[0]+"</div>";
 
-                    }
+                                    content +=  "</a>" ;
+
+                                    content +=" </div>";
+
+                                    
+                                    content += "<div class='col-sm-12 col-xs-12' style='height: 28px; '>";
+                                    content +="<div style='height: 100%;width:100%; border-bottom: 1px solid #959595;line-height:28px;'>";
+                                    content +=  " <div class='col-sm-6 col-xs-6 ' style='float: left;padding-left: 0px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'>";
+                                    content +=      "<span class='glyphicon glyphicon-user'></span>";
+
+
+                                    content +=    "<span class='sr-only'>{{ page.posted_by }}&nbsp;:&nbsp;</span>";
+                                                    
+                                    content +=           "<a href='"+author_path+"'>"+item[2]+"</a>";
+                                    content +=  " </div>"
+                                    content +=  "<div class='col-sm-6 col-xs-6 ' style='padding-left: 0px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;'>";
+                                    content +=  "<div style='float: right;'>";
+                                    content +=  "<span class='glyphicon glyphicon-tag'></span>";
+                                    content +=  "<span class='sr-only' >{{ page.posted_on }}&nbsp;:&nbsp;</span>";
+                                    content +=    "<a href='/categories/"+item[1]+"' >"+item[1]+ "</a>";
+                                    content += "</div>"  ;   
+                                    content += "</div>";
+                                    content += " </div>";
+                                    content +="</div>";
+                                    content += "<div class='col-sm-12 col-xs-12' style='line-height:28px; padding-left: 0px;padding-right: 0px;'>";
+                                    content += "<div class='col-xs-4 col-sm-4'>";
+                                    content +=  "<img src='/bootstrap/img/q.png'>";
+                                    content +=  "<font>22</font>";
+                                    content += "</div>";
+                                    content += "<div class='col-xs-4 col-sm-4'>";
+                                    content +="<img src='/bootstrap/img/w.png'>";
+                                    content +=  "<font>17</font>";
+                                    content += "</div>";
+                                    content +=  "<div class='col-xs-4 col-sm-4'>";
+                                    content +=   "<img src='/bootstrap/img/e.png'>";
+                                    content += "</div>";
+                                    content += "</div>";
+                                    content += "</div>";
+                                    $("#page_main").append(content);
+                                }
+                                }
+                            });
+                        var countdiv=$("#page_main").children("div").length;
+                            
+                            if(countstart==countdiv){
+                                $("#loading").css("display","none");
+                            }
+                    });
+                }
+                if ("ALL"!=b&&a!="ALL") {
+                    var countstart=$("#page_main").children("div").length;
+                    $.getJSON("/classify.json",function(o){
+                        var countall=0;
+                            $.each( o, function( i , item ){
+                                $.each( authors, function( j , author ){
+                                    if(item[2]==author.name.replace(" ","") || ""){
+                                        author_path=author.path.replace(" ","") || "";
+                                    }
+                                });
+                                if (item[1]==a&&item[5]==b) {
+                                        countall+=1;
+                                if (countall>num&&countall<=(num+9)) {
+                                    var content =" <div class='col-xs-12 col-sm-4 all' style=' margin-top: 12px;' >";
+                                    content +="<div class='img-rounded' style='background-color:#dbdbdb;height: 216px; border: 1px solid #E0E0E0;'>";
+                                    
+                                    content +="<div class='img-rounded'  style='position:relative;' >";
+                                    content +=   " <a class='' href='"+item[4]+"' target='_blank' title='"+item[0]+"'>";
+                                            
+                                        
+                                        if (item[3]==""){
+                                    content +=  "<img src='/images/blogways.png' alt='...' class='img-rounded img-main'  style='width: 100%;height: 160px;'>";
+                                        }else{
+                                    content +=   "<img src='"+item[3]+"' alt='...' class='img-rounded img-main' style='width: 100%;height: 160px;'>";
+                                        }
+
+                                    content +=  "<div   style='position:absolute;width:100%;height:30px;margin-top:132px; z-indent:2;left:0;top:0;color: #fff;background: #000; border-top-right-radius: 0em;border-top-left-radius: 0em;border-bottom-right-radius: 6px;border-bottom-left-radius: 6px;text-align: center;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;line-height: 30px;'>"+item[0]+"</div>";
+
+                                    content +=  "</a>" ;
+
+                                    content +=" </div>";
+
+                                    
+                                    content += "<div class='col-sm-12 col-xs-12' style='height: 28px; '>";
+                                    content +="<div style='height: 100%;width:100%; border-bottom: 1px solid #959595;line-height:28px;'>";
+                                    content +=  " <div class='col-sm-6 col-xs-6 ' style='float: left;padding-left: 0px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'>";
+                                    content +=      "<span class='glyphicon glyphicon-user'></span>";
+
+
+                                    content +=    "<span class='sr-only'>{{ page.posted_by }}&nbsp;:&nbsp;</span>";
+                                                    
+                                    content +=           "<a href='"+author_path+"'>"+item[2]+"</a>";
+                                    content +=  " </div>"
+                                    content +=  "<div class='col-sm-6 col-xs-6 ' style='padding-left: 0px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;'>";
+                                    content +=  "<div style='float: right;'>";
+                                    content +=  "<span class='glyphicon glyphicon-tag'></span>";
+                                    content +=  "<span class='sr-only' >{{ page.posted_on }}&nbsp;:&nbsp;</span>";
+                                    content +=    "<a href='/categories/"+item[1]+"' >"+item[1]+ "</a>";
+                                    content += "</div>"  ;   
+                                    content += "</div>";
+                                    content += " </div>";
+                                    content +="</div>";
+                                    content += "<div class='col-sm-12 col-xs-12' style='line-height:28px; padding-left: 0px;padding-right: 0px;'>";
+                                    content += "<div class='col-xs-4 col-sm-4'>";
+                                    content +=  "<img src='/bootstrap/img/q.png'>";
+                                    content +=  "<font>22</font>";
+                                    content += "</div>";
+                                    content += "<div class='col-xs-4 col-sm-4'>";
+                                    content +="<img src='/bootstrap/img/w.png'>";
+                                    content +=  "<font>17</font>";
+                                    content += "</div>";
+                                    content +=  "<div class='col-xs-4 col-sm-4'>";
+                                    content +=   "<img src='/bootstrap/img/e.png'>";
+                                    content += "</div>";
+                                    content += "</div>";
+                                    content += "</div>";
+                                    $("#page_main").append(content);
+                                }
+                                }
+                            });
+                    });
+                }
+            }
+            if(m=="ALL"&&n=="ALL"){
+                $.getJSON("/classify.json",function(o){
+                    var countmain=0;
+                    $.each( o, function( i , item ){
+                        $.each( authors, function( j , author ){
+                            if(item[2]==author.name.replace(" ","") || ""){
+                                 author_path=author.path.replace(" ","") || "";
+                            }
+                        });
+                            countmain+=1;
+                            if (countmain<=9) {
+                                var content =" <div class='col-xs-12 col-sm-4 all' style=' margin-top: 12px;' >";
+                                content +="<div class='img-rounded' style='background-color:#dbdbdb;height: 216px; border: 1px solid #E0E0E0;'>";
+                                
+                                content +="<div class='img-rounded'  style='position:relative;' >";
+                                content +=   " <a class='' href='"+item[4]+"' target='_blank' title='"+item[0]+"'>";
+                                        
+                                    
+                                    if (item[3]==""){
+                                content +=  "<img src='/images/blogways.png' alt='...' class='img-rounded img-main'  style='width: 100%;height: 160px;'>";
+                                    }else{
+                                content +=   "<img src='"+item[3]+"' alt='...' class='img-rounded img-main' style='width: 100%;height: 160px;'>";
+                                    }
+
+                                content +=  "<div   style='position:absolute;width:100%;height:30px;margin-top:132px; z-indent:2;left:0;top:0;color: #fff;background: #000; border-top-right-radius: 0em;border-top-left-radius: 0em;border-bottom-right-radius: 6px;border-bottom-left-radius: 6px;text-align: center;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;line-height: 30px;'>"+item[0]+"</div>";
+
+                                content +=  "</a>" ;
+
+                                content +=" </div>";
+
+                                
+                                content += "<div class='col-sm-12 col-xs-12' style='height: 28px; '>";
+                                content +="<div style='height: 100%;width:100%; border-bottom: 1px solid #959595;line-height:28px;'>";
+                                content +=  " <div class='col-sm-6 col-xs-6 ' style='float: left;padding-left: 0px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'>";
+                                content +=      "<span class='glyphicon glyphicon-user'></span>";
+
+
+                                content +=    "<span class='sr-only'>{{ page.posted_by }}&nbsp;:&nbsp;</span>";
+                                                
+                                content +=           "<a href='"+author_path+"'>"+item[2]+"</a>";
+                                content +=  " </div>"
+                                content +=  "<div class='col-sm-6 col-xs-6 ' style='padding-left: 0px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;'>";
+                                content +=  "<div style='float: right;'>";
+                                content +=  "<span class='glyphicon glyphicon-tag'></span>";
+                                content +=  "<span class='sr-only' >{{ page.posted_on }}&nbsp;:&nbsp;</span>";
+                                content +=    "<a href='/categories/"+item[1]+"' >"+item[1]+ "</a>";
+                                content += "</div>"  ; 
+                                content += "</div>"  ;  
+                                content += "</div>";
+                                content += " </div>";
+                                content += "<div class='col-sm-12 col-xs-12' style='line-height:28px; padding-left: 0px;padding-right: 0px;'>";
+                                content += "<div class='col-xs-4 col-sm-4'>";
+                                content +=  "<img src='/bootstrap/img/q.png'>";
+                                content +=  "<font>22</font>";
+                                content += "</div>";
+                                content += "<div class='col-xs-4 col-sm-4'>";
+                                content +="<img src='/bootstrap/img/w.png'>";
+                                content +=  "<font>17</font>";
+                                content += "</div>";
+                                content +=  "<div class='col-xs-4 col-sm-4'>";
+                                content +=   "<img src='/bootstrap/img/e.png'>";
+                                content += "</div>";
+                                content += "</div>";
+                                content += "</div>";
+                                $("#page_main").append(content);
+                            }
+                    });
+                });
+            }
+
+           
+            $("#menu_name,#menu_time").change(function(){
+                var countname=0;
+                var counttime=0;
+                var countall=0;
+                $(".classify").remove();
+                $(".all").remove();
+                var a=$("#menu_name option:checked").text();
+                var b=$("#menu_time option:checked").text().replace(/\s+/g,"");
+                if (a!="ALL"||b!="ALL") {
+                    $(".all").css("display","none");
+                }
+                if (a=="ALL"&&b=="ALL") {
+                   location.reload();
+                }
+                $.getJSON("/classify.json",function(o){
+                    $.each( o, function( i , item ){
+                        $.each( authors, function( j , author ){
+                            if(item[2]==author.name.replace(" ","") || ""){
+                             author_path=author.path.replace(" ","") || "";
+                            }
+                        });
+                        if (item[1]==a&&"ALL"==b.substring(0,4)) {
+                            countname+=1;
+                            if(countname<=9){
+
+                            var content =" <div class='col-xs-12 col-sm-4 classify' style=' margin-top: 12px;' >";
+                            content +="<div class='img-rounded' style='background-color:#dbdbdb;height: 216px; border: 1px solid #E0E0E0;'>";
+                            
+                            content +="<div class='img-rounded'  style='position:relative;' >";
+                            content +=   " <a class='' href='"+item[4]+"' target='_blank' title='"+item[0]+"'>";
+                                    
+                                
+                                if (item[3]==""){
+                            content +=  "<img src='/images/blogways.png' alt='...' class='img-rounded img-main'  style='width: 100%;height: 160px;'>";
+                                }else{
+                            content +=   "<img src='"+item[3]+"' alt='...' class='img-rounded img-main' style='width: 100%;height: 160px;'>";
+                                }
+
+                            content +=  "<div   style='position:absolute;width:100%;height:30px;margin-top:132px; z-indent:2;left:0;top:0;color: #fff;background: #000; border-top-right-radius: 0em;border-top-left-radius: 0em;border-bottom-right-radius: 6px;border-bottom-left-radius: 6px;text-align: center;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;line-height: 30px;'>"+item[0]+"</div>";
+
+                            content +=  "</a>" ;
+
+                            content +=" </div>";
+
+                            
+                            content += "<div class='col-sm-12 col-xs-12' style='height: 28px; '>";
+                            content +="<div style='height: 100%;width:100%; border-bottom: 1px solid #959595;line-height:28px;'>";
+                            content +=  " <div class='col-sm-6 col-xs-6 ' style='float: left;padding-left: 0px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'>";
+                            content +=      "<span class='glyphicon glyphicon-user'></span>";
+
+
+                            content +=    "<span class='sr-only'>{{ page.posted_by }}&nbsp;:&nbsp;</span>";
+                                            
+                            content +=           "<a href='"+author_path+"'>"+item[2]+"</a>";
+                            content +=  " </div>"
+                            content +=  "<div class='col-sm-6 col-xs-6 ' style='padding-left: 0px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;'>";
+                            content +=  "<div style='float: right;'>";
+                            content +=  "<span class='glyphicon glyphicon-tag'></span>";
+                            content +=  "<span class='sr-only' >{{ page.posted_on }}&nbsp;:&nbsp;</span>";
+                            content +=    "<a href='/categories/"+item[1]+"' >"+item[1]+ "</a>";
+                            content += "</div>"  ;   
+                            content += "</div>";
+                            content += " </div>";
+                            content +="</div>";
+                            content += "<div class='col-sm-12 col-xs-12' style='line-height:28px; padding-left: 0px;padding-right: 0px;'>";
+                            content += "<div class='col-xs-4 col-sm-4'>";
+                            content +=  "<img src='/bootstrap/img/q.png'>";
+                            content +=  "<font>22</font>";
+                            content += "</div>";
+                            content += "<div class='col-xs-4 col-sm-4'>";
+                            content +="<img src='/bootstrap/img/w.png'>";
+                            content +=  "<font>17</font>";
+                            content += "</div>";
+                            content +=  "<div class='col-xs-4 col-sm-4'>";
+                            content +=   "<img src='/bootstrap/img/e.png'>";
+                            content += "</div>";
+                            content += "</div>";
+                            content += "</div>";
+                            $("#page_main").append(content);
+                             }
+                        }
+                        if ("ALL"==a&&item[5]==b.substring(0,4)) {
+                            counttime+=1;
+                            if(counttime<=9){
+
+
+                            var content =" <div class='col-xs-12 col-sm-4 classify' style=' margin-top: 12px;' >";
+                            content +="<div class='img-rounded' style='background-color:#dbdbdb;height: 216px; border: 1px solid #E0E0E0;'>";
+                            
+                            content +="<div class='img-rounded'  style='position:relative;' >";
+                            content +=   " <a class='' href='"+item[4]+"' target='_blank' title='"+item[0]+"'>";
+                                if (item[3]==""){
+                            content +=  "<img src='/images/blogways.png' alt='...' class='img-rounded img-main'  style='width: 100%;height: 160px;'>";
+                                }else{
+                            content +=   "<img src='"+item[3]+"' alt='...' class='img-rounded img-main' style='width: 100%;height: 160px;'>";
+                                }
+                            content +=  "<div   style='position:absolute;width:100%;height:30px;margin-top:132px; z-indent:2;left:0;top:0;color: #fff;background: #000; border-top-right-radius: 0em;border-top-left-radius: 0em;border-bottom-right-radius: 6px;border-bottom-left-radius: 6px;text-align: center;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;line-height: 30px;'>"+item[0]+"</div>";
+                            content +=  "</a>" ;
+                            content +=" </div>";
+                            content += "<div class='col-sm-12 col-xs-12' style='height: 28px; '>";
+                            content +="<div style='height: 100%;width:100%; border-bottom: 1px solid #959595;line-height:28px;'>";
+                            content +=  " <div class='col-sm-6 col-xs-6 ' style='float: left;padding-left: 0px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'>";
+                            content +=      "<span class='glyphicon glyphicon-user'></span>";
+                            content +=    "<span class='sr-only'>{{ page.posted_by }}&nbsp;:&nbsp;</span>";
+                            content +=           "<a href='"+author_path+"'>"+item[2]+"</a>";
+                            content +=  " </div>"
+                            content +=  "<div class='col-sm-6 col-xs-6 ' style='padding-left: 0px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;'>";
+                            content +=  "<div style='float: right;'>";
+                            content +=  "<span class='glyphicon glyphicon-tag'></span>";
+                            content +=  "<span class='sr-only' >{{ page.posted_on }}&nbsp;:&nbsp;</span>";
+                            content +=    "<a href='/categories/"+item[1]+"'>"+item[1]+ "</a>";
+                            content += "</div>"  ;   
+                            content += "</div>";
+                            content += " </div>";
+                            content +="</div>";
+                            content += "<div class='col-sm-12 col-xs-12' style='line-height:28px; padding-left: 0px;padding-right: 0px;'>";
+                            content += "<div class='col-xs-4 col-sm-4'>";
+                            content +=  "<img src='/bootstrap/img/q.png'>";
+                            content +=  "<font>22</font>";
+                            content += "</div>";
+                            content += "<div class='col-xs-4 col-sm-4'>";
+                            content +="<img src='/bootstrap/img/w.png'>";
+                            content +=  "<font>17</font>";
+                            content += "</div>";
+                            content +=  "<div class='col-xs-4 col-sm-4'>";
+                            content +=   "<img src='/bootstrap/img/e.png'>";
+                            content += "</div>";
+                            content += "</div>";
+                            content += "</div>";
+                            $("#page_main").append(content);
+                               }
+
+                        }
+                        if (item[1]==a&&item[5]==b.substring(0,4)) {
+                            countall+=1;
+                            if (countall<=9) {
+                            var content =" <div class='col-xs-12 col-sm-4 classify' style=' margin-top: 12px;' >";
+                            content +="<div class='img-rounded' style='background-color:#dbdbdb;height: 216px; border: 1px solid #E0E0E0;'>";
+                            content +="<div class='img-rounded'  style='position:relative;' >";
+                            content +=   " <a class='' href='"+item[4]+"' target='_blank' title='"+item[0]+"'>";
+                                if (item[3]==""){
+                            content +=  "<img src='/images/blogways.png' alt='...' class='img-rounded img-main'  style='width: 100%;height: 160px;'>";
+                                }else{
+                            content +=   "<img src='"+item[3]+"' alt='...' class='img-rounded img-main' style='width: 100%;height: 160px;'>";
+                                }
+                            content +=  "<div   style='position:absolute;width:100%;height:30px;margin-top:132px; z-indent:2;left:0;top:0;color: #fff;background: #000; border-top-right-radius: 0em;border-top-left-radius: 0em;border-bottom-right-radius: 6px;border-bottom-left-radius: 6px;text-align: center;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;line-height: 30px;'>"+item[0]+"</div>";
+                            content +=  "</a>" ;
+                            content +=" </div>";
+                            content += "<div class='col-sm-12 col-xs-12' style='height: 28px; '>";
+                            content +="<div style='height: 100%;width:100%; border-bottom: 1px solid #959595;line-height:28px;'>";
+                            content +=  " <div class='col-sm-6 col-xs-6 ' style='float: left;padding-left: 0px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'>";
+                            content +=      "<span class='glyphicon glyphicon-user'></span>";
+                            content +=    "<span class='sr-only'>{{ page.posted_by }}&nbsp;:&nbsp;</span>";
+                                            
+                            content +=           "<a href='"+author_path+"'>"+item[2]+"</a>";
+                            content +=  " </div>"
+                            content +=  "<div class='col-sm-6 col-xs-6 ' style='padding-left: 0px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;'>";
+                            content +=  "<div style='float: right;'>";
+                            content +=  "<span class='glyphicon glyphicon-tag'></span>";
+                            content +=  "<span class='sr-only' >{{ page.posted_on }}&nbsp;:&nbsp;</span>";
+                            content +=    "<a href='/categories/"+item[1]+"'>"+item[1]+ "</a>";
+                            content += "</div>"  ;   
+                            content += "</div>";
+                            content += " </div>";
+                            content +="</div>";
+                            content += "<div class='col-sm-12 col-xs-12' style='line-height:28px; padding-left: 0px;padding-right: 0px;'>";
+                            content += "<div class='col-xs-4 col-sm-4'>";
+                            content +=  "<img src='/bootstrap/img/q.png'>";
+                            content +=  "<font>22</font>";
+                            content += "</div>";
+                            content += "<div class='col-xs-4 col-sm-4'>";
+                            content +="<img src='/bootstrap/img/w.png'>";
+                            content +=  "<font>17</font>";
+                            content += "</div>";
+                            content +=  "<div class='col-xs-4 col-sm-4'>";
+                            content +=   "<img src='/bootstrap/img/e.png'>";
+                            content += "</div>";
+                            content += "</div>";
+                            content += "</div>";
+                            $("#page_main").append(content);
+                            }
+                        }
+                    });
                 });
             });
-        
-          });
+
                    
             $.getJSON("/authors.json",function(o){
-                    o.sort(function(a,b){
-                    return b.articles.length-a.articles.length 
-                     });
+                o.sort(function(a,b){
+                        return b.articles.length-a.articles.length 
+                });
                 $.each( o, function( i , item ){
-                     var name = item.name.replace(" ","") || "";     
-                     var path = item.path.replace(" ","") || "";                    
-                        var num = item.articles.length || 0;
-
-                        if (i<=5) {
-                   var content =" <div style='height: 70px; background-color: #f3f3f3;box-shadow: 0px 2px 5px #bebdbd;line-height: 30px;vertical-align:middle;'> ";
+                    var name = item.name.replace(" ","") || "";     
+                    var path = item.path.replace(" ","") || "";                    
+                    var num = item.articles.length || 0;
+                    if (i<=5) {
+                        var content =" <div style='height: 70px; background-color: #f3f3f3;box-shadow: 0px 2px 5px #bebdbd;line-height: 30px;vertical-align:middle;'> ";
                         content +=" <a href='"+path+"'>";
                         content +="<img src='/images/blogways.png' alt='...''  style='width:50px;height: 50px;border: 1px solid #E0E0E0;margin-top: 10px;margin-left: 10px;border:none; float:left; display:inline;''>";
                         content +="</a>";
@@ -259,17 +701,11 @@
                         content +=" </div>";
                         content +=" </div>";
                         content +=" </div>";
-
                         $("#people_like").append(content);
-                        }
-
+                    }
                 });
-        
             });
-
-
         });
-
         var _hmt = _hmt || [];
         (function() {
           var hm = document.createElement("script");

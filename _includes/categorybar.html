@@ -37,10 +37,12 @@
             {% if year !=nyear %}
             
        <div style="border:1px solid #E0E0E0;height: 40px;line-height: 40px; background:#f3f3f3; ">
-            <div class="col-sm-9">
+            <div class="col-sm-9" >
+                <a href="/years/year"  onclick="click_year({{post.date| date: '%Y'}})" value="{{post.date| date: '%Y'}}">
             <font style="color: #24292c;">
         {{post.date| date: '%Y'}}年度
             </font>
+            </a>
             </div>
             <div class="col-sm-3 pull-right" style="line-height: 40px;">
             <span class="badge" >
@@ -65,75 +67,23 @@
 
 
 <div class='categorybar panel panel-default' id='categorybar'>
-    <div class='panel-heading'>
-        <h4 class='panel-title'><span class="glyphicon glyphicon-tag"></span> 热门分类</h4>
+    <div class='panel-heading' style="height: 50px; background-color: #f3f3f3;box-shadow: 0px 2px 5px #bebdbd;line-height: 30px;">
+        <span class="glyphicon glyphicon-tag"></span>
+        <font style="font-weight: bold; color: #24292c;" >热门分类</font> 
     </div>
-    <div class='list-group' id='categorybar-list' style="position:absolute; height:400px;width: 90%; overflow:auto; ">
+    <div class='list-group' id='categorybar-list' style="position:absolute; height:400px;width: 89%; overflow:auto;border:1px solid #E0E0E0; ">
     </div>
 </div>
 
 
 <div class='categorybar panel panel-default' style="margin-top: 430px;" >
     <div class="panel-heading" style="height: 50px; background-color: #f3f3f3;box-shadow: 0px 2px 5px #bebdbd;line-height: 30px;">
-        <span class="glyphicon glyphicon-grain"></span>
+        <img src="/images/like.png">
         <font style="font-weight: bold; color: #24292c;" >人气博主</font>
     </div>
     <div class='list-group' id="people_like">
 
-        <!-- <div style="height: 70px; background-color: #f3f3f3;box-shadow: 0px 2px 5px #bebdbd;line-height: 30px;vertical-align:middle;">
-            
-                
-            <a href="">
-          
-                <img src="/images/blogways.png" alt="..."  style="width:50px;height: 50px;border: 1px solid #E0E0E0;margin-top: 10px;margin-left: 10px;border:none; float:left; display:inline;">
-            
-            
-            </a>
-                <div style=" float:left; display:inline; margin-top:5px; margin-left:5px;">
-
-                     <div >小凡凡
-
-                    </div>
-                    <div >
-                        <span>上传:122</span>
-                        <span>人气:199</span>
-                
-                    </div>
-                    
-                </div>
-            
-           
-            
-            
-        </div> -->
-
-                       <!--      {% for author in site.authors limit:4%}
-                            
-                               
-
-                        <a class='list-group-item' style="background: #f3f3f3;" href='{{ author.page_path }}'>
-                            <span>
-
-                             {% if author.image == null %} 
-                                <img src="/images/blogways.png" alt="..."  style="width:50px;height: 50px;border: 1px solid #E0E0E0;">
-                                {% else %}
-                                <img src="{{ author.image }}" alt="..."  style="width: 50px;height: 50px;border: 1px solid #E0E0E0;">
-                                {% endif %}
-                                </span>
-
-                                <span>
-                                    <div>
-                                        <font>
-                                     {{ author.name | remove: ' ' }}
-                                        </font>
-                                    </div>
-                                </span>
-                                
-                           
-                            <span class='badge pull-right' id='{{ author.name | remove: ' ' }}-side-num'></span>
-                        </a>
-                      
-                        {% endfor %} -->
+        
                     </div>
   
 </div>
