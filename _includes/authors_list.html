@@ -23,62 +23,47 @@
 
             </ol>
         </div>
-<div class='mainbar col-md-9 col-sm-12 col-xs-12'>
-                
-                    {% for year in site.data.years %}
-                        {% assign yearcount=0 %}
-                        {% assign y=year.y %}
-                        {% for post in site.posts %}
-                            {% assign name=post.author | strip %}
-                            {% assign posty=post.date | date: "%Y" %}
-                            {% if name == page.name and y == posty %}
-                                {% assign yearcount=yearcount | plus:1 %}
-                            {% endif %}
-                        {% endfor %}
-                         <div class="col-sm-12 col-xs-12  " style=" margin-bottom: 10px;border:1px solid #E0E0E0;background-color:#fff;padding-left: 0px;padding-right: 0px;" >
-
-                        <div  class="col-sm-12 col-xs-12  " onclick="click_date({{y}})" style="height: 60px;background: #24292c; text-align:center;line-height: 60px;">
-                        
-                    
-                                <font style="color: #fff;">
-                               
-                               {{y}}年度
-                                     
-                                </font>
-                                <span  style="color: #fff;">
-                                   (共计{{yearcount}}篇）
-                                </span>
-                                <span class="glyphicon glyphicon-print pull-right" style="color: #fff;margin-top: 20px;">
-                                    
-                                </span>
-                    </div>
+        <div class='mainbar col-md-9 col-sm-12 col-xs-12'>
+                {% for year in site.data.years %}
+                    {% assign yearcount=0 %}
+                    {% assign y=year.y %}
                     {% for post in site.posts %}
-                            {% assign name=post.author | strip %}
-                            {% assign posty=post.date | date: "%Y" %}
-                            {% if name == page.name and y == posty %}
-                    <div class="menu_date_{{post.date| date: '%Y'}}" id="menu_date_{{post.date| date: '%Y'}}" style="display:none;" >
-                        <div class='col-sm-12 col-xs-12' style='height: 30px;line-height:30px;'>
-                            <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
+                        {% assign name=post.author | strip %}
+                        {% assign posty=post.date | date: "%Y" %}
+                        {% if name == page.name and y == posty %}
+                            {% assign yearcount=yearcount | plus:1 %}
+                        {% endif %}
+                    {% endfor %}
+            <div class="col-sm-12 col-xs-12  " style=" margin-bottom: 10px;border:1px solid #E0E0E0;background-color:#fff;padding-left: 0px;padding-right: 0px;" >
+                <div  class="col-sm-12 col-xs-12  " onclick="click_date({{y}})" style="height: 60px;background: #24292c; text-align:center;line-height: 60px;">
+                    <font style="color: #fff;">
+                        {{y}}年度
+                    </font>
+                    <span  style="color: #fff;">
+                        (共计{{yearcount}}篇）
+                    </span>
+                    <span class="glyphicon glyphicon-print pull-right" style="color: #fff;margin-top: 20px;">
+                    </span>
+                </div>
+                    {% for post in site.posts %}
+                        {% assign name=post.author | strip %}
+                        {% assign posty=post.date | date: "%Y" %}
+                        {% if name == page.name and y == posty %}
+                <div class="menu_date_{{post.date| date: '%Y'}}" id="menu_date_{{post.date| date: '%Y'}}" style="display:block;" >
+                    <div class='col-sm-12 col-xs-12' style='height: 30px;line-height:30px;'>
+                        <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                             <span class="glyphicon glyphicon-list-alt"></span>
                             <a href="{{post.url}}" style='width: 400px;color:#000;margin-left: 20px;'>{{post.title}}</a>
-                            </div>
-                            <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
+                        </div>
+                        <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                             <span style='float:right;'>发布于：{{post.date | date: "%Y.%m.%d"}}</span>
-                            </div>
                         </div>
                     </div>
-                         {% endif %}
-                        {% endfor %}
-                       </div><!--end of panel-->{% endfor %}     
-                           
-                            
-                            
-                       
-                    
-                
-
-                
-            </div><!--end of mainbar-->
+                </div>
+                        {% endif %}
+                    {% endfor %}
+            </div><!--end of panel-->{% endfor %}     
+        </div><!--end of mainbar-->
             <div class='sidebar col-md-3 hidden-sm hidden-xs'>
                 <div class='authorslistbar panel panel-default' id='authorslistbar'>
                     <div class='panel-heading'>

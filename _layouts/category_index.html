@@ -5,16 +5,15 @@ page_tags: 标签
 
     <div class='container'>
         <div class='main-content row'>
-            <div class='mainbar col-md-9 col-sm-12 col-xs-12'>
-                <div class='panel panel-info'>
-                    <div class='category-title panel-heading'>
-                        <h2 class='category-name panel-title'>{{ page.category }}</h2>
-                    </div>
-                    <div class='panel bdsharebar'>
-                        {% include bdshare.html %}
-                    </div>
-                </div>
+            <div class='mainbar col-md-12 col-sm-12 col-xs-12'>
+             <ol class=" breadcrumb " style="background: #fff;">
+                <span class="glyphicon glyphicon-home"></span>
+                <a href="/" style="color: #000;">首页</a>>
+                <a href="" style="color: #000;">分类</a>
 
+            </ol>
+        </div>
+            <div class='mainbar col-md-9 col-sm-12 col-xs-12'>
                 <div class='category-list al-article-list visible-lg visible-md visible-sm hidden-xs'>
                     {% for year in site.data.years %}
                     {% assign flag = true %}
@@ -41,35 +40,7 @@ page_tags: 标签
                     </div><!--end of panel-->{% endif %}{% endfor %}
                 </div><!--end of category-list-->
 
-                <div class='al-article-list-xs hidden-lg hidden-md hidden-sm visible-xs'>
-                    {% for year1 in site.data.years %}
-                    {% assign flag1 = true %}
-                    {% for cate in site.categories %}
-                    {% capture c1 %}{{ cate[0] | downcase }}{% endcapture %}
-                    {% capture c2 %}{{ page.category | downcase }}{% endcapture %}
-                    {% capture c3 %}{{ cate[0] }}{% endcapture %}
-                    {% if c1 == c2 %}
-                    {% for post1 in site.categories[c3] %}
-                    {% capture y1 %}{{ post1.date | date: '%Y' }}{% endcapture %}
-                    {% if year1.y == y1 %}
-                    {% if flag1 == true %}
-                    <div class='panel panel-default'>
-                        <div class='panel-heading'>
-                            <h2 class='panel-title al-year'>{{ year1.y }}</h2>
-                        </div>
-                        <div class='list-group'>{% assign flag1 = false %}{% endif %}
-                            <a class='list-group-item list-group-item-default' href='{{ post1.url }}' target='_blank'>
-                                <h4 class='list-group-item-heading al-title-xs'>{{ post1.title | truncate: 30 }}</h4>
-                                <div class='list-group-item-text'>
-                                    <span class='al-article-date-xs pull-right'>({{ post1.date | date: '%m.%d' }})</span>
-                                    <span class='badge'>{{ post1.category }}</span>
-                                </div>
-                            </a>{% endif %}{% endfor %}
-                            {% endif %}{% endfor %}
-                            {% if flag1 == false %}
-                        </div><!--end of list-group-->
-                    </div><!--end of panel-->{% endif %}{% endfor %}
-                </div><!--end of list-xs-->
+                
             </div><!--end of mainbar-->
             <div class='sidebar col-md-3 hidden-sm hidden-xs'>
                 <div class='cate-ix-bar panel panel-default' id='categorybar'>

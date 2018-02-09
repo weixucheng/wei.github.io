@@ -38,7 +38,7 @@
             
        <div style="border:1px solid #E0E0E0;height: 40px;line-height: 40px; background:#f3f3f3; ">
             <div class="col-sm-9" >
-                <a href="/years/year"  onclick="click_year({{post.date| date: '%Y'}})" value="{{post.date| date: '%Y'}}">
+                <a href="/years/year:click_year({{post.date| date: '%Y'}});"   value="{{post.date| date: '%Y'}}">
             <font style="color: #24292c;">
         {{post.date| date: '%Y'}}年度
             </font>
