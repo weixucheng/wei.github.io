@@ -20,6 +20,8 @@
     <script src='/js/app.js'></script>
     <script>
 
+
+
         function click_date(date){
            var a= $(".menu_date_"+date+"").css("display");
             if (a=="none") {
@@ -60,10 +62,100 @@
                 });
             }   
         }
-
+        function click_classdate(year){
+           var a= $(".yser_menu_"+year+"").css("display");
+             if (a=="none") {
+                $(".yser_menu_"+year+"").css("display","block");
+            }else{
+                $(".yser_menu_"+year+"").css("display","none");
+            }
+        }
 
 
         $(function(){
+            $(".new_year").each(function(){
+                var countname=0;
+                var years=$(this).text().replace(/\ +/g,"");
+                years=years.replace(/[\r\n]/g,"");
+                years=years.substring(0,4);
+                $.getJSON("/yearauthors.json",function(o){
+                    o.sort(function(a,b){
+                        return b.num-a.num
+                    });
+                    $.each( o, function( i , item ){
+                        var name = item.name.replace(" ","") || "";     
+                        var path = item.path.replace(" ","") || "";  
+                        var yearauthor=item.year.replace(" ","")||"";                  
+                        var num = item.num.replace(" ","") || "";
+                        if (years==yearauthor) {
+                            countname=countname+1;
+                            if (num!=0) {
+                            if (countname==1) {
+                                var content="<div class='col-sm-12 col-xs-12' style='height: 55px;line-height:55px;padding-left:0px;'>";
+                                content+="<img src='../images/1.jpg' style='width:30px;height:25px;'>";
+                                content+="<a href='"+path+"'  style='width: 400px;color:#000;margin-left: 20px;'>"+name+"</a>";
+                                content+="<span style='float:right;'>共计<font style='font-size:18px;'>"+num+"</font>篇</span>";
+                                content+="</div>";
+                                $("#menu_year_"+years+"").append(content);
+                            }else if(countname==2){
+                                var content="<div class='col-sm-12 col-xs-12' style='height: 55px;line-height:55px;padding-left:0px;'>";
+                                content+="<img src='../images/2.jpg' style='width:30px;height:25px;'>";
+                                content+="<a href='"+path+"'  style='width: 400px;color:#000;margin-left: 20px;'>"+name+"</a>";
+                                content+="<span style='float:right;'>共计<font style='font-size:18px;'>"+num+"</font>篇</span>";
+                                content+="</div>";
+                                $("#menu_year_"+years+"").append(content);
+                            }else if(countname==3){
+                                var content="<div class='col-sm-12 col-xs-12' style='height: 55px;line-height:55px;padding-left:0px;'>";
+                                content+="<img src='../images/3.jpg' style='width:30px;height:25px;'>";
+                                content+="<a href='"+path+"'  style='width: 400px;color:#000;margin-left: 20px;'>"+name+"</a>";
+                                content+="<span style='float:right;'>共计<font style='font-size:18px;'>"+num+"</font>篇</span>";
+                                content+="</div>";
+                                $("#menu_year_"+years+"").append(content);
+                            } else{
+                           
+                                var content="<div class='col-sm-12 col-xs-12' style='height: 55px;line-height:55px;padding-left:0px;'>";
+                                content+="<img src='../images/4.jpg' style='width:30px;height:25px;'>";
+                                content+="<a href='"+path+"'  style='width: 400px;color:#000;margin-left: 20px;'>"+name+"</a>";
+                                content+="<span style='float:right;'>共计<font style='font-size:18px;'>"+num+"</font>篇</span>";
+                                content+="</div>";
+                                $("#menu_year_"+years+"").append(content);
+                                }
+                            }
+                        }
+                    });
+                });
+            });
+            $("#username").keyup(function(){
+                var values=$("#username").val();
+                $.getJSON("/authors.json",function(a){ 
+                    $.each( a, function( i , item ){
+                        var name=item.name.replace(" ","") || "";
+                        var path=item.path.replace(" ","") || "";
+                        if (values==name) {
+                            $("#search_a").attr("href",path); 
+                        }
+                    });
+                });
+                $.getJSON("/categorycount.json",function(b){ 
+                    $.each( b, function( i , item ){
+                        if (values==item[1]) {
+                            $("#search_a").attr("href","/categories/"+item[1]+"");
+                        }
+                    });
+                });
+            });
+
+
+            $(".year_all").each(function(){
+                var $this=$(this).text().replace(/\ +/g,"");
+                $this=$this.replace(/[\r\n]/g,"");
+                $this=$this.substring(0,4);
+                var divnum=$("#year_menu_"+$this+"").parent().children("div").length-1;
+                var content ="<font style='color:#fff;'>(共计"+divnum+"篇)";
+                    content+="</font>";
+                    content+="<img class='pull-right' src='../../images/6.jpg'  style='width: 60px;height: 40px;margin-top: 10px;''>";
+                $(this).append(content);
+            });
            
             var m=$("#menu_name option:checked").text();
             var n=$("#menu_time option:checked").text().replace(/\s+/g,"");

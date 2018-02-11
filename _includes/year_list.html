@@ -26,18 +26,20 @@
                 {% assign counts1 = counts1 | split: ', ' | reverse %}
                 {% assign i = 0 %}
         
-        
+                {% assign color =1.1 %}
                 {% for post in site.posts  %}
                 
                     {% assign year =post.date | date: '%Y' %}
                     {% assign nyear = post.next.date | date: '%Y'  %}
                     {% if year !=nyear %}
+                    {% assign color=color | minus: 0.1 %}
+                    <a name="yearname{{post.date| date: '%Y'}}" ></a>
                     
                 <div    class="col-sm-12 col-xs-12  " style=" margin-bottom: 10px;border:1px solid #E0E0E0;background-color:#fff;padding-left: 0px;padding-right: 0px;" >
-                    <div  class="col-sm-12 col-xs-12  " onclick="click_year({{post.date| date: '%Y'}})" style="height: 60px;background: #24292c; text-align:center;line-height: 60px;">
+                    <div  class="col-sm-12 col-xs-12  " onclick="click_year({{post.date| date: '%Y'}})" style="height: 60px;background: #24292c; text-align:center;line-height: 60px;opacity: {{color}} ">
                         
                     
-                                <font style="color: #fff;">
+                                <font style="color: #fff;" class="new_year" >
                                
                                {{post.date| date: '%Y'}}年度
                                      
@@ -45,7 +47,7 @@
                                 <span  style="color: #fff;">
                                    (共计{{counts1[i]}}篇）
                                 </span>
-                                <span class="glyphicon glyphicon-print pull-right" style="color: #fff;margin-top: 20px;"></span>
+                               <img class="pull-right" src="../images/6.jpg"  style="width: 60px;height: 40px;margin-top: 10px;">
                     </div>
                     <div class="col-sm-12 col-xs-12" id="menu_year_{{post.date| date: '%Y'}}" >
                     </div>
@@ -65,7 +67,7 @@
             </div><!--end of mainbar-->
             <div class='sidebar col-md-3 hidden-sm hidden-xs'>
                 <div class='authorslistbar panel panel-default' id='authorslistbar'>
-                    <div class='panel-heading'>
+                    <div class='panel-heading' style="height: 60px;line-height: 40px;">
                         <span class="glyphicon glyphicon-list-alt"></span>
                         <font style="font-weight: bold; color: #24292c;" >年份</font>
                     </div>
@@ -94,23 +96,24 @@
 
 
 
-
+        
         {% for post in site.posts  %}
         
             {% assign year =post.date | date: '%Y' %}
             {% assign nyear = post.next.date | date: '%Y'  %}
             {% if year !=nyear %}
             
-       <div style="border:1px solid #E0E0E0;height: 40px;line-height: 40px; background:#f3f3f3; ">
-            <div class="col-sm-9" >
-                <a   onclick="click_year({{post.date| date: '%Y'}})" value="{{post.date| date: '%Y'}}" style="line-height: 40px;">
+            
+       <div style="border:1px solid #E0E0E0;height: 50px;line-height: 50px; background:#f3f3f3;">
+            <div class="col-sm-9"  >
+                <a   href="#yearname{{post.date| date: '%Y'}}" value="{{post.date| date: '%Y'}}" style="line-height: 40px;">
                     <font style="color: #24292c;">
                         {{post.date| date: '%Y'}}
                     </font>
                 </a>
             </div>
             <div class="col-sm-3 pull-right" style="line-height: 40px;">
-                <span class="badge" >
+                <span class="badge" style="margin-top: 16px;" >
                     {{counts[i]}}
                 </span>
             </div>

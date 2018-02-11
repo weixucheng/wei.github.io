@@ -9,14 +9,18 @@ page_tags: 标签
              <ol class=" breadcrumb " style="background: #fff;">
                 <span class="glyphicon glyphicon-home"></span>
                 <a href="/" style="color: #000;">首页</a>>
-                <a href="" style="color: #000;">分类</a>
+                <a href="" style="color: #000;">分类</a>>
+                
+                <a href="" style="color: #000;">{{page.category}}</a>
+               
 
             </ol>
         </div>
             <div class='mainbar col-md-9 col-sm-12 col-xs-12'>
-                <div class='category-list al-article-list visible-lg visible-md visible-sm hidden-xs'>
+                    {% assign color = 1.1 %}
                     {% for year in site.data.years %}
                     {% assign flag = true %}
+                    {% assign count = 0 %}
                     {% for cate in site.categories %}
                     {% capture c1 %}{{ cate[0] | downcase }}{% endcapture %}
                     {% capture c2 %}{{ page.category | downcase }}{% endcapture %}
@@ -26,26 +30,44 @@ page_tags: 标签
                     {% capture y %}{{ post.date | date: '%Y' }}{% endcapture %}
                     {% if year.y == y %}
                     {% if flag == true %}
-                    <div class='panel panel-default'>
-                        <div class='panel-body'>
-                            <h2 class='al-year'>{{ year.y }}</h2>
-                            <hr class='al-hr'>{% assign flag = false %}{% endif %}
-                            <div class='al-article'>
-                                <a href='{{ post.url }}' target='_blank' title='{{ post.title }}'>{{ post.title | truncate: 30 }}</a>
-                                <span class='al-article-date'>&nbsp;(发布于：{{ post.date | date: '%Y.%m.%d' }})</span>
-                            </div>{% endif %}{% endfor %}
+                    {% assign color =color | minus :0.1 %}
+                    <div class="col-sm-12 col-xs-12  " style=" margin-bottom: 10px;border:1px solid #E0E0E0;background-color:#fff;padding-left: 0px;padding-right: 0px;">
+                        
+                            <div class="col-sm-12 col-xs-12  " style="padding-left: 0px;padding-right: 0px;"  >
+                                <div class="year_all" onclick="click_classdate({{ year.y }})" style="height: 60px;background: #24292c; text-align:center;line-height: 60px;opacity: {{color}}">
+                                <font style="color: #fff;">
+                                    {{ year.y }}年度
+                                </font>
+
+                                </div>
+                            </div>
+                            {% assign flag = false %}{% endif %}
+                                <div class="yser_menu_{{year.y}}" id="year_menu_{{year.y}}" style="display: block;">
+                            <div class='col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
+                                <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
+                                    <span class="glyphicon glyphicon-list-alt"></span>
+                                    <a href='{{ post.url }}' target='_blank' title='{{ post.title }}' style='color:#000;margin-left: 20px;'>{{ post.title | truncate: 30 }}</a>
+                                </div>
+                                <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
+                                <span class='al-article-date' style="color: #000;">(发布于：{{ post.date | date: '%Y.%m.%d' }})</span>
+                                </div>
+                            </div>
+                            </div>
+
+                            {% endif %}{% endfor %}
                             {% endif %}{% endfor %}
                             {% if flag == false %}
-                        </div>
+                        
                     </div><!--end of panel-->{% endif %}{% endfor %}
-                </div><!--end of category-list-->
+                
 
                 
             </div><!--end of mainbar-->
             <div class='sidebar col-md-3 hidden-sm hidden-xs'>
                 <div class='cate-ix-bar panel panel-default' id='categorybar'>
-                    <div class='panel-heading'>
-                        <h4 class='panel-title'>热门分类</h4>
+                    <div class='panel-heading' style="height: 60px;line-height: 40px;">
+                        <span class="glyphicon glyphicon-tag"></span>
+                        <font style="font-weight: bold; color: #24292c;" >热门分类</font>
                     </div>
                     <div class='list-group' id="categorybar-list">
                     </div>

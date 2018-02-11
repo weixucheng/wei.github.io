@@ -19,12 +19,18 @@
              <ol class=" breadcrumb " style="background: #fff;">
                 <span class="glyphicon glyphicon-home"></span>
                 <a href="/" style="color: #000;">首页</a>>
-                <a href="" style="color: #000;">博文</a>
+                <a href="" style="color: #000;">博文</a>>
+               
+                <a href="" style="color: #000;">{{page.name}}</a>
+               
 
             </ol>
         </div>
         <div class='mainbar col-md-9 col-sm-12 col-xs-12'>
+            {% assign color=1.1 %}
                 {% for year in site.data.years %}
+                    {% assign color=color | minus:0.1 %}
+
                     {% assign yearcount=0 %}
                     {% assign y=year.y %}
                     {% for post in site.posts %}
@@ -35,22 +41,21 @@
                         {% endif %}
                     {% endfor %}
             <div class="col-sm-12 col-xs-12  " style=" margin-bottom: 10px;border:1px solid #E0E0E0;background-color:#fff;padding-left: 0px;padding-right: 0px;" >
-                <div  class="col-sm-12 col-xs-12  " onclick="click_date({{y}})" style="height: 60px;background: #24292c; text-align:center;line-height: 60px;">
+                <div  class="col-sm-12 col-xs-12  " onclick="click_date({{y}})" style="height: 60px;background: #24292c; text-align:center;line-height: 60px;opacity:{{color}};">
                     <font style="color: #fff;">
                         {{y}}年度
                     </font>
                     <span  style="color: #fff;">
                         (共计{{yearcount}}篇）
                     </span>
-                    <span class="glyphicon glyphicon-print pull-right" style="color: #fff;margin-top: 20px;">
-                    </span>
+                    <img class="pull-right" src="../../images/6.jpg"  style="width: 60px;height: 40px;margin-top: 10px;">
                 </div>
                     {% for post in site.posts %}
                         {% assign name=post.author | strip %}
                         {% assign posty=post.date | date: "%Y" %}
                         {% if name == page.name and y == posty %}
                 <div class="menu_date_{{post.date| date: '%Y'}}" id="menu_date_{{post.date| date: '%Y'}}" style="display:block;" >
-                    <div class='col-sm-12 col-xs-12' style='height: 30px;line-height:30px;'>
+                    <div class='col-sm-12 col-xs-12' style='height: 55px;line-height:55px;'>
                         <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                             <span class="glyphicon glyphicon-list-alt"></span>
                             <a href="{{post.url}}" style='width: 400px;color:#000;margin-left: 20px;'>{{post.title}}</a>
@@ -66,7 +71,7 @@
         </div><!--end of mainbar-->
             <div class='sidebar col-md-3 hidden-sm hidden-xs'>
                 <div class='authorslistbar panel panel-default' id='authorslistbar'>
-                    <div class='panel-heading'>
+                    <div class='panel-heading' style="height: 60px;line-height: 40px;">
                         <span class="glyphicon glyphicon-user"></span>
                         <font style="font-weight: bold; color: #24292c;" >作者列表</font>
                     </div>
