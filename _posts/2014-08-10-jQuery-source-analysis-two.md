@@ -27,30 +27,30 @@ description: jQuery通过.extend和.fn.extend像jQuery的全局对象和实例�
 		// 若无特殊情况，参数中的第一个为target，若没有传递参数，默认为{}
 		target = arguments[0] || {}, 			i = 1,
 		length = arguments.length,
-
+	
 		// 是否进行深度复制的flag，即为参数中[ boolean ]所传递过来的值，默认为false
 		deep = false; 	
-
+	
 		// 处理深度复制的情况，若设置了[ boolean ]，则其位置必为arguments中第一个(arguments[0])
 		if ( typeof target === "boolean" ) {
 			deep = target;
-
+	
 			// 跳过 [ boolean ] 参数，取得target扩展对象
 			target = arguments[ i ] || {};
 			i++;
 		}
-
+	
 		// 处理target是一个string或其他什么（可能发生在深度复制中）
 		if ( typeof target !== "object" && !jQuery.isFunction(target) ) {
 			target = {};
 		}
-
+	
 		// 如果只有一个参数被传递过来，则扩展jQuery自己，即将target值设为this
 		if ( i === length ) {
 			target = this;
 			i--;
 		}
-
+	
 		for ( ; i < length; i++ ) {
 			// 只处理不为空或undefined值
 			if ( (options = arguments[ i ]) != null ) {
@@ -63,7 +63,7 @@ description: jQuery通过.extend和.fn.extend像jQuery的全局对象和实例�
 					if ( target === copy ) {
 						continue;	// 当传递过来的参数中的所有属性及方法，
 					}
-
+	
 					// 如果进行深度扩展，且我们正在合并的是一个纯对象或者数组，就递归调用
 					if ( deep && copy && ( jQuery.isPlainObject(copy) 
 							|| (copyIsArray = jQuery.isArray(copy)) ) ) {
@@ -96,7 +96,7 @@ description: jQuery通过.extend和.fn.extend像jQuery的全局对象和实例�
 	jQuery.extend({
 		// 在页面中生成一个唯一标识每一个副本jQuery
 		expando: "jQuery" + ( version + Math.random() ).replace( /\D/g, "" ),
-
+	
 		// 在没有ready模块时，假定jQuery准备完成
 		isReady: true,
 		// 抛出指定的错误信息
@@ -111,22 +111,22 @@ description: jQuery通过.extend和.fn.extend像jQuery的全局对象和实例�
 		isWindow: function( obj ) {}, 	// 判断参数是否为浏览器窗口对象window
 	
 		isNumeric: function( obj ) {}, 	// 判断参数是不是数值
-
+	
 		isEmptyObject: function( obj ) {},  // 判断参数是否是一个空对象
-
+	
 		// 判断参数obj是不是通过对象字面量或new Object创建的
 		isPlainObject: function( obj ) {},  
 	
 		type: function( obj ) {},  // 返回obj类型
 	
 		globalEval: function( data ) {},   // 在全局上下文中，求给定的JavaScript字符串数据的值
-
+	
 		// 将参数字符串转换为骆驼表示法，如camelCase,nodeName等，
 		// 基本上jQuery中所有的方法都是用的骆驼表示法
 		camelCase: function( string ) {},	
 	
 		nodeName: function( elem, name ) {},	// 返回指定元素的节点名称与给定的名字是否一样
-
+	
 		// args 仅在each内部使用，对obj执行规定运行的函数callback
 		each: function( obj, callback, args ) {},
 	
@@ -134,32 +134,32 @@ description: jQuery通过.extend和.fn.extend像jQuery的全局对象和实例�
 	
 		// results 仅在内部使用，转换一个类似数组的对象成为真正的JavaScript数组
 		makeArray: function( arr, results ) {	}, 
-
+	
 		// 确定第一个参数在数组中的位置(如果没有找到则返回 -1 )
 		inArray: function( elem, arr, i ) {},  
-
+	
 		merge: function( first, second ) {},  // 将两个参数合并，并返回合并后的值
-
+	
 		grep: function( elems, callback, invert ) {},  // 数组元素过滤筛选
-
+	
 		// arg 仅在内部使用，对当前集合elems中的每个元素调用callback，
 		// 将返回结果作为一个新的jQuery对象
 		map: function( elems, callback, arg ) {},
-
+	
 		// 一个对象的全局的GUID计数器
 		guid: 1,
-
+	
 		// optionally partially applying any arguments
 		// 创建一个新的，在指定上下文中执行的函数
 		proxy: function( fn, context ) {},
-
+	
 		now: function() { return +( new Date() ); },  // 返回当前时间
-
+	
 		// jQuery.support is not used in Core but other projects attach their
 		// properties to it so it needs to exist.
 		support: support
 	});
-	
+
 `jQuery.fn.extend`中扩展的**实例对象**工具函数，其函数原型如下代码所示：
 
 	jQuery.fn.extend({
@@ -169,7 +169,7 @@ description: jQuery通过.extend和.fn.extend像jQuery的全局对象和实例�
 		filter: function( selector ) {},
 		
 		not: function( selector ) {}, 	// 选中给定元素集中与给定选择符不匹配的元素
-
+	
 		// 根据选择符来检测匹配元素集合，如果这些元素中至少有一个元素匹配给定的参数，则返回 true
 		is: function( selector ) {} 	
 	});
@@ -181,7 +181,7 @@ description: jQuery通过.extend和.fn.extend像jQuery的全局对象和实例�
 		i = 0,
 		length = obj.length,
 		isArray = isArraylike( obj );
-
+	
 		if ( isArray ) {
 			for ( ; i < length; i++ ) {
 				value = callback.call( obj[ i ], i, obj[ i ] );
@@ -192,7 +192,7 @@ description: jQuery通过.extend和.fn.extend像jQuery的全局对象和实例�
 		} else {
 			for ( i in obj ) {
 				value = callback.call( obj[ i ], i, obj[ i ] );
-
+	
 				if ( value === false ) {
 					break;
 				}
@@ -202,7 +202,7 @@ description: jQuery通过.extend和.fn.extend像jQuery的全局对象和实例�
 首先通过**数组**和**对象**两种方式来遍历参数`obj`，对`obj`中的每个元素调用`callback.call`将每个元素绑定到回调函数上执行，并返回执行结果。
 
 当回调函数返回`false`，则停止循环。在其源码中还涉及到`callback.apply`的方式来调用回调函数，其作用于`call`一样，都是将函数绑定到另外一个对象上去运行。关于`call`与`apply`的详细说明，可以跳转到[JavaScript中，Array和Function的那些事儿][]查看详细信息！
-[JavaScript中，Array和Function的那些事儿]: http://www.blogways.net/blog/2014/07/22/somethings-of-array-and-function.html "JavaScript中，Array和Function的那些事儿"
+[JavaScript中，Array和Function的那些事儿]: http://www.blogways.net/blog/2014/07/22/somethings-of-array-and-function.html	"JavaScript中，Array和Function的那些事儿"
 
 ### 示例：###
 测试代码如下所示：
