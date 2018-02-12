@@ -29,8 +29,9 @@
               </a>
               <ul class='dropdown-menu cate-drop-menu' role='menu' >{% for cate in site.categories %}
                 {% assign ca_name = cate | first %}{% if ca_name != page.category %}
+                {% assign name = cate | first %}
                 <li>
-                  <a href='/categories/{{ ca_name | downcase}}/'>{{ cate  | first }}
+                  <a href='/categories/{{ name | downcase}}/'>{{ cate  | first }}
                     <span class='badge pull-right'>{{ cate | last | size }}</span>
                   </a>
                 </li>{% else %}
