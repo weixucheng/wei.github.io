@@ -27,7 +27,7 @@ limit_tags: 8
         <div class='col-xs-12 col-sm-12 col-md-9   mainbar'>
             <div class="col-xs-12 col-sm-12 "   style=" border:1px solid #E0E0E0;background-color:#f3f3f3; height: 48px; " role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true" style="line-height: 50px;">×</span>
+                    <span aria-hidden="true" style="line-height: 50px;" id="buttonnew">×</span>
                 </button>
                 <div style="line-height: 48px;">
                     <font color="#888" style="font-weight: bold;color: #24292c;">
@@ -60,7 +60,7 @@ limit_tags: 8
                    <u><a href='{{ post.url }}' target='_blank' title='{{ post.title }}' style="color: #24292c;" >{{ post.title }}</a></u>  
                 </div>
                 <div class="  col-md-1 col-xs-1 "  style="line-height: 70px; padding-right: 0px;margin-top: 30px;">
-                   <span class="glyphicon glyphicon-search pull-right" ></span>
+                   <a href="{{ post.url }}" style="color: #000;"><span class="glyphicon glyphicon-search pull-right" ></span></a>
                 </div>
 
             </div>
@@ -185,9 +185,8 @@ limit_tags: 8
     </div>
 </div>
 <footer class="blog-footer">
-      <p>CUC Industry Innovation R&D
       <p>
-        亚信科技（南京）有限公司 联通事业部
+        Copyright <font style="font-size: 20px;">©</font> blogways.net 
       </p>
 </footer>
  

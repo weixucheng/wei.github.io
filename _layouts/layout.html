@@ -73,6 +73,11 @@
 
 
         $(function(){
+
+
+            $("#buttonnew").click(function(){
+                alert(1);
+            });
             $(".new_year").each(function(){
                 var countname=0;
                 var years=$(this).text().replace(/\ +/g,"");
@@ -812,13 +817,18 @@
 </head>
 <body style='background-color: #F5F5F5;'>
     <div class='totop visible-lg visible-md visible-sm hidden-xs'>
-        <a id='to-top' href='javascript:void(0)'>
-            <span id='to-top-title'>返回</br>顶部</span>
+        <a id='to-top' href='javascript:void(0)' style="background: #7f7f7f;line-height: 50px;text-align: center;border-radius: 5px;">
+            <span class="glyphicon glyphicon-chevron-up" style="color: #000;width: 25px;height: 20px;"></span>
+             
+        </a>
+        <a  id='to-top' style="position: fixed; bottom: 25px; right: 50px; z-index: 99999; background-position: 0 -110px;  width: 50px; height: 50px;background: #7f7f7f;line-height: 50px;text-align: center;border-radius: 5px;display: none;">
+            <span style="color: #000;">反馈</span>
         </a>
     </div>
     <div class='totop-xs hidden-lg hidden-md hidden-sm visible-xs'>
         <a id='to-top-xs' href='javascript:void(0)'>
-            <span id='to-top-title-xs'>返回</br>顶部</span>
+            <span id='to-top-title-xs'></span>
+            <span >反馈</span>
         </a>
     </div>
     <div class='headerbar'>

@@ -54,10 +54,6 @@ $(document).ready(function(){
     $('#to-top, #to-top-xs').on( 'click', function( event ){
         $('html,body').animate({scrollTop: '0px'}, 500);
     });
-    $('#to-top,#to-top-xs').hover(function(){
-        $('#to-top-title, #to-top-title-xs').show().css('display','block');
-    }, function(){
-        $('#to-top-title, #to-top-title-xs').hide();
-    });
+  
 
 });
