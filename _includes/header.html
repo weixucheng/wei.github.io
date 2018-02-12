@@ -16,18 +16,18 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse"  >
           <ul class="nav navbar-nav" style="margin-top: 3%;margin-left:7%" >{% if page.page_type == 'index' %}
-            <li><a class="active" href="javascript:void(0)">HOME</a></li>{% else %}
-            <li><a href='/'>HOME</a></li>{% endif %}{% if page.pt_page_type == 'pt' %}
+            <li><a class="active" href="javascript:void(0)">主页</a></li>{% else %}
+            <li><a href='/'>主页</a></li>{% endif %}{% if page.pt_page_type == 'pt' %}
             <li class='divider visible-xs'></li>
             <li class='active'><a href='javascript:void(0)'>博文</a></li>{% else %}{% endif %}
             <li class='divider visible-xs'></li>
               {% if page.category != null and page.pt_page_type == null %}
-            <li class='dropdown visible-sm visible-xs active'>{% else %}
-            <li class='dropdown visible-sm visible-xs'>{% endif %}
+            <li class='dropdown  active'>{% else %}
+            <li class='dropdown '>{% endif %}
               <a class='dropdown-toggle' data-toggle='dropdown' href='#'>热门分类
                 <span class='caret'></span>
               </a>
-              <ul class='dropdown-menu cate-drop-menu' role='menu'>{% for cate in site.categories %}
+              <ul class='dropdown-menu cate-drop-menu' role='menu' >{% for cate in site.categories %}
                 {% assign ca_name = cate | first %}{% if ca_name != page.category %}
                 <li>
                   <a href='/categories/{{ cate | first }}/'>{{ cate  | first }}
@@ -43,8 +43,8 @@
             </li>
 
               {% if page.category != null and page.pt_page_type == null %}
-            <li class='dropdown visible-sm visible-xs active'>{% else %}
-            <li class='dropdown visible-sm visible-xs'>{% endif %}
+            <li class='dropdown  active'>{% else %}
+            <li class='dropdown '>{% endif %}
               <a class='dropdown-toggle' data-toggle='dropdown' href='#'>年度博文
                 <span class='caret'></span>
               </a>
@@ -83,7 +83,7 @@
 
               {% if page.page_type == 'author-all' or page.page_type == 'author'%}
             <li class='dropdown '>{% else %}<li class='dropdown'>{% endif %}
-              <a class='dropdown-toggle' data-toggle='dropdown' href='#'>ABOUT US
+              <a class='dropdown-toggle' data-toggle='dropdown' href='#'>关于我们
                 <span class='caret'></span>
               </a>
               <ul class='dropdown-menu' role='menu'>{% if page.page_type == 'author-all' %}
@@ -94,17 +94,17 @@
                 <li><a href='{{ author.page_path }}'>{{ author.name | remove: ' ' }}</a></li>{% endif %}{% endfor %}
               </ul>
             </li>
-            <li><a  href='https://github.com/blogways/blogways.github.io' title='https://github.com/blogways/blogways.github.io' target='_blank'>MORE</a></li>
+            <li><a  href='https://github.com/blogways/blogways.github.io' title='https://github.com/blogways/blogways.github.io' target='_blank'>更多</a></li>
           </ul>
           <div style="height: 40px;width: 260px;float: right; margin-top: 30px;border-radius: 25px;border-color: #000;background: #000;line-height: 10px;">
             <form action="" class="basic-grey">
           
-            <span class="glyphicon glyphicon-search pull-left" style="color: #999;margin-left: 10px;margin-top: 10px;"> </span>
+            <span class="glyphicon glyphicon-search pull-left" style="color: #999;margin-left: 10px;margin-top: 12px;"> </span>
            
-            <input type="text" class="pull-left" id="username" style="height: 40px; width: 120px; border-color: #000;background: #000;outline:none;padding-right: 0px;color: #fff;" placeholder="搜索标签、人">
+            <input type="text" class="pull-left" id="username" style="height: 40px; width: 120px; border-color: #000;background: #000;outline:none;padding-right: 0px;color: #fff;margin-left: 5px;" placeholder="搜索标签、人">
             
-           <span class=" pull-right"  style="margin-top: 7px;margin-right: 10px;height: 25px; width: 45px;border-radius: 25px;border-color: #000;background: #999;text-align: center;line-height: 25px;">
-            <a href="" id="search_a" style="text-decoration: none;"><div id="search" style="color: #000;">new</div></a></span>
+           <!-- <span class=" pull-right"  style="margin-top: 7px;margin-right: 10px;height: 25px; width: 45px;border-radius: 25px;border-color: #000;background: #999;text-align: center;line-height: 25px;">
+            <a href="" id="search_a" style="text-decoration: none;"><div id="search" style="color: #000;">new</div></a></span> -->
         </form>
          <ul id="groupid" class="anserdh" style="width: 260px;float: right;border-color: #000;background: #000;list-style-type:none;">
               

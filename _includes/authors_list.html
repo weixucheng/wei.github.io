@@ -29,7 +29,7 @@
         <div class='mainbar col-md-9 col-sm-12 col-xs-12'>
             {% assign color=1.1 %}
                 {% for year in site.data.years %}
-                    {% assign color=color | minus:0.1 %}
+                    
 
                     {% assign yearcount=0 %}
                     {% assign y=year.y %}
@@ -40,6 +40,8 @@
                             {% assign yearcount=yearcount | plus:1 %}
                         {% endif %}
                     {% endfor %}
+                    {% if yearcount != 0%}
+                    {% assign color=color | minus:0.1 %}
             <div class="col-sm-12 col-xs-12  " style=" margin-bottom: 10px;border:1px solid #E0E0E0;background-color:#fff;padding-left: 0px;padding-right: 0px;" >
                 <div  class="col-sm-12 col-xs-12  " onclick="click_date({{y}})" style="height: 60px;background: #24292c; text-align:center;line-height: 60px;opacity:{{color}};">
                     <font style="color: #fff;">
@@ -65,9 +67,12 @@
                         </div>
                     </div>
                 </div>
+
                         {% endif %}
                     {% endfor %}
-            </div><!--end of panel-->{% endfor %}     
+            </div><!--end of panel-->
+            {% endif %}
+            {% endfor %}     
         </div><!--end of mainbar-->
             <div class='sidebar col-md-3 hidden-sm hidden-xs'>
                 <div class='authorslistbar panel panel-default' id='authorslistbar'>

@@ -76,8 +76,14 @@
 
 
             $("#buttonnew").click(function(){
-                alert(1);
+                $(".newinformation").css("display","none");
+                $("#buttonnew").css("display","none");
             });
+            $("#show").click(function(){
+                $(".newinformation").css("display","block");
+                $("#buttonnew").css("display","block");
+            });
+
             $(".new_year").each(function(){
                 var countname=0;
                 var years=$(this).text().replace(/\ +/g,"");
