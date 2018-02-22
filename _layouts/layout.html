@@ -76,10 +76,14 @@
 
 
             $("#buttonnew").click(function(){
+                 $("#selectdown").css("display","block");
                 $(".newinformation").css("display","none");
+
                 $("#buttonnew").css("display","none");
+               
             });
-            $("#show").click(function(){
+            $("#selectdown").click(function(){
+                $("#selectdown").css("display","none")
                 $(".newinformation").css("display","block");
                 $("#buttonnew").css("display","block");
             });
