@@ -22,7 +22,7 @@
             <li class='active'><a href='javascript:void(0)'>博文</a></li>{% else %}{% endif %}
             <li class='divider visible-xs'></li>
               {% if page.category != null and page.pt_page_type == null %}
-            <li class='dropdown  active'>{% else %}
+            <li class='dropdown  '>{% else %}
             <li class='dropdown '>{% endif %}
               <a class='dropdown-toggle' data-toggle='dropdown' href='#'>热门分类
                 <span class='caret'></span>
@@ -45,12 +45,12 @@
             </li>
 
               {% if page.category != null and page.pt_page_type == null %}
-            <li class='dropdown  active'>{% else %}
+            <li class='dropdown  '>{% else %}
             <li class='dropdown '>{% endif %}
               <a class='dropdown-toggle' data-toggle='dropdown' href='#'>年度博文
                 <span class='caret'></span>
               </a>
-              <ul class='dropdown-menu cate-drop-menu' role='menu'>
+              <ul class='dropdown-menu ' role='menu'>
                 {% assign count = 1 %}
         {% for post in site.posts reversed %}
             {% assign year = post.date | date: '%Y' %}
