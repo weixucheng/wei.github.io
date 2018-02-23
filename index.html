@@ -39,18 +39,19 @@ limit_tags: 8
             {% for post in site.posts limit:2%}
             <div  class="newinformation col-md-12 col-xs-12"  style=" border:1px solid #E0E0E0;height: 70px;background: #FFFFFF;">
                 <div class="col-xs-2 col-sm-1  img-padding" style="line-height: 70px;">
+                  {% for author in site.authors %}{% if post.author == author.name %}
                     
-                            {% if post.image == null %} 
-                            <img src="/images/blogways.png" alt="..."  style="width:50px;height: 50px;border: 1px solid #E0E0E0;">
-                            {% else %}
+                            <!-- {% if post.image == null %}  -->
+                            <img src="{{author.image}}" alt="..."  style="width:50px;height: 50px;border: 1px solid #E0E0E0;">
+                            <!-- {% else %}
                             <img src="{{ post.image }}" alt="..."  style="width: 50px;height: 50px;border: 1px solid #E0E0E0;">
-                            {% endif %}
+                            {% endif %} -->
                     
                 </div> 
                 <div class=" col-xs-2 col-sm-1 col-md-1  img-padding"  style="line-height: 70px;">
                     <u>
                    <span class='sr-only'>{{ page.posted_by }}&nbsp;:&nbsp;</span>
-                                        {% for author in site.authors %}{% if post.author == author.name %}
+                                        
                                         <a style="color: #24292c;" href='{{ author.page_path }}'>{{ post.author | remove: ' '}}</a>{% endif %}{% endfor %} 
                     </u> 
                 </div>
