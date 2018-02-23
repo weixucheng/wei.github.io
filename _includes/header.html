@@ -27,14 +27,11 @@
                 <span class='caret'></span>
               </a>
               <ul class='dropdown-menu cate-drop-menu' role='menu' >{% for cate in site.categories %}
-                {% assign ca_name = cate | first %}{% if ca_name != page.category %}
-                {% assign name = ca_name | downcase %}
-                {% assign name1 = name | downcase %}
-                {% assign name2 = name1 | downcase %}
-                {% assign name3 = name2 | downcase %}
+                {% assign ca_name = cate | first | downcase %}{% if ca_name != page.category %}
+                
                 
                 <li>
-                  <a href='/categories/{{ name3 }}/'>{{ cate  | first }}
+                  <a href='/categories/{{ ca_name }}/'>{{ cate  | first }}
                     <span class='badge pull-right'>{{ cate | last | size }}</span>
                   </a>
                 </li>{% else %}
