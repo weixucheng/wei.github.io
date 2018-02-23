@@ -26,8 +26,8 @@
               <a class='dropdown-toggle' data-toggle='dropdown' href='#'>热门分类
                 <span class='caret'></span>
               </a>
-              <ul class='dropdown-menu cate-drop-menu' role='menu' >{% for cate in site.categories %}
-                {% assign ca_name = cate | first | downcase %}{% if ca_name != page.category %}
+              <ul class='dropdown-menu ' role='menu' id="classmain" ><!-- {% for cate in site.categories %} -->
+             <!--    {% assign ca_name = cate | first | downcase %}{% if ca_name != page.category %}
                 
                 
                 <li>
@@ -39,7 +39,7 @@
                   <a href='javascript:void(0)'>{{ cate | first }}
                     <span class='badge pull-right'>{{ cate | last | size }}</span>
                   </a>
-                </li>{% endif %}{% endfor %}
+                </li>{% endif %}{% endfor %} -->
               </ul>
             </li>
 
