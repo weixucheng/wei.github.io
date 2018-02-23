@@ -28,10 +28,10 @@
               </a>
               <ul class='dropdown-menu cate-drop-menu' role='menu' >{% for cate in site.categories %}
                 {% assign ca_name = cate | first %}{% if ca_name != page.category %}
-                {% assign name = cate | first %}
-                {% assign namemin = name | downcase %}
+                
+                {% assign namemin = ca_name | downcase %}
                 <li>
-                  <a href='/categories/{{ namemin}}/'>{{ cate  | first }}
+                  <a href='/categories/{{ namemin | downcase}}/'>{{ cate  | first }}
                     <span class='badge pull-right'>{{ cate | last | size }}</span>
                   </a>
                 </li>{% else %}
