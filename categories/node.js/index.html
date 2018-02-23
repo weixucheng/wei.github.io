@@ -74,10 +74,14 @@
 
 
             $("#buttonnew").click(function(){
+                 $("#selectdown").css("display","block");
                 $(".newinformation").css("display","none");
+
                 $("#buttonnew").css("display","none");
+               
             });
-            $("#show").click(function(){
+            $("#selectdown").click(function(){
+                $("#selectdown").css("display","none")
                 $(".newinformation").css("display","block");
                 $("#buttonnew").css("display","block");
             });
@@ -787,12 +791,13 @@
                 });
                 $.each( o, function( i , item ){
                     var name = item.name.replace(" ","") || "";     
-                    var path = item.path.replace(" ","") || "";                    
+                    var path = item.path.replace(" ","") || "";   
+                    var image = item.image.replace(" ","") || "";                 
                     var num = item.articles.length || 0;
                     if (i<=5) {
                         var content =" <div style='height: 70px; background-color: #f3f3f3;box-shadow: 0px 2px 5px #bebdbd;line-height: 30px;vertical-align:middle;'> ";
                         content +=" <a href='"+path+"'>";
-                        content +="<img src='/images/blogways.png' alt='...''  style='width:50px;height: 50px;border: 1px solid #E0E0E0;margin-top: 10px;margin-left: 10px;border:none; float:left; display:inline;''>";
+                        content +="<img src='"+image+"' alt='...''  style='width:50px;height: 50px;border: 1px solid #E0E0E0;margin-top: 10px;margin-left: 10px;border:none; float:left; display:inline;''>";
                         content +="</a>";
                         content +=" <div style=' float:left; display:inline; margin-top:5px; margin-left:5px;'>";
                         content +="     <div >"+name+"</div>";
@@ -859,17 +864,23 @@
             <li><a href='/'>主页</a></li>
             <li class='divider visible-xs'></li>
               
-            <li class='dropdown  active'>
+            <li class='dropdown'>
               <a class='dropdown-toggle' data-toggle='dropdown' href='#'>热门分类
                 <span class='caret'></span>
               </a>
-              <ul class='dropdown-menu cate-drop-menu' role='menu' >
+              <ul class='dropdown-menu ' role='menu' >
+                
+                
+                
                 
                 <li>
-                  <a href='/categories/Jekyll/'>Jekyll
+                  <a href='/categories/jekyll/'>Jekyll
                     <span class='badge pull-right'>4</span>
                   </a>
                 </li>
+                
+                
+                
                 
                 <li>
                   <a href='/categories/杂记/'>杂记
@@ -877,71 +888,107 @@
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
-                  <a href='/categories/JUnit/'>JUnit
+                  <a href='/categories/junit/'>JUnit
                     <span class='badge pull-right'>8</span>
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
-                  <a href='/categories/NoSQL/'>NoSQL
+                  <a href='/categories/nosql/'>NoSQL
                     <span class='badge pull-right'>11</span>
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
-                  <a href='/categories/Sencha/'>Sencha
+                  <a href='/categories/sencha/'>Sencha
                     <span class='badge pull-right'>5</span>
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
-                  <a href='/categories/Nginx/'>Nginx
+                  <a href='/categories/nginx/'>Nginx
                     <span class='badge pull-right'>5</span>
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
-                  <a href='/categories/Apache/'>Apache
+                  <a href='/categories/apache/'>Apache
                     <span class='badge pull-right'>12</span>
                   </a>
                 </li>
                 
-                <li class='disabled active'>
-                  <a href='javascript:void(0)'>Node.js
+                
+                
+                
+                <li>
+                  <a href='/categories/node.js/'>Node.js
                     <span class='badge pull-right'>7</span>
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
-                  <a href='/categories/Express/'>Express
+                  <a href='/categories/express/'>Express
                     <span class='badge pull-right'>14</span>
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
-                  <a href='/categories/jQuery/'>jQuery
+                  <a href='/categories/jquery/'>jQuery
                     <span class='badge pull-right'>22</span>
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
-                  <a href='/categories/Java/'>Java
+                  <a href='/categories/java/'>Java
                     <span class='badge pull-right'>12</span>
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
-                  <a href='/categories/Solr/'>Solr
+                  <a href='/categories/solr/'>Solr
                     <span class='badge pull-right'>6</span>
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
-                  <a href='/categories/WordPress/'>WordPress
+                  <a href='/categories/wordpress/'>WordPress
                     <span class='badge pull-right'>3</span>
                   </a>
                 </li>
+                
+                
+                
                 
                 <li>
                   <a href='/categories/drupal/'>drupal
@@ -949,11 +996,17 @@
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
                   <a href='/categories/joomla/'>joomla
                     <span class='badge pull-right'>1</span>
                   </a>
                 </li>
+                
+                
+                
                 
                 <li>
                   <a href='/categories/design/'>design
@@ -961,11 +1014,17 @@
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
-                  <a href='/categories/Web前端/'>Web前端
+                  <a href='/categories/web前端/'>Web前端
                     <span class='badge pull-right'>1</span>
                   </a>
                 </li>
+                
+                
+                
                 
                 <li>
                   <a href='/categories/keepalived/'>keepalived
@@ -973,11 +1032,17 @@
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
                   <a href='/categories/iot/'>iot
                     <span class='badge pull-right'>1</span>
                   </a>
                 </li>
+                
+                
+                
                 
                 <li>
                   <a href='/categories/web前端/'>web前端
@@ -985,17 +1050,26 @@
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
                   <a href='/categories/交互设计/'>交互设计
                     <span class='badge pull-right'>6</span>
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
-                  <a href='/categories/Spring/'>Spring
+                  <a href='/categories/spring/'>Spring
                     <span class='badge pull-right'>3</span>
                   </a>
                 </li>
+                
+                
+                
                 
                 <li>
                   <a href='/categories/web后端/'>web后端
@@ -1003,11 +1077,17 @@
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
                   <a href='/categories/git/'>git
                     <span class='badge pull-right'>1</span>
                   </a>
                 </li>
+                
+                
+                
                 
                 <li>
                   <a href='/categories/索引/'>索引
@@ -1015,17 +1095,26 @@
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
                   <a href='/categories/storm/'>storm
                     <span class='badge pull-right'>7</span>
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
-                  <a href='/categories/Python/'>Python
+                  <a href='/categories/python/'>Python
                     <span class='badge pull-right'>2</span>
                   </a>
                 </li>
+                
+                
+                
                 
                 <li>
                   <a href='/categories/nodejs/'>nodejs
@@ -1033,11 +1122,17 @@
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
                   <a href='/categories/地图/'>地图
                     <span class='badge pull-right'>1</span>
                   </a>
                 </li>
+                
+                
+                
                 
                 <li>
                   <a href='/categories/websocket/'>websocket
@@ -1045,17 +1140,26 @@
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
                   <a href='/categories/kafka/'>kafka
                     <span class='badge pull-right'>4</span>
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
-                  <a href='/categories/GC/'>GC
+                  <a href='/categories/gc/'>GC
                     <span class='badge pull-right'>1</span>
                   </a>
                 </li>
+                
+                
+                
                 
                 <li>
                   <a href='/categories/tiles/'>tiles
@@ -1063,11 +1167,17 @@
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
                   <a href='/categories/dubbo/'>dubbo
                     <span class='badge pull-right'>1</span>
                   </a>
                 </li>
+                
+                
+                
                 
                 <li>
                   <a href='/categories/zookeeper/'>zookeeper
@@ -1075,11 +1185,17 @@
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
-                  <a href='/categories/JVM/'>JVM
+                  <a href='/categories/jvm/'>JVM
                     <span class='badge pull-right'>1</span>
                   </a>
                 </li>
+                
+                
+                
                 
                 <li>
                   <a href='/categories/mysql/'>mysql
@@ -1087,11 +1203,17 @@
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
                   <a href='/categories/ehcache/'>ehcache
                     <span class='badge pull-right'>1</span>
                   </a>
                 </li>
+                
+                
+                
                 
                 <li>
                   <a href='/categories/disconf/'>disconf
@@ -1099,11 +1221,17 @@
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
                   <a href='/categories/docker/'>docker
                     <span class='badge pull-right'>1</span>
                   </a>
                 </li>
+                
+                
+                
                 
                 <li>
                   <a href='/categories/linux/'>linux
@@ -1111,17 +1239,26 @@
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
                   <a href='/categories/spring-cloud/'>spring-cloud
                     <span class='badge pull-right'>1</span>
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
-                  <a href='/categories/Git/'>Git
+                  <a href='/categories/git/'>Git
                     <span class='badge pull-right'>1</span>
                   </a>
                 </li>
+                
+                
+                
                 
                 <li>
                   <a href='/categories/数据库/'>数据库
@@ -1129,20 +1266,54 @@
                   </a>
                 </li>
                 
+                
+                
+                
                 <li>
                   <a href='/categories/liquid/'>liquid
                     <span class='badge pull-right'>1</span>
                   </a>
                 </li>
+                
               </ul>
             </li>
 
-              
-            <li class='dropdown  active'>
+              <li class='dropdown'>
+              <a class='dropdown-toggle' data-toggle='dropdown' href='#'>所有作者
+                <span class='caret'></span>
+              </a>
+              <ul class='dropdown-menu' role='menu'>
+                <li><a href='/about.html'>所有信息</a></li>
+                <li class='divider'></li>
+                <li><a href='/authors/chenfan/'>陈凡</a></li>
+                <li><a href='/authors/chenlong/'>陈龙</a></li>
+                <li><a href='/authors/chenwt/'>陈文婷</a></li>
+                <li><a href='/authors/fukui/'>付奎</a></li>
+                <li><a href='/authors/gaoxiaobo/'>高晓波</a></li>
+                <li><a href='/authors/huangmai/'>黄劢</a></li>
+                <li><a href='/authors/jacky/'>Jacky</a></li>
+                <li><a href='/authors/jyjsjd/'>景阳</a></li>
+                <li><a href='/authors/liuyiwei/'>刘益伟</a></li>
+                <li><a href='/authors/qianwx/'>钱文旭</a></li>
+                <li><a href='/authors/tangshizhong/'>汤仕忠</a></li>
+                <li><a href='/authors/tangzhi/'>唐治</a></li>
+                <li><a href='/authors/wangdong/'>王栋</a></li>
+                <li><a href='/authors/wanghui/'>汪回</a></li>
+                <li><a href='/authors/wangtianwen/'>王天文</a></li>
+                <li><a href='/authors/xuwannian/'>徐万年</a></li>
+                <li><a href='/authors/wanzhou/'>万洲</a></li>
+                <li><a href='/authors/weixucheng/'>卫旭成</a></li>
+                <li><a href='/authors/zhangke/'>张可</a></li>
+                <li><a href='/authors/zhangshaoyong/'>张少勇</a></li>
+                <li><a href='/authors/zhaojiajun/'>赵家君</a></li>
+              </ul>
+            </li>
+             
+            <li class='dropdown'>
               <a class='dropdown-toggle' data-toggle='dropdown' href='#'>年度博文
                 <span class='caret'></span>
               </a>
-              <ul class='dropdown-menu cate-drop-menu' role='menu'>
+              <ul class='dropdown-menu ' role='menu'>
                 
         
 
@@ -2274,36 +2445,6 @@
               </ul>
             </li>
 
-              <li class='dropdown'>
-              <a class='dropdown-toggle' data-toggle='dropdown' href='#'>关于我们
-                <span class='caret'></span>
-              </a>
-              <ul class='dropdown-menu' role='menu'>
-                <li><a href='/about.html'>所有信息</a></li>
-                <li class='divider'></li>
-                <li><a href='/authors/chenfan/'>陈凡</a></li>
-                <li><a href='/authors/chenlong/'>陈龙</a></li>
-                <li><a href='/authors/chenwt/'>陈文婷</a></li>
-                <li><a href='/authors/fukui/'>付奎</a></li>
-                <li><a href='/authors/gaoxiaobo/'>高晓波</a></li>
-                <li><a href='/authors/huangmai/'>黄劢</a></li>
-                <li><a href='/authors/jacky/'>Jacky</a></li>
-                <li><a href='/authors/jyjsjd/'>景阳</a></li>
-                <li><a href='/authors/liuyiwei/'>刘益伟</a></li>
-                <li><a href='/authors/qianwx/'>钱文旭</a></li>
-                <li><a href='/authors/tangshizhong/'>汤仕忠</a></li>
-                <li><a href='/authors/tangzhi/'>唐治</a></li>
-                <li><a href='/authors/wangdong/'>王栋</a></li>
-                <li><a href='/authors/wanghui/'>汪回</a></li>
-                <li><a href='/authors/wangtianwen/'>王天文</a></li>
-                <li><a href='/authors/xuwannian/'>徐万年</a></li>
-                <li><a href='/authors/wanzhou/'>万洲</a></li>
-                <li><a href='/authors/weixucheng/'>卫旭成</a></li>
-                <li><a href='/authors/zhangke/'>张可</a></li>
-                <li><a href='/authors/zhangshaoyong/'>张少勇</a></li>
-                <li><a href='/authors/zhaojiajun/'>赵家君</a></li>
-              </ul>
-            </li>
             <li><a  href='https://github.com/blogways/blogways.github.io' title='https://github.com/blogways/blogways.github.io' target='_blank'>更多</a></li>
           </ul>
           <div style="height: 40px;width: 260px;float: right; margin-top: 30px;border-radius: 25px;border-color: #000;background: #000;line-height: 10px;">
