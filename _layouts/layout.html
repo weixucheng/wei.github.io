@@ -73,15 +73,6 @@
 
 
         $(function(){
-            $.getJSON("/categorycount.json",function(a){
-                $.each( a, function( i , item ){
-                    var content =
-                    "<li><a   href='/categories/"+item[0]+"/'>"+item[1]+
-                        "<span class='badge pull-right'>"+item[2]+"</span>"+
-                    "</a></li>"
-                    $("#classmain").append(content);
-                });
-            });
 
 
             $("#buttonnew").click(function(){
