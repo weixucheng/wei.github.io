@@ -40,6 +40,7 @@
             }
             else
             {
+                var countnum=0;
                 $.getJSON("/yearauthors.json",function(o){
                     o.sort(function(a,b){
                         return b.num-a.num
@@ -50,13 +51,42 @@
                         var yearauthor=item.year.replace(" ","")||"";                  
                         var num = item.num.replace(" ","") || "";
                         if (year==yearauthor) {
+                            countnum=countnum+1;
                             if (num!=0) {
-                                var content="<div class='col-sm-12 col-xs-12' style='height: 30px;line-height:30px;padding-left:0px;'>";
-                                content+="<span class='glyphicon glyphicon-user' ></span>";
-                                content+="<a href='"+path+"'  style='width: 400px;color:#000;margin-left: 20px;'>"+name+"</a>";
-                                content+="<span style='float:right;'>共计<font style='font-size:18px;'>"+num+"</font>篇</span>";
+                                if (countnum==1) 
+                                {
+                                    var content="<div class='csspre col-sm-12 col-xs-12' style='height: 55px;line-height:55px;padding-left:0px;'>";
+                                    content+="<img src='../images/1.jpg' style='width:30px;height:25px;'>";
+                                    content+="<a class='color-a' href='"+path+"'  style='width: 400px;margin-left: 20px;'>"+name+"</a>";
+                                    content+="<span style='float:right;color:#33333380;'>共计<font style='font-size:18px;'>"+num+"</font>篇</span>";
+                                    content+="</div>";
+                                    $("#menu_year_"+year+"").append(content);
+                                }
+                                else if(countnum==2)
+                                {
+                                    var content="<div class='csspre col-sm-12 col-xs-12' style='height: 55px;line-height:55px;padding-left:0px;'>";
+                                    content+="<img src='../images/2.jpg' style='width:30px;height:25px;'>";
+                                    content+="<a class='color-a' href='"+path+"'  style='width: 400px;margin-left: 20px;'>"+name+"</a>";
+                                    content+="<span style='float:right;color:#33333380;'>共计<font style='font-size:18px;'>"+num+"</font>篇</span>";
+                                    content+="</div>";
+                                    $("#menu_year_"+year+"").append(content);
+                                }
+                                else if(countnum==3)
+                                {
+                                    var content="<div class='csspre col-sm-12 col-xs-12' style='height: 55px;line-height:55px;padding-left:0px;'>";
+                                    content+="<img src='../images/3.jpg' style='width:30px;height:25px;'>";
+                                    content+="<a class='color-a' href='"+path+"'  style='width: 400px;margin-left: 20px;'>"+name+"</a>";
+                                    content+="<span style='float:right;color:#33333380;'>共计<font style='font-size:18px;'>"+num+"</font>篇</span>";
+                                    content+="</div>";
+                                    $("#menu_year_"+year+"").append(content);
+                                }else{
+                                    var content="<div class='csspre col-sm-12 col-xs-12' style='height: 55px;line-height:55px;padding-left:0px;'>";
+                                content+="<img src='../images/4.jpg' style='width:30px;height:25px;'>";
+                                content+="<a class='color-a' href='"+path+"'  style='width: 400px;margin-left: 20px;'>"+name+"</a>";
+                                content+="<span style='float:right;color:#33333380;'>共计<font style='font-size:18px;'>"+num+"</font>篇</span>";
                                 content+="</div>";
                                 $("#menu_year_"+year+"").append(content);
+                                }
                             }
                         }
                     });
