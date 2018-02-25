@@ -19,7 +19,8 @@
                 <ol class=" breadcrumb " style="background: #fff;">
                     <span class="glyphicon glyphicon-home"></span>
                     <a href="/" style="color: #000;">首页</a>>
-                    <a href="" style="color: #000;">博文</a>
+                    <a href="" style="color: #000;">博文</a>>
+                    <a href="" style="color: #000;">{{page.name}}</a>
                 </ol>
             </div>
         <div class='mainbar col-md-9 col-sm-12 col-xs-12'>
@@ -59,9 +60,9 @@
                         {% if name == page.name and y == posty %}
                 <div class="menu_date_{{post.date| date: '%Y'}}" id="menu_date_{{post.date| date: '%Y'}}" style="display:block;" >
                     <div class='csspre col-sm-12 col-xs-12 ' style='height: 55px;line-height:55px;'>
-                        <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
+                        <div class='csspp col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                             <span class="glyphicon glyphicon-list-alt"></span>
-                            <a href="{{post.url}}" style='width: 400px;color:#000;margin-left: 20px;'>{{post.title}}</a>
+                            <a class="color-a" href="{{post.url}}"  style='width: 400px;margin-left: 20px;'>{{post.title}}</a>
                         </div>
                         <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                             <span style="color:#33333380;">发布于：{{post.date | date: "%Y.%m.%d"}}</span>
@@ -76,16 +77,18 @@
         </div><!--end of mainbar-->
             <div class='sidebar col-md-3 hidden-sm hidden-xs'>
                 <div class='authorslistbar panel panel-default' id='authorslistbar'>
-                    <div class='panel-heading' style="height: 60px;line-height: 40px;">
+                    <div class='panel-heading' style="height: 60px;line-height: 40px;background: #fff;box-shadow: 1px 2px 11px #bebdbd;">
                         <span class="glyphicon glyphicon-user"></span>
                         <font style="font-weight: bold; color: #24292c;" >作者列表</font>
                     </div>
-                    <div class='list-group'>{% for author in site.authors %}{% if page.name != author.name %}
+                    <div class='list-group' style="position:absolute; height:400px;width: 89%; overflow:auto;border:1px solid #E0E0E0;margin-top: 2px;">{% for author in site.authors %}{% if page.name != author.name %}
                         <a class='list-group-item' href='{{ author.page_path }}'>{{ author.name | remove: ' ' }}
                             <span class='badge pull-right' id='{{ author.name | remove: ' ' }}-side-num'></span>
+                            <div class='main-line'></div>
                         </a>{% else %}
                         <a class='list-group-item disabled'>{{ author.name | remove: ' ' }}
                             <span class='badge pull-right' id='{{ author.name | remove: ' ' }}-side-num'></span>
+                            <div class='main-line'></div>
                         </a>{% endif %}{% endfor %}
                     </div>
                 </div><!--end of authorslistbar-->

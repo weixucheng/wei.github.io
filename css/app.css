@@ -12,8 +12,11 @@ span.article-mark{ position: relative; top: -10px; font-size: 40px; color: #ddd;
 /**
  * authors_list
  * */
-.csspre:hover { cursor:hand;background:#f5f5f5; }
 
+.color-a{color:#000;}
+.csspre:hover .color-a{color:none;}
+.csspre:hover { cursor:hand;background:#f5f5f5; }
+.main-line {width:99%;height:2px;position:relative;bottom:-10px;background-color:#e0e0e0;}
 .al-article-list { font-family: Georgia, serif; }
 h2.al-year { margin-top: 0px; text-align: center; font-family: Georgia, serif; }
 hr.al-hr { margin-top: 0px; border-top-color: #ccc; }

@@ -45,7 +45,7 @@ page_tags: 标签
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='{{ post.url }}' target='_blank' title='{{ post.title }}' style='color:#000;margin-left: 20px;'>{{ post.title | truncate: 30 }}</a>
+                                    <a class="color-a" href='{{ post.url }}' target='_blank' title='{{ post.title }}' style='margin-left: 20px;'>{{ post.title | truncate: 30 }}</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：{{ post.date | date: '%Y.%m.%d' }}</span>
@@ -64,11 +64,11 @@ page_tags: 标签
             </div><!--end of mainbar-->
             <div class='sidebar col-md-3 hidden-sm hidden-xs'>
                 <div class='cate-ix-bar panel panel-default' id='categorybar'>
-                    <div class='panel-heading' style="height: 60px;line-height: 40px;">
+                    <div class='panel-heading' style="height: 60px;line-height: 40px;background: #fff;box-shadow: 1px 2px 11px #bebdbd;">
                         <span class="glyphicon glyphicon-tag"></span>
                         <font style="font-weight: bold; color: #24292c;" >热门分类</font>
                     </div>
-                    <div class='list-group' id="categorybar-list">
+                    <div class='list-group' id="categorybar-list" style="position:absolute; height:400px;width: 89%; overflow:auto;border:1px solid #E0E0E0;margin-top: 2px; " >
                     </div>
                 </div><!--end of cateixbar-->
                 <script>
@@ -85,7 +85,7 @@ page_tags: 标签
                                       content ="<a class='list-group-item disabled' >"+item[1];
                                     }
                                     content += "<span class='badge pull-right'>"+item[2]+"</span>"+
-                                    "</a>"
+                                    "<div class='main-line'></div></a>"
                                     $("#categorybar-list").append(content);
                                 });
                             });

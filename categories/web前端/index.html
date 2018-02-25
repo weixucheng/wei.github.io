@@ -14,6 +14,7 @@
     <link rel='stylesheet' type='text/css' href='/bootstrap/css/bootstrap-theme.css'>
     <link rel='stylesheet' type='text/css' href='/css/app.css'>
 	<link rel="stylesheet" type="text/css" href='/bootstrap/style.css'>
+    <link rel='stylesheet' type='text/css' href='/css/color.css'>
     <script src='/bootstrap/js/bootstrap.js'></script>
     <script src='/js/app.js'></script>
     <script>
@@ -71,7 +72,9 @@
 
 
         $(function(){
-
+            $(".csspre").mouseenter(function(){
+                $(this).children("div").children("a").css("color","none");
+            });
 
             $("#buttonnew").click(function(){
                  $("#selectdown").css("display","block");
@@ -106,21 +109,21 @@
                             if (countname==1) {
                                 var content="<div class='csspre col-sm-12 col-xs-12' style='height: 55px;line-height:55px;padding-left:0px;'>";
                                 content+="<img src='../images/1.jpg' style='width:30px;height:25px;'>";
-                                content+="<a href='"+path+"'  style='width: 400px;color:#000;margin-left: 20px;'>"+name+"</a>";
+                                content+="<a class='color-a' href='"+path+"'  style='width: 400px;margin-left: 20px;'>"+name+"</a>";
                                 content+="<span style='float:right;color:#33333380;'>共计<font style='font-size:18px;'>"+num+"</font>篇</span>";
                                 content+="</div>";
                                 $("#menu_year_"+years+"").append(content);
                             }else if(countname==2){
                                 var content="<div class='csspre col-sm-12 col-xs-12' style='height: 55px;line-height:55px;padding-left:0px;'>";
                                 content+="<img src='../images/2.jpg' style='width:30px;height:25px;'>";
-                                content+="<a href='"+path+"'  style='width: 400px;color:#000;margin-left: 20px;'>"+name+"</a>";
+                                content+="<a class='color-a' href='"+path+"'  style='width: 400px;margin-left: 20px;'>"+name+"</a>";
                                 content+="<span style='float:right;color:#33333380;'>共计<font style='font-size:18px;'>"+num+"</font>篇</span>";
                                 content+="</div>";
                                 $("#menu_year_"+years+"").append(content);
                             }else if(countname==3){
                                 var content="<div class='csspre col-sm-12 col-xs-12' style='height: 55px;line-height:55px;padding-left:0px;'>";
                                 content+="<img src='../images/3.jpg' style='width:30px;height:25px;'>";
-                                content+="<a href='"+path+"'  style='width: 400px;color:#000;margin-left: 20px;'>"+name+"</a>";
+                                content+="<a class='color-a' href='"+path+"'  style='width: 400px;margin-left: 20px;'>"+name+"</a>";
                                 content+="<span style='float:right;color:#33333380;'>共计<font style='font-size:18px;'>"+num+"</font>篇</span>";
                                 content+="</div>";
                                 $("#menu_year_"+years+"").append(content);
@@ -128,7 +131,7 @@
                            
                                 var content="<div class='csspre col-sm-12 col-xs-12' style='height: 55px;line-height:55px;padding-left:0px;'>";
                                 content+="<img src='../images/4.jpg' style='width:30px;height:25px;'>";
-                                content+="<a href='"+path+"'  style='width: 400px;color:#000;margin-left: 20px;'>"+name+"</a>";
+                                content+="<a class='color-a' href='"+path+"'  style='width: 400px;margin-left: 20px;'>"+name+"</a>";
                                 content+="<span style='float:right;color:#33333380;'>共计<font style='font-size:18px;'>"+num+"</font>篇</span>";
                                 content+="</div>";
                                 $("#menu_year_"+years+"").append(content);
@@ -795,15 +798,17 @@
                     var image = item.image.replace(" ","") || "";                 
                     var num = item.articles.length || 0;
                     if (i<=5) {
-                        var content =" <div style='height: 70px; background-color: #f3f3f3;box-shadow: 0px 2px 5px #bebdbd;line-height: 30px;vertical-align:middle;'> ";
+                        var content =" <div style='height: 70px; background-color: #f3f3f3;line-height: 30px;vertical-align:middle;padding-left:10px;padding-right:10px;'> ";
+                        content +=" <div style='height: 70px;border-bottom:1px solid #E0E0E0; '> ";
                         content +=" <a href='"+path+"'>";
-                        content +="<img src='"+image+"' alt='...''  style='width:50px;height: 50px;border: 1px solid #E0E0E0;margin-top: 10px;margin-left: 10px;border:none; float:left; display:inline;''>";
+                        content +="<img src='"+image+"' alt='...''  style='width:50px;height: 50px;border: 1px solid #E0E0E0;margin-top: 10px;border:none; float:left; display:inline;''>";
                         content +="</a>";
                         content +=" <div style=' float:left; display:inline; margin-top:5px; margin-left:5px;'>";
-                        content +="     <div >"+name+"</div>";
-                        content +="  <div >";
+                        content +="     <div style='font-weight: bold; color: #24292c;font-size:12px;' ><a class='color-a' href='"+path+"' >"+name+"</a></div>";
+                        content +="  <div style='color: #24292c;font-size:12px;' >";
                         content +="     <span>上传:<u><a href='"+path+"'>"+num+"</a></u></span>";
                         content +="    <span>人气:199</span>";
+                        content +=" </div>";
                         content +=" </div>";
                         content +=" </div>";
                         content +=" </div>";
@@ -3015,7 +3020,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2016/06/05/web-bootstrap.html' target='_blank' title='bootstrap的响应式布局' style='color:#000;margin-left: 20px;'>bootstrap的响应式布局</a>
+                                    <a class="color-a" href='/blog/2016/06/05/web-bootstrap.html' target='_blank' title='bootstrap的响应式布局' style='margin-left: 20px;'>bootstrap的响应式布局</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2016.06.05</span>
@@ -3045,7 +3050,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2016/12/18/canvas-3.html' target='_blank' title='canvas学习[3]--文本和图片' style='color:#000;margin-left: 20px;'>canvas学习[3]--文本和图片</a>
+                                    <a class="color-a" href='/blog/2016/12/18/canvas-3.html' target='_blank' title='canvas学习[3]--文本和图片' style='margin-left: 20px;'>canvas学习[3]--文本和图片</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2016.12.18</span>
@@ -3061,7 +3066,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2016/12/18/canvas-2.html' target='_blank' title='canvas学习[2]--样式与颜色' style='color:#000;margin-left: 20px;'>canvas学习[2]--样式与颜色</a>
+                                    <a class="color-a" href='/blog/2016/12/18/canvas-2.html' target='_blank' title='canvas学习[2]--样式与颜色' style='margin-left: 20px;'>canvas学习[2]--样式与颜色</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2016.12.18</span>
@@ -3077,7 +3082,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2016/12/18/canvas-1.html' target='_blank' title='canvas学习[1]--绘制基本图形' style='color:#000;margin-left: 20px;'>canvas学习[1]--绘制基本图形</a>
+                                    <a class="color-a" href='/blog/2016/12/18/canvas-1.html' target='_blank' title='canvas学习[1]--绘制基本图形' style='margin-left: 20px;'>canvas学习[1]--绘制基本图形</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2016.12.18</span>
@@ -3093,7 +3098,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2016/12/08/zen-coding.html' target='_blank' title='Zen Coding：快速编写HTML' style='color:#000;margin-left: 20px;'>Zen Coding：快速编写HTML</a>
+                                    <a class="color-a" href='/blog/2016/12/08/zen-coding.html' target='_blank' title='Zen Coding：快速编写HTML' style='margin-left: 20px;'>Zen Coding：快速编写HTML</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2016.12.08</span>
@@ -3109,7 +3114,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2016/12/05/web-mui-04.html' target='_blank' title='mui前端APP之四－android签名机制介绍及Hbuilder打包' style='color:#000;margin-left: 20px;'>mui前端APP之四－android签名机制介绍及Hb...</a>
+                                    <a class="color-a" href='/blog/2016/12/05/web-mui-04.html' target='_blank' title='mui前端APP之四－android签名机制介绍及Hbuilder打包' style='margin-left: 20px;'>mui前端APP之四－android签名机制介绍及Hb...</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2016.12.05</span>
@@ -3125,7 +3130,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2016/12/02/web-mui-03.html' target='_blank' title='mui前端APP之三－IOS证书申请' style='color:#000;margin-left: 20px;'>mui前端APP之三－IOS证书申请</a>
+                                    <a class="color-a" href='/blog/2016/12/02/web-mui-03.html' target='_blank' title='mui前端APP之三－IOS证书申请' style='margin-left: 20px;'>mui前端APP之三－IOS证书申请</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2016.12.02</span>
@@ -3141,7 +3146,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2016/12/02/web-mui-02.html' target='_blank' title='mui前端APP开发实践－热点新闻' style='color:#000;margin-left: 20px;'>mui前端APP开发实践－热点新闻</a>
+                                    <a class="color-a" href='/blog/2016/12/02/web-mui-02.html' target='_blank' title='mui前端APP开发实践－热点新闻' style='margin-left: 20px;'>mui前端APP开发实践－热点新闻</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2016.12.02</span>
@@ -3157,7 +3162,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2016/10/09/web-mui-01.html' target='_blank' title='初识APP混合应用开发框架 -- mui' style='color:#000;margin-left: 20px;'>初识APP混合应用开发框架 -- mui</a>
+                                    <a class="color-a" href='/blog/2016/10/09/web-mui-01.html' target='_blank' title='初识APP混合应用开发框架 -- mui' style='margin-left: 20px;'>初识APP混合应用开发框架 -- mui</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2016.10.09</span>
@@ -3173,7 +3178,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2016/10/06/web-cas.html' target='_blank' title='CAS单点登录' style='color:#000;margin-left: 20px;'>CAS单点登录</a>
+                                    <a class="color-a" href='/blog/2016/10/06/web-cas.html' target='_blank' title='CAS单点登录' style='margin-left: 20px;'>CAS单点登录</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2016.10.06</span>
@@ -3189,7 +3194,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2016/09/10/web-d3-2.html' target='_blank' title='D3.js基本简介[2]--在D3中使用SVG和Canvas' style='color:#000;margin-left: 20px;'>D3.js基本简介[2]--在D3中使用SVG和Canvas</a>
+                                    <a class="color-a" href='/blog/2016/09/10/web-d3-2.html' target='_blank' title='D3.js基本简介[2]--在D3中使用SVG和Canvas' style='margin-left: 20px;'>D3.js基本简介[2]--在D3中使用SVG和Canvas</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2016.09.10</span>
@@ -3205,7 +3210,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2016/09/08/web-swagger.html' target='_blank' title='Swagger介绍及应用实例' style='color:#000;margin-left: 20px;'>Swagger介绍及应用实例</a>
+                                    <a class="color-a" href='/blog/2016/09/08/web-swagger.html' target='_blank' title='Swagger介绍及应用实例' style='margin-left: 20px;'>Swagger介绍及应用实例</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2016.09.08</span>
@@ -3221,7 +3226,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2016/09/03/web-d3-1.html' target='_blank' title='D3.js基本简介[1]--概念与基本使用方法' style='color:#000;margin-left: 20px;'>D3.js基本简介[1]--概念与基本使用方法</a>
+                                    <a class="color-a" href='/blog/2016/09/03/web-d3-1.html' target='_blank' title='D3.js基本简介[1]--概念与基本使用方法' style='margin-left: 20px;'>D3.js基本简介[1]--概念与基本使用方法</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2016.09.03</span>
@@ -3237,7 +3242,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2016/08/26/web-rem-share.html' target='_blank' title='H5终端自适应解决方案 -- flexible + rem' style='color:#000;margin-left: 20px;'>H5终端自适应解决方案 -- flexible + rem</a>
+                                    <a class="color-a" href='/blog/2016/08/26/web-rem-share.html' target='_blank' title='H5终端自适应解决方案 -- flexible + rem' style='margin-left: 20px;'>H5终端自适应解决方案 -- flexible + rem</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2016.08.26</span>
@@ -3253,7 +3258,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2016/08/18/web-svg-2.html' target='_blank' title='SVG学习[2]--基本数据及path元素' style='color:#000;margin-left: 20px;'>SVG学习[2]--基本数据及path元素</a>
+                                    <a class="color-a" href='/blog/2016/08/18/web-svg-2.html' target='_blank' title='SVG学习[2]--基本数据及path元素' style='margin-left: 20px;'>SVG学习[2]--基本数据及path元素</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2016.08.18</span>
@@ -3269,7 +3274,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2016/08/18/web-svg-1.html' target='_blank' title='SVG学习[1]--简介及基本元素' style='color:#000;margin-left: 20px;'>SVG学习[1]--简介及基本元素</a>
+                                    <a class="color-a" href='/blog/2016/08/18/web-svg-1.html' target='_blank' title='SVG学习[1]--简介及基本元素' style='margin-left: 20px;'>SVG学习[1]--简介及基本元素</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2016.08.18</span>
@@ -4048,11 +4053,11 @@
             </div><!--end of mainbar-->
             <div class='sidebar col-md-3 hidden-sm hidden-xs'>
                 <div class='cate-ix-bar panel panel-default' id='categorybar'>
-                    <div class='panel-heading' style="height: 60px;line-height: 40px;">
+                    <div class='panel-heading' style="height: 60px;line-height: 40px;background: #fff;box-shadow: 1px 2px 11px #bebdbd;">
                         <span class="glyphicon glyphicon-tag"></span>
                         <font style="font-weight: bold; color: #24292c;" >热门分类</font>
                     </div>
-                    <div class='list-group' id="categorybar-list">
+                    <div class='list-group' id="categorybar-list" style="position:absolute; height:400px;width: 89%; overflow:auto;border:1px solid #E0E0E0;margin-top: 2px; " >
                     </div>
                 </div><!--end of cateixbar-->
                 <script>
@@ -4069,7 +4074,7 @@
                                       content ="<a class='list-group-item disabled' >"+item[1];
                                     }
                                     content += "<span class='badge pull-right'>"+item[2]+"</span>"+
-                                    "</a>"
+                                    "<div class='main-line'></div></a>"
                                     $("#categorybar-list").append(content);
                                 });
                             });

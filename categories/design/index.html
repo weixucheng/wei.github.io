@@ -14,6 +14,7 @@
     <link rel='stylesheet' type='text/css' href='/bootstrap/css/bootstrap-theme.css'>
     <link rel='stylesheet' type='text/css' href='/css/app.css'>
 	<link rel="stylesheet" type="text/css" href='/bootstrap/style.css'>
+    <link rel='stylesheet' type='text/css' href='/css/color.css'>
     <script src='/bootstrap/js/bootstrap.js'></script>
     <script src='/js/app.js'></script>
     <script>
@@ -71,7 +72,9 @@
 
 
         $(function(){
-
+            $(".csspre").mouseenter(function(){
+                $(this).children("div").children("a").css("color","none");
+            });
 
             $("#buttonnew").click(function(){
                  $("#selectdown").css("display","block");
@@ -106,21 +109,21 @@
                             if (countname==1) {
                                 var content="<div class='csspre col-sm-12 col-xs-12' style='height: 55px;line-height:55px;padding-left:0px;'>";
                                 content+="<img src='../images/1.jpg' style='width:30px;height:25px;'>";
-                                content+="<a href='"+path+"'  style='width: 400px;color:#000;margin-left: 20px;'>"+name+"</a>";
+                                content+="<a class='color-a' href='"+path+"'  style='width: 400px;margin-left: 20px;'>"+name+"</a>";
                                 content+="<span style='float:right;color:#33333380;'>共计<font style='font-size:18px;'>"+num+"</font>篇</span>";
                                 content+="</div>";
                                 $("#menu_year_"+years+"").append(content);
                             }else if(countname==2){
                                 var content="<div class='csspre col-sm-12 col-xs-12' style='height: 55px;line-height:55px;padding-left:0px;'>";
                                 content+="<img src='../images/2.jpg' style='width:30px;height:25px;'>";
-                                content+="<a href='"+path+"'  style='width: 400px;color:#000;margin-left: 20px;'>"+name+"</a>";
+                                content+="<a class='color-a' href='"+path+"'  style='width: 400px;margin-left: 20px;'>"+name+"</a>";
                                 content+="<span style='float:right;color:#33333380;'>共计<font style='font-size:18px;'>"+num+"</font>篇</span>";
                                 content+="</div>";
                                 $("#menu_year_"+years+"").append(content);
                             }else if(countname==3){
                                 var content="<div class='csspre col-sm-12 col-xs-12' style='height: 55px;line-height:55px;padding-left:0px;'>";
                                 content+="<img src='../images/3.jpg' style='width:30px;height:25px;'>";
-                                content+="<a href='"+path+"'  style='width: 400px;color:#000;margin-left: 20px;'>"+name+"</a>";
+                                content+="<a class='color-a' href='"+path+"'  style='width: 400px;margin-left: 20px;'>"+name+"</a>";
                                 content+="<span style='float:right;color:#33333380;'>共计<font style='font-size:18px;'>"+num+"</font>篇</span>";
                                 content+="</div>";
                                 $("#menu_year_"+years+"").append(content);
@@ -128,7 +131,7 @@
                            
                                 var content="<div class='csspre col-sm-12 col-xs-12' style='height: 55px;line-height:55px;padding-left:0px;'>";
                                 content+="<img src='../images/4.jpg' style='width:30px;height:25px;'>";
-                                content+="<a href='"+path+"'  style='width: 400px;color:#000;margin-left: 20px;'>"+name+"</a>";
+                                content+="<a class='color-a' href='"+path+"'  style='width: 400px;margin-left: 20px;'>"+name+"</a>";
                                 content+="<span style='float:right;color:#33333380;'>共计<font style='font-size:18px;'>"+num+"</font>篇</span>";
                                 content+="</div>";
                                 $("#menu_year_"+years+"").append(content);
@@ -795,15 +798,17 @@
                     var image = item.image.replace(" ","") || "";                 
                     var num = item.articles.length || 0;
                     if (i<=5) {
-                        var content =" <div style='height: 70px; background-color: #f3f3f3;box-shadow: 0px 2px 5px #bebdbd;line-height: 30px;vertical-align:middle;'> ";
+                        var content =" <div style='height: 70px; background-color: #f3f3f3;line-height: 30px;vertical-align:middle;padding-left:10px;padding-right:10px;'> ";
+                        content +=" <div style='height: 70px;border-bottom:1px solid #E0E0E0; '> ";
                         content +=" <a href='"+path+"'>";
-                        content +="<img src='"+image+"' alt='...''  style='width:50px;height: 50px;border: 1px solid #E0E0E0;margin-top: 10px;margin-left: 10px;border:none; float:left; display:inline;''>";
+                        content +="<img src='"+image+"' alt='...''  style='width:50px;height: 50px;border: 1px solid #E0E0E0;margin-top: 10px;border:none; float:left; display:inline;''>";
                         content +="</a>";
                         content +=" <div style=' float:left; display:inline; margin-top:5px; margin-left:5px;'>";
-                        content +="     <div >"+name+"</div>";
-                        content +="  <div >";
+                        content +="     <div style='font-weight: bold; color: #24292c;font-size:12px;' ><a class='color-a' href='"+path+"' >"+name+"</a></div>";
+                        content +="  <div style='color: #24292c;font-size:12px;' >";
                         content +="     <span>上传:<u><a href='"+path+"'>"+num+"</a></u></span>";
                         content +="    <span>人气:199</span>";
+                        content +=" </div>";
                         content +=" </div>";
                         content +=" </div>";
                         content +=" </div>";
@@ -2779,7 +2784,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2017/12/19/user-experience-oriented-design-performance.html' target='_blank' title='以用户体验为导向的设计表现' style='color:#000;margin-left: 20px;'>以用户体验为导向的设计表现</a>
+                                    <a class="color-a" href='/blog/2017/12/19/user-experience-oriented-design-performance.html' target='_blank' title='以用户体验为导向的设计表现' style='margin-left: 20px;'>以用户体验为导向的设计表现</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2017.12.19</span>
@@ -2795,7 +2800,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2017/12/19/much-more-better-design.html' target='_blank' title='让你的设计更精致' style='color:#000;margin-left: 20px;'>让你的设计更精致</a>
+                                    <a class="color-a" href='/blog/2017/12/19/much-more-better-design.html' target='_blank' title='让你的设计更精致' style='margin-left: 20px;'>让你的设计更精致</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2017.12.19</span>
@@ -2811,7 +2816,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2017/12/19/background-skill.html' target='_blank' title='三种技巧搞定背景' style='color:#000;margin-left: 20px;'>三种技巧搞定背景</a>
+                                    <a class="color-a" href='/blog/2017/12/19/background-skill.html' target='_blank' title='三种技巧搞定背景' style='margin-left: 20px;'>三种技巧搞定背景</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2017.12.19</span>
@@ -2827,7 +2832,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2017/12/16/necessary-tech-of-webdesigner.html' target='_blank' title='网页设计师必备整理术' style='color:#000;margin-left: 20px;'>网页设计师必备整理术</a>
+                                    <a class="color-a" href='/blog/2017/12/16/necessary-tech-of-webdesigner.html' target='_blank' title='网页设计师必备整理术' style='margin-left: 20px;'>网页设计师必备整理术</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2017.12.16</span>
@@ -2843,7 +2848,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2017/12/16/multi-style-layout-improve.html' target='_blank' title='多种风格的版式改造' style='color:#000;margin-left: 20px;'>多种风格的版式改造</a>
+                                    <a class="color-a" href='/blog/2017/12/16/multi-style-layout-improve.html' target='_blank' title='多种风格的版式改造' style='margin-left: 20px;'>多种风格的版式改造</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2017.12.16</span>
@@ -2859,7 +2864,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2017/12/16/flat-design-appr.html' target='_blank' title='手机界面扁平化设计案例赏析' style='color:#000;margin-left: 20px;'>手机界面扁平化设计案例赏析</a>
+                                    <a class="color-a" href='/blog/2017/12/16/flat-design-appr.html' target='_blank' title='手机界面扁平化设计案例赏析' style='margin-left: 20px;'>手机界面扁平化设计案例赏析</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2017.12.16</span>
@@ -3097,7 +3102,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2016/12/14/Design-Trends.html' target='_blank' title='新设计趋势观察' style='color:#000;margin-left: 20px;'>新设计趋势观察</a>
+                                    <a class="color-a" href='/blog/2016/12/14/Design-Trends.html' target='_blank' title='新设计趋势观察' style='margin-left: 20px;'>新设计趋势观察</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2016.12.14</span>
@@ -3113,7 +3118,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2016/12/13/app-navigation.html' target='_blank' title='移动APP导航设计的选择及利弊对比' style='color:#000;margin-left: 20px;'>移动APP导航设计的选择及利弊对比</a>
+                                    <a class="color-a" href='/blog/2016/12/13/app-navigation.html' target='_blank' title='移动APP导航设计的选择及利弊对比' style='margin-left: 20px;'>移动APP导航设计的选择及利弊对比</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2016.12.13</span>
@@ -3129,7 +3134,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2016/12/11/responsive-design.html' target='_blank' title='响应式设计学习' style='color:#000;margin-left: 20px;'>响应式设计学习</a>
+                                    <a class="color-a" href='/blog/2016/12/11/responsive-design.html' target='_blank' title='响应式设计学习' style='margin-left: 20px;'>响应式设计学习</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2016.12.11</span>
@@ -3145,7 +3150,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2016/12/11/color-strategy.html' target='_blank' title='色彩攻略' style='color:#000;margin-left: 20px;'>色彩攻略</a>
+                                    <a class="color-a" href='/blog/2016/12/11/color-strategy.html' target='_blank' title='色彩攻略' style='margin-left: 20px;'>色彩攻略</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2016.12.11</span>
@@ -3161,7 +3166,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2016/05/23/web-design.html' target='_blank' title='怎样设计才能让网站看起来高大上' style='color:#000;margin-left: 20px;'>怎样设计才能让网站看起来高大上</a>
+                                    <a class="color-a" href='/blog/2016/05/23/web-design.html' target='_blank' title='怎样设计才能让网站看起来高大上' style='margin-left: 20px;'>怎样设计才能让网站看起来高大上</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2016.05.23</span>
@@ -3920,11 +3925,11 @@
             </div><!--end of mainbar-->
             <div class='sidebar col-md-3 hidden-sm hidden-xs'>
                 <div class='cate-ix-bar panel panel-default' id='categorybar'>
-                    <div class='panel-heading' style="height: 60px;line-height: 40px;">
+                    <div class='panel-heading' style="height: 60px;line-height: 40px;background: #fff;box-shadow: 1px 2px 11px #bebdbd;">
                         <span class="glyphicon glyphicon-tag"></span>
                         <font style="font-weight: bold; color: #24292c;" >热门分类</font>
                     </div>
-                    <div class='list-group' id="categorybar-list">
+                    <div class='list-group' id="categorybar-list" style="position:absolute; height:400px;width: 89%; overflow:auto;border:1px solid #E0E0E0;margin-top: 2px; " >
                     </div>
                 </div><!--end of cateixbar-->
                 <script>
@@ -3941,7 +3946,7 @@
                                       content ="<a class='list-group-item disabled' >"+item[1];
                                     }
                                     content += "<span class='badge pull-right'>"+item[2]+"</span>"+
-                                    "</a>"
+                                    "<div class='main-line'></div></a>"
                                     $("#categorybar-list").append(content);
                                 });
                             });

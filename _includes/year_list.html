@@ -67,12 +67,12 @@
             </div><!--end of mainbar-->
             <div class='sidebar col-md-3 hidden-sm hidden-xs'>
                 <div class='authorslistbar panel panel-default' id='authorslistbar'>
-                    <div class='panel-heading' style="height: 60px;line-height: 40px;">
+                    <div class='panel-heading' style="height: 60px;line-height: 40px;background: #fff;box-shadow: 1px 2px 11px #bebdbd;">
                         <span class="glyphicon glyphicon-list-alt"></span>
                         <font style="font-weight: bold; color: #24292c;" >年份</font>
                     </div>
                       
-                    <div class='list-group'>
+                    <div class='list-group' style="margin-top: 2px;">
         {% assign count = 1 %}
         {% for post in site.posts reversed %}
             {% assign year = post.date | date: '%Y' %}
@@ -104,7 +104,7 @@
             {% if year !=nyear %}
             
             
-       <div style="border:1px solid #E0E0E0;height: 50px;line-height: 50px; background:#f3f3f3;">
+       <!-- <div style="border:1px solid #E0E0E0;height: 50px;line-height: 50px; background:#f3f3f3;">
             <div class="col-sm-9"  >
                 <a   href="#yearname{{post.date| date: '%Y'}}" value="{{post.date| date: '%Y'}}" style="line-height: 40px;">
                     <font style="color: #24292c;">
@@ -118,8 +118,14 @@
                 </span>
             </div>
         
-        </div>
-
+        </div> -->
+        <a class='list-group-item list-group-item-default'  href="/years/year#yearname{{post.date| date: '%Y'}}">{{post.date| date: '%Y'}}年度
+                    <span  class='badge pull-right'>{{counts[i]}}
+                    </span> 
+                    <div class='main-line'>
+                        
+                    </div>
+                </a>
         {% assign i=i | plus: 1 %}
         {% endif %}
 

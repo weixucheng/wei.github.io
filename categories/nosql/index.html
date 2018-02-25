@@ -14,6 +14,7 @@
     <link rel='stylesheet' type='text/css' href='/bootstrap/css/bootstrap-theme.css'>
     <link rel='stylesheet' type='text/css' href='/css/app.css'>
 	<link rel="stylesheet" type="text/css" href='/bootstrap/style.css'>
+    <link rel='stylesheet' type='text/css' href='/css/color.css'>
     <script src='/bootstrap/js/bootstrap.js'></script>
     <script src='/js/app.js'></script>
     <script>
@@ -71,7 +72,9 @@
 
 
         $(function(){
-
+            $(".csspre").mouseenter(function(){
+                $(this).children("div").children("a").css("color","none");
+            });
 
             $("#buttonnew").click(function(){
                  $("#selectdown").css("display","block");
@@ -106,21 +109,21 @@
                             if (countname==1) {
                                 var content="<div class='csspre col-sm-12 col-xs-12' style='height: 55px;line-height:55px;padding-left:0px;'>";
                                 content+="<img src='../images/1.jpg' style='width:30px;height:25px;'>";
-                                content+="<a href='"+path+"'  style='width: 400px;color:#000;margin-left: 20px;'>"+name+"</a>";
+                                content+="<a class='color-a' href='"+path+"'  style='width: 400px;margin-left: 20px;'>"+name+"</a>";
                                 content+="<span style='float:right;color:#33333380;'>共计<font style='font-size:18px;'>"+num+"</font>篇</span>";
                                 content+="</div>";
                                 $("#menu_year_"+years+"").append(content);
                             }else if(countname==2){
                                 var content="<div class='csspre col-sm-12 col-xs-12' style='height: 55px;line-height:55px;padding-left:0px;'>";
                                 content+="<img src='../images/2.jpg' style='width:30px;height:25px;'>";
-                                content+="<a href='"+path+"'  style='width: 400px;color:#000;margin-left: 20px;'>"+name+"</a>";
+                                content+="<a class='color-a' href='"+path+"'  style='width: 400px;margin-left: 20px;'>"+name+"</a>";
                                 content+="<span style='float:right;color:#33333380;'>共计<font style='font-size:18px;'>"+num+"</font>篇</span>";
                                 content+="</div>";
                                 $("#menu_year_"+years+"").append(content);
                             }else if(countname==3){
                                 var content="<div class='csspre col-sm-12 col-xs-12' style='height: 55px;line-height:55px;padding-left:0px;'>";
                                 content+="<img src='../images/3.jpg' style='width:30px;height:25px;'>";
-                                content+="<a href='"+path+"'  style='width: 400px;color:#000;margin-left: 20px;'>"+name+"</a>";
+                                content+="<a class='color-a' href='"+path+"'  style='width: 400px;margin-left: 20px;'>"+name+"</a>";
                                 content+="<span style='float:right;color:#33333380;'>共计<font style='font-size:18px;'>"+num+"</font>篇</span>";
                                 content+="</div>";
                                 $("#menu_year_"+years+"").append(content);
@@ -128,7 +131,7 @@
                            
                                 var content="<div class='csspre col-sm-12 col-xs-12' style='height: 55px;line-height:55px;padding-left:0px;'>";
                                 content+="<img src='../images/4.jpg' style='width:30px;height:25px;'>";
-                                content+="<a href='"+path+"'  style='width: 400px;color:#000;margin-left: 20px;'>"+name+"</a>";
+                                content+="<a class='color-a' href='"+path+"'  style='width: 400px;margin-left: 20px;'>"+name+"</a>";
                                 content+="<span style='float:right;color:#33333380;'>共计<font style='font-size:18px;'>"+num+"</font>篇</span>";
                                 content+="</div>";
                                 $("#menu_year_"+years+"").append(content);
@@ -795,15 +798,17 @@
                     var image = item.image.replace(" ","") || "";                 
                     var num = item.articles.length || 0;
                     if (i<=5) {
-                        var content =" <div style='height: 70px; background-color: #f3f3f3;box-shadow: 0px 2px 5px #bebdbd;line-height: 30px;vertical-align:middle;'> ";
+                        var content =" <div style='height: 70px; background-color: #f3f3f3;line-height: 30px;vertical-align:middle;padding-left:10px;padding-right:10px;'> ";
+                        content +=" <div style='height: 70px;border-bottom:1px solid #E0E0E0; '> ";
                         content +=" <a href='"+path+"'>";
-                        content +="<img src='"+image+"' alt='...''  style='width:50px;height: 50px;border: 1px solid #E0E0E0;margin-top: 10px;margin-left: 10px;border:none; float:left; display:inline;''>";
+                        content +="<img src='"+image+"' alt='...''  style='width:50px;height: 50px;border: 1px solid #E0E0E0;margin-top: 10px;border:none; float:left; display:inline;''>";
                         content +="</a>";
                         content +=" <div style=' float:left; display:inline; margin-top:5px; margin-left:5px;'>";
-                        content +="     <div >"+name+"</div>";
-                        content +="  <div >";
+                        content +="     <div style='font-weight: bold; color: #24292c;font-size:12px;' ><a class='color-a' href='"+path+"' >"+name+"</a></div>";
+                        content +="  <div style='color: #24292c;font-size:12px;' >";
                         content +="     <span>上传:<u><a href='"+path+"'>"+num+"</a></u></span>";
                         content +="    <span>人气:199</span>";
+                        content +=" </div>";
                         content +=" </div>";
                         content +=" </div>";
                         content +=" </div>";
@@ -3147,7 +3152,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2015/05/05/mongodb-sharding-io-rate.html' target='_blank' title='MongoDB 入库速度和分片的关系' style='color:#000;margin-left: 20px;'>MongoDB 入库速度和分片的关系</a>
+                                    <a class="color-a" href='/blog/2015/05/05/mongodb-sharding-io-rate.html' target='_blank' title='MongoDB 入库速度和分片的关系' style='margin-left: 20px;'>MongoDB 入库速度和分片的关系</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2015.05.05</span>
@@ -3163,7 +3168,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2015/05/05/mongodb-sharding-introduction-by-docs.html' target='_blank' title='MongoDB 分片介绍' style='color:#000;margin-left: 20px;'>MongoDB 分片介绍</a>
+                                    <a class="color-a" href='/blog/2015/05/05/mongodb-sharding-introduction-by-docs.html' target='_blank' title='MongoDB 分片介绍' style='margin-left: 20px;'>MongoDB 分片介绍</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2015.05.05</span>
@@ -3179,7 +3184,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2015/05/04/mongodb-install-and-distribution-deploy.html' target='_blank' title='MongoDB 安装与分布式部署' style='color:#000;margin-left: 20px;'>MongoDB 安装与分布式部署</a>
+                                    <a class="color-a" href='/blog/2015/05/04/mongodb-install-and-distribution-deploy.html' target='_blank' title='MongoDB 安装与分布式部署' style='margin-left: 20px;'>MongoDB 安装与分布式部署</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2015.05.04</span>
@@ -3625,7 +3630,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2013/07/22/mongodb.html' target='_blank' title='MongoDB 应用架构之路' style='color:#000;margin-left: 20px;'>MongoDB 应用架构之路</a>
+                                    <a class="color-a" href='/blog/2013/07/22/mongodb.html' target='_blank' title='MongoDB 应用架构之路' style='margin-left: 20px;'>MongoDB 应用架构之路</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2013.07.22</span>
@@ -3641,7 +3646,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2013/06/21/aix-redis.html' target='_blank' title='AIX下编译redis代码' style='color:#000;margin-left: 20px;'>AIX下编译redis代码</a>
+                                    <a class="color-a" href='/blog/2013/06/21/aix-redis.html' target='_blank' title='AIX下编译redis代码' style='margin-left: 20px;'>AIX下编译redis代码</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2013.06.21</span>
@@ -3657,7 +3662,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2013/06/02/jedis-demo.html' target='_blank' title='Redis的Java客户端Jedis的八种调用方式(事务、管道、分布式…)介绍' style='color:#000;margin-left: 20px;'>Redis的Java客户端Jedis的八种调用方式(事...</a>
+                                    <a class="color-a" href='/blog/2013/06/02/jedis-demo.html' target='_blank' title='Redis的Java客户端Jedis的八种调用方式(事务、管道、分布式…)介绍' style='margin-left: 20px;'>Redis的Java客户端Jedis的八种调用方式(事...</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2013.06.02</span>
@@ -3673,7 +3678,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2013/05/05/redis-usage.html' target='_blank' title='Redis Linux 数据类型' style='color:#000;margin-left: 20px;'>Redis Linux 数据类型</a>
+                                    <a class="color-a" href='/blog/2013/05/05/redis-usage.html' target='_blank' title='Redis Linux 数据类型' style='margin-left: 20px;'>Redis Linux 数据类型</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2013.05.05</span>
@@ -3689,7 +3694,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2013/05/05/redis-usage-2.html' target='_blank' title='Redis Linux Pipeline && 分布式' style='color:#000;margin-left: 20px;'>Redis Linux Pipeline && 分布式</a>
+                                    <a class="color-a" href='/blog/2013/05/05/redis-usage-2.html' target='_blank' title='Redis Linux Pipeline && 分布式' style='margin-left: 20px;'>Redis Linux Pipeline && 分布式</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2013.05.05</span>
@@ -3705,7 +3710,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2013/05/02/redis.html' target='_blank' title='Redis Linux 安装 && 测试' style='color:#000;margin-left: 20px;'>Redis Linux 安装 && 测试</a>
+                                    <a class="color-a" href='/blog/2013/05/02/redis.html' target='_blank' title='Redis Linux 安装 && 测试' style='margin-left: 20px;'>Redis Linux 安装 && 测试</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2013.05.02</span>
@@ -3721,7 +3726,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2013/05/01/demo-libmemcached-at-mac.html' target='_blank' title='MAC OSX 环境下搭建 memcached 环境' style='color:#000;margin-left: 20px;'>MAC OSX 环境下搭建 memcached 环境</a>
+                                    <a class="color-a" href='/blog/2013/05/01/demo-libmemcached-at-mac.html' target='_blank' title='MAC OSX 环境下搭建 memcached 环境' style='margin-left: 20px;'>MAC OSX 环境下搭建 memcached 环境</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2013.05.01</span>
@@ -3737,7 +3742,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2013/04/27/memcache.html' target='_blank' title='memcache NOSQL服务器安装及使用' style='color:#000;margin-left: 20px;'>memcache NOSQL服务器安装及使用</a>
+                                    <a class="color-a" href='/blog/2013/04/27/memcache.html' target='_blank' title='memcache NOSQL服务器安装及使用' style='margin-left: 20px;'>memcache NOSQL服务器安装及使用</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2013.04.27</span>
@@ -3920,11 +3925,11 @@
             </div><!--end of mainbar-->
             <div class='sidebar col-md-3 hidden-sm hidden-xs'>
                 <div class='cate-ix-bar panel panel-default' id='categorybar'>
-                    <div class='panel-heading' style="height: 60px;line-height: 40px;">
+                    <div class='panel-heading' style="height: 60px;line-height: 40px;background: #fff;box-shadow: 1px 2px 11px #bebdbd;">
                         <span class="glyphicon glyphicon-tag"></span>
                         <font style="font-weight: bold; color: #24292c;" >热门分类</font>
                     </div>
-                    <div class='list-group' id="categorybar-list">
+                    <div class='list-group' id="categorybar-list" style="position:absolute; height:400px;width: 89%; overflow:auto;border:1px solid #E0E0E0;margin-top: 2px; " >
                     </div>
                 </div><!--end of cateixbar-->
                 <script>
@@ -3941,7 +3946,7 @@
                                       content ="<a class='list-group-item disabled' >"+item[1];
                                     }
                                     content += "<span class='badge pull-right'>"+item[2]+"</span>"+
-                                    "</a>"
+                                    "<div class='main-line'></div></a>"
                                     $("#categorybar-list").append(content);
                                 });
                             });

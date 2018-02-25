@@ -14,6 +14,7 @@
     <link rel='stylesheet' type='text/css' href='/bootstrap/css/bootstrap-theme.css'>
     <link rel='stylesheet' type='text/css' href='/css/app.css'>
 	<link rel="stylesheet" type="text/css" href='/bootstrap/style.css'>
+    <link rel='stylesheet' type='text/css' href='/css/color.css'>
     <script src='/bootstrap/js/bootstrap.js'></script>
     <script src='/js/app.js'></script>
     <script>
@@ -71,7 +72,9 @@
 
 
         $(function(){
-
+            $(".csspre").mouseenter(function(){
+                $(this).children("div").children("a").css("color","none");
+            });
 
             $("#buttonnew").click(function(){
                  $("#selectdown").css("display","block");
@@ -106,21 +109,21 @@
                             if (countname==1) {
                                 var content="<div class='csspre col-sm-12 col-xs-12' style='height: 55px;line-height:55px;padding-left:0px;'>";
                                 content+="<img src='../images/1.jpg' style='width:30px;height:25px;'>";
-                                content+="<a href='"+path+"'  style='width: 400px;color:#000;margin-left: 20px;'>"+name+"</a>";
+                                content+="<a class='color-a' href='"+path+"'  style='width: 400px;margin-left: 20px;'>"+name+"</a>";
                                 content+="<span style='float:right;color:#33333380;'>共计<font style='font-size:18px;'>"+num+"</font>篇</span>";
                                 content+="</div>";
                                 $("#menu_year_"+years+"").append(content);
                             }else if(countname==2){
                                 var content="<div class='csspre col-sm-12 col-xs-12' style='height: 55px;line-height:55px;padding-left:0px;'>";
                                 content+="<img src='../images/2.jpg' style='width:30px;height:25px;'>";
-                                content+="<a href='"+path+"'  style='width: 400px;color:#000;margin-left: 20px;'>"+name+"</a>";
+                                content+="<a class='color-a' href='"+path+"'  style='width: 400px;margin-left: 20px;'>"+name+"</a>";
                                 content+="<span style='float:right;color:#33333380;'>共计<font style='font-size:18px;'>"+num+"</font>篇</span>";
                                 content+="</div>";
                                 $("#menu_year_"+years+"").append(content);
                             }else if(countname==3){
                                 var content="<div class='csspre col-sm-12 col-xs-12' style='height: 55px;line-height:55px;padding-left:0px;'>";
                                 content+="<img src='../images/3.jpg' style='width:30px;height:25px;'>";
-                                content+="<a href='"+path+"'  style='width: 400px;color:#000;margin-left: 20px;'>"+name+"</a>";
+                                content+="<a class='color-a' href='"+path+"'  style='width: 400px;margin-left: 20px;'>"+name+"</a>";
                                 content+="<span style='float:right;color:#33333380;'>共计<font style='font-size:18px;'>"+num+"</font>篇</span>";
                                 content+="</div>";
                                 $("#menu_year_"+years+"").append(content);
@@ -128,7 +131,7 @@
                            
                                 var content="<div class='csspre col-sm-12 col-xs-12' style='height: 55px;line-height:55px;padding-left:0px;'>";
                                 content+="<img src='../images/4.jpg' style='width:30px;height:25px;'>";
-                                content+="<a href='"+path+"'  style='width: 400px;color:#000;margin-left: 20px;'>"+name+"</a>";
+                                content+="<a class='color-a' href='"+path+"'  style='width: 400px;margin-left: 20px;'>"+name+"</a>";
                                 content+="<span style='float:right;color:#33333380;'>共计<font style='font-size:18px;'>"+num+"</font>篇</span>";
                                 content+="</div>";
                                 $("#menu_year_"+years+"").append(content);
@@ -795,15 +798,17 @@
                     var image = item.image.replace(" ","") || "";                 
                     var num = item.articles.length || 0;
                     if (i<=5) {
-                        var content =" <div style='height: 70px; background-color: #f3f3f3;box-shadow: 0px 2px 5px #bebdbd;line-height: 30px;vertical-align:middle;'> ";
+                        var content =" <div style='height: 70px; background-color: #f3f3f3;line-height: 30px;vertical-align:middle;padding-left:10px;padding-right:10px;'> ";
+                        content +=" <div style='height: 70px;border-bottom:1px solid #E0E0E0; '> ";
                         content +=" <a href='"+path+"'>";
-                        content +="<img src='"+image+"' alt='...''  style='width:50px;height: 50px;border: 1px solid #E0E0E0;margin-top: 10px;margin-left: 10px;border:none; float:left; display:inline;''>";
+                        content +="<img src='"+image+"' alt='...''  style='width:50px;height: 50px;border: 1px solid #E0E0E0;margin-top: 10px;border:none; float:left; display:inline;''>";
                         content +="</a>";
                         content +=" <div style=' float:left; display:inline; margin-top:5px; margin-left:5px;'>";
-                        content +="     <div >"+name+"</div>";
-                        content +="  <div >";
+                        content +="     <div style='font-weight: bold; color: #24292c;font-size:12px;' ><a class='color-a' href='"+path+"' >"+name+"</a></div>";
+                        content +="  <div style='color: #24292c;font-size:12px;' >";
                         content +="     <span>上传:<u><a href='"+path+"'>"+num+"</a></u></span>";
                         content +="    <span>人气:199</span>";
+                        content +=" </div>";
                         content +=" </div>";
                         content +=" </div>";
                         content +=" </div>";
@@ -3507,7 +3512,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2013/09/21/senchatouch-5.html' target='_blank' title='Sencha Touch 实例分析（自定义列表）' style='color:#000;margin-left: 20px;'>Sencha Touch 实例分析（自定义列表）</a>
+                                    <a class="color-a" href='/blog/2013/09/21/senchatouch-5.html' target='_blank' title='Sencha Touch 实例分析（自定义列表）' style='margin-left: 20px;'>Sencha Touch 实例分析（自定义列表）</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2013.09.21</span>
@@ -3523,7 +3528,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2013/09/20/senchatouch-4.html' target='_blank' title='Sencha Touch 实例分析（功能导航）' style='color:#000;margin-left: 20px;'>Sencha Touch 实例分析（功能导航）</a>
+                                    <a class="color-a" href='/blog/2013/09/20/senchatouch-4.html' target='_blank' title='Sencha Touch 实例分析（功能导航）' style='margin-left: 20px;'>Sencha Touch 实例分析（功能导航）</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2013.09.20</span>
@@ -3539,7 +3544,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2013/09/20/senchatouch-3.html' target='_blank' title='构建基于 Sencha Touch MVC 的 web 应用' style='color:#000;margin-left: 20px;'>构建基于 Sencha Touch MVC 的 web 应用</a>
+                                    <a class="color-a" href='/blog/2013/09/20/senchatouch-3.html' target='_blank' title='构建基于 Sencha Touch MVC 的 web 应用' style='margin-left: 20px;'>构建基于 Sencha Touch MVC 的 web 应用</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2013.09.20</span>
@@ -3555,7 +3560,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2013/09/18/senchatouch-2.html' target='_blank' title='Sencha Touch 体验' style='color:#000;margin-left: 20px;'>Sencha Touch 体验</a>
+                                    <a class="color-a" href='/blog/2013/09/18/senchatouch-2.html' target='_blank' title='Sencha Touch 体验' style='margin-left: 20px;'>Sencha Touch 体验</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2013.09.18</span>
@@ -3571,7 +3576,7 @@
                             <div class='csspre col-sm-12 col-xs-12'  style='height: 55px;line-height:55px;'>
                                 <div class=' col-xs-7 col-sm-9 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                     <span class="glyphicon glyphicon-list-alt"></span>
-                                    <a href='/blog/2013/09/17/senchatouch-1.html' target='_blank' title='Sencha Touch 框架简介' style='color:#000;margin-left: 20px;'>Sencha Touch 框架简介</a>
+                                    <a class="color-a" href='/blog/2013/09/17/senchatouch-1.html' target='_blank' title='Sencha Touch 框架简介' style='margin-left: 20px;'>Sencha Touch 框架简介</a>
                                 </div>
                                 <div class='col-xs-5 col-sm-3 ' style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;-o-text-overflow:ellipsis; ">
                                 <span class='al-article-date' style="color:#33333380;">发布于：2013.09.17</span>
@@ -3750,11 +3755,11 @@
             </div><!--end of mainbar-->
             <div class='sidebar col-md-3 hidden-sm hidden-xs'>
                 <div class='cate-ix-bar panel panel-default' id='categorybar'>
-                    <div class='panel-heading' style="height: 60px;line-height: 40px;">
+                    <div class='panel-heading' style="height: 60px;line-height: 40px;background: #fff;box-shadow: 1px 2px 11px #bebdbd;">
                         <span class="glyphicon glyphicon-tag"></span>
                         <font style="font-weight: bold; color: #24292c;" >热门分类</font>
                     </div>
-                    <div class='list-group' id="categorybar-list">
+                    <div class='list-group' id="categorybar-list" style="position:absolute; height:400px;width: 89%; overflow:auto;border:1px solid #E0E0E0;margin-top: 2px; " >
                     </div>
                 </div><!--end of cateixbar-->
                 <script>
@@ -3771,7 +3776,7 @@
                                       content ="<a class='list-group-item disabled' >"+item[1];
                                     }
                                     content += "<span class='badge pull-right'>"+item[2]+"</span>"+
-                                    "</a>"
+                                    "<div class='main-line'></div></a>"
                                     $("#categorybar-list").append(content);
                                 });
                             });
