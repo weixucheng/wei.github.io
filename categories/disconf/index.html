@@ -102,6 +102,16 @@
 
 
         $(function(){
+
+
+            $(window).resize(function(){
+                var width = $(document).width();
+                if (width<=750) {
+                    $("#span_header").css("display","none");
+                }else{
+                    $("#span_header").css("display","block");
+                }
+                });
             $(".csspre").mouseenter(function(){
                 $(this).children("div").children("a").css("color","none");
             });
@@ -302,7 +312,7 @@
                                     content +=  " </div>"
                                     content +=  "<div class='col-sm-6 col-xs-6 ' style='padding-left: 0px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;'>";
                                     content +=  "<div style='float: right;'>";
-                                    content +=  "<img src='/images/fenlei.png'>";
+                                    content +=  "<span class='glyphicon glyphicon-tag' style='color: #5b5555cc;'></span>";
                                     content +=  "<span class='sr-only' >&nbsp;:&nbsp;</span>";
                                     content +=    "<a href='/categories/"+item[1]+"' >"+item[1]+ "</a>";
                                     content += "</div>"  ;   
@@ -378,7 +388,7 @@
                                     content +=  " </div>"
                                     content +=  "<div class='col-sm-6 col-xs-6 ' style='padding-left: 0px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;'>";
                                     content +=  "<div style='float: right;'>";
-                                    content +=  "<img src='/images/fenlei.png'>";
+                                    content +=  "<span class='glyphicon glyphicon-tag' style='color: #5b5555cc;'></span>";
                                     content +=  "<span class='sr-only' >&nbsp;:&nbsp;</span>";
                                     content +=    "<a href='/categories/"+item[1]+"' >"+item[1]+ "</a>";
                                     content += "</div>"  ;   
@@ -455,7 +465,7 @@
                                     content +=  " </div>"
                                     content +=  "<div class='col-sm-6 col-xs-6 ' style='padding-left: 0px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;'>";
                                     content +=  "<div style='float: right;'>";
-                                    content +=  "<img src='/images/fenlei.png'>";
+                                    content +=  "<span class='glyphicon glyphicon-tag' style='color: #5b5555cc;'></span>";
                                     content +=  "<span class='sr-only' >&nbsp;:&nbsp;</span>";
                                     content +=    "<a href='/categories/"+item[1]+"' >"+item[1]+ "</a>";
                                     content += "</div>"  ;   
@@ -532,7 +542,7 @@
                                     content +=  " </div>"
                                     content +=  "<div class='col-sm-6 col-xs-6 ' style='padding-left: 0px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;'>";
                                     content +=  "<div style='float: right;'>";
-                                    content +=  "<img src='/images/fenlei.png'>";
+                                    content +=  "<span class='glyphicon glyphicon-tag' style='color: #5b5555cc;'></span>";
                                     content +=  "<span class='sr-only' >&nbsp;:&nbsp;</span>";
                                     content +=    "<a href='/categories/"+item[1]+"' >"+item[1]+ "</a>";
                                     content += "</div>"  ;   
@@ -603,7 +613,7 @@
                                 content +=  " </div>"
                                 content +=  "<div class='col-sm-6 col-xs-6 ' style='padding-left: 0px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;'>";
                                 content +=  "<div style='float: right;'>";
-                                content +=  "<img src='/images/fenlei.png'>";
+                                content +=  "<span class='glyphicon glyphicon-tag' style='color: #5b5555cc;'></span>";
                                 content +=  "<span class='sr-only' >&nbsp;:&nbsp;</span>";
                                 content +=    "<a href='/categories/"+item[1]+"' >"+item[1]+ "</a>";
                                 content += "</div>"  ; 
@@ -688,7 +698,7 @@
                             content +=  " </div>"
                             content +=  "<div class='col-sm-6 col-xs-6 ' style='padding-left: 0px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;'>";
                             content +=  "<div style='float: right;'>";
-                            content +=  "<img src='/images/fenlei.png'>";
+                            content +=  "<span class='glyphicon glyphicon-tag' style='color: #5b5555cc;'></span>";
                             content +=  "<span class='sr-only' >&nbsp;:&nbsp;</span>";
                             content +=    "<a href='/categories/"+item[1]+"' >"+item[1]+ "</a>";
                             content += "</div>"  ;   
@@ -739,7 +749,7 @@
                             content +=  " </div>"
                             content +=  "<div class='col-sm-6 col-xs-6 ' style='padding-left: 0px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;'>";
                             content +=  "<div style='float: right;'>";
-                            content +=  "<img src='/images/fenlei.png'>";
+                            content +=  "<span class='glyphicon glyphicon-tag' style='color: #5b5555cc;'></span>";
                             content +=  "<span class='sr-only' >&nbsp;:&nbsp;</span>";
                             content +=    "<a href='/categories/"+item[1]+"'>"+item[1]+ "</a>";
                             content += "</div>"  ;   
@@ -789,7 +799,7 @@
                             content +=  " </div>"
                             content +=  "<div class='col-sm-6 col-xs-6 ' style='padding-left: 0px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;'>";
                             content +=  "<div style='float: right;'>";
-                            content +=  "<img src='/images/fenlei.png'>";
+                            content +=  "<span class='glyphicon glyphicon-tag' style='color: #5b5555cc;'></span>";
                             content +=  "<span class='sr-only' >&nbsp;:&nbsp;</span>";
                             content +=    "<a href='/categories/"+item[1]+"'>"+item[1]+ "</a>";
                             content += "</div>"  ;   
@@ -862,25 +872,24 @@
 </head>
 <body style='background-color: #F5F5F5;'>
     <div class='totop visible-lg visible-md visible-sm hidden-xs'>
-        <a id='to-top' href='javascript:void(0)' style="position: fixed; bottom: 80px; right: 50px; z-index: 99999; background-position: 0 -110px;  width: 50px; height: 50px;background: #7f7f7f;line-height: 50px;text-align: center;border-radius: 5px;display: none;">
+        <a id='to-top' href='javascript:void(0)' >
             <span class="glyphicon glyphicon-chevron-up" style="color: #000;width: 25px;height: 20px;"></span>
              
         </a>
-        <a  id='to-top' style="position: fixed; bottom: 25px; right: 50px; z-index: 99999; background-position: 0 -110px;  width: 50px; height: 50px;background: #7f7f7f;line-height: 50px;text-align: center;border-radius: 5px;display: none;">
+        <a  id='to-top' style="position: fixed; bottom: 25px; right: 50px; z-index: 99999; background-position: 0 -110px;  width: 50px; height: 50px;background: #ccc;line-height: 50px;text-align: center;border-radius: 5px;display: none;">
             <span style="color: #000;">反馈</span>
         </a>
     </div>
     <div class='totop-xs hidden-lg hidden-md hidden-sm visible-xs'>
-        <a id='to-top-xs' href='javascript:void(0)' style="position: fixed; bottom: 70px; right: 50px; z-index: 99999; background-position: 0 -110px;  width: 50px; height: 50px;background: #7f7f7f;line-height: 50px;text-align: center;border-radius: 5px;display: none;">
-            <span class="glyphicon glyphicon-chevron-up" style="color: #000;width: 25px;height: 20px;"></span>
+        <a id='to-top-xs' href='javascript:void(0)' ></span>
         </a>
-        <a  id='to-top-xs' style="position: fixed; bottom: 15px; right: 50px; z-index: 99999; background-position: 0 -110px;  width: 50px; height: 50px;background: #7f7f7f;line-height: 50px;text-align: center;border-radius: 5px;display: none;">
+        <a  id='to-top-xs' style="position: fixed; bottom: 15px; right: 50px; z-index: 99999; background-position: 0 -110px;  width: 50px; height: 50px;background: #ccc;line-height: 50px;text-align: center;border-radius: 5px;display: none;">
             <span style="color: #000;">反馈</span>
         </a>
     </div>
     <div class='headerbar'>
         
-     <nav class="navbar  navbar-inverse  navbar-fixed-top" style="height: 100px;" >
+     <nav class="navbar  navbar-inverse  navbar-fixed-top"  >
       <div class="container con" >
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -909,7 +918,7 @@
                     <span class='caret'></span>
               </a>
 
-                      <span class="glyphicon glyphicon-triangle-top" style="background: #2a2727;top: 16px;left: 35px;border-width: 0 10px 10px;border-style: solid;border-color: transparent transparent #f5f5f5;margin: 40px auto;position: absolute;"></span>
+                      <span id="span_header" class="glyphicon glyphicon-triangle-top visible-md-*" style="background: #2a2727;top: 41px;left: 35px;border-width: 0 10px 10px;border-style: solid;border-color: transparent transparent #f5f5f5;position: absolute;"></span>
 
                       
               
