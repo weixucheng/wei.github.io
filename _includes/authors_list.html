@@ -14,7 +14,7 @@
     </script>
 
     <div class='container'>
-        <div class='main-content row'>
+        <div class='main-content row' style="margin-top: 15px;">
             <div class='mainbar col-md-12 col-sm-12 col-xs-12'>
                 <ol class=" breadcrumb " style="background: #fff;">
                     <span class="glyphicon glyphicon-home"></span>
@@ -83,15 +83,23 @@
                     </div>
                     <div class='list-group' style="position:absolute; height:400px;width: 89%; overflow:auto;border:1px solid #E0E0E0;margin-top: 2px;">{% for author in site.authors %}{% if page.name != author.name %}
                         <a class='list-group-item' href='{{ author.page_path }}'>{{ author.name | remove: ' ' }}
-                            <span class='badge pull-right' id='{{ author.name | remove: ' ' }}-side-num'></span>
+                            <span class='badge pull-right' style="background: #000;" id='{{ author.name | remove: ' ' }}-side-num'></span>
                             <div class='main-line'></div>
                         </a>{% else %}
-                        <a class='list-group-item disabled'>{{ author.name | remove: ' ' }}
-                            <span class='badge pull-right' id='{{ author.name | remove: ' ' }}-side-num'></span>
+                        <a class='list-group-item disabled'><font style="color:#4876FF;">{{ author.name | remove: ' ' }}</font> 
+                            <span class='badge pull-right'   style="background: #000;" id='{{ author.name | remove: ' ' }}-side-num'></span>
                             <div class='main-line'></div>
                         </a>{% endif %}{% endfor %}
                     </div>
                 </div><!--end of authorslistbar-->
             </div><!--end of sidebar-->
         </div><!--end of main-content-->
+
     </div><!--end of container-->
+    <div style="height:85px;"></div>
+    <footer class="blog-footer" style="position:fixed;bottom: 0px;width: 100%;height: 60px;line-height: 0px;">
+      <p>
+        Copyright <font style="font-size: 20px;">©</font> blogways.net 
+      </p>
+</footer>
+

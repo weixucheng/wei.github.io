@@ -23,9 +23,9 @@ limit_tags: 8
 
 <div class='container'>
     
-    <div class='row main-content'>
+    <div class='row main-content' style="margin-top: 15px;">
         <div class='col-xs-12 col-sm-12 col-md-9   mainbar'>
-            <div class="col-xs-12 col-sm-12 "   style=" border:1px solid #E0E0E0;background-color:#f3f3f3; height: 48px; " >
+            <div class="col-xs-12 col-sm-12 "   style=" border:1px solid #E0E0E0;background-color:#f3f3f3; height: 48px; margin-bottom:-1px;" >
                 <button type="button" class="close" style="outline:none;border:none;" >
                     <span  class="glyphicon glyphicon-remove" style=" line-height: 50px;" id="buttonnew"></span>
                     <span class="glyphicon glyphicon-chevron-down" id="selectdown" style="line-height: 50px;display: block;" ></span>
@@ -37,7 +37,7 @@ limit_tags: 8
                 </div>           
             </div>
             {% for post in site.posts limit:2%}
-            <div  class="newinformation col-md-12 col-xs-12"  style=" border:1px solid #E0E0E0;height: 70px;background: #FFFFFF;">
+            <div  class="newinformation col-md-12 col-xs-12"  style=" border:1px solid #E0E0E0;height: 70px;background: #FFFFFF;margin-bottom:-1px;">
               <div class="col-xs-2 col-sm-1  img-padding" style="line-height: 70px;">
                   {% for author in site.authors %}{% if post.author == author.name %}
                 <img src="{{author.image}}" alt="..."  style="width:50px;height: 50px;border: 1px solid #E0E0E0;">
@@ -63,7 +63,7 @@ limit_tags: 8
 
 
 
-            <div class="col-xs-12 col-sm-12 col-md-12 " id="classandyear" style=" border:1px solid #E0E0E0;background-color:#f3f3f3;   line-height:48px; margin-top: 20px;  " >
+            <div class="col-xs-12 col-sm-12 col-md-12 " id="classandyear" style=" border:1px solid #E0E0E0;background-color:#f3f3f3;   line-height:48px; margin-top: 20px; margin-bottom:-1px; " >
               <div class="col-xs-12 col-sm-4 col-md-4  img-padding">
                 <font style="color: #24292c;font-weight: bold;">
                  分类
@@ -96,9 +96,9 @@ limit_tags: 8
             <div class='ix-article-list' id="page_main">
 
             </div><!--end of article-list -->
-            <div id="loading" style="width: 100%;height: 40px;float: left;line-height: 40px;margin-top: 20px;margin-bottom: 20px;padding-right: 15px;padding-left: 15px;">
-              <div style="width: 100%;height: 40px;background: #dbdbdb;text-align: center;line-height: 40px;border-radius:5px;background-color: #7f7f7f;font-size: 14px;">
-               正在加载更多...
+            <div id="loading" style="width: 100%;height: 40px;float: left;line-height: 40px;margin-top: 20px;margin-bottom: 20px;padding-right: 6px;padding-left: 6px;">
+              <div style="width: 100%;height: 40px;background: #dbdbdb;text-align: center;line-height: 40px;border-radius:5px;">
+               <font  style="color: #7f7f7f;font-size: 14px;"> 正在加载更多...</font>
               </div>
                
             </div>

@@ -1,5 +1,6 @@
+
 <div class='container'>
-        <div class='main-content row'>
+        <div class='main-content row' style="margin-top: 15px;">
             <div class='mainbar col-md-12 col-sm-12 col-xs-12'>
                 <ol class=" breadcrumb " style="background: #fff;">
                     <span class="glyphicon glyphicon-home"></span>
@@ -49,7 +50,7 @@
                                 </span>
                                <img class="pull-right" src="../images/6.jpg"  style="width: 60px;height: 40px;margin-top: 10px;">
                     </div>
-                    <div class="col-sm-12 col-xs-12" id="menu_year_{{post.date| date: '%Y'}}" >
+                    <div  id="menu_year_{{post.date| date: '%Y'}}" >
                     </div>
                 </div> 
                 
@@ -120,7 +121,7 @@
         
         </div> -->
         <a class='list-group-item list-group-item-default'  href="/years/year#yearname{{post.date| date: '%Y'}}">{{post.date| date: '%Y'}}年度
-                    <span  class='badge pull-right'>{{counts[i]}}
+                    <span  class='badge pull-right' style="background: #000;">{{counts[i]}}
                     </span> 
                     <div class='main-line'>
                         
@@ -141,3 +142,9 @@
             </div><!--end of sidebar-->
         </div><!--end of main-content-->
     </div><!--end of container-->
+    <div style="height:85px;"></div>
+    <footer class="blog-footer" style="position:fixed;bottom: 0px;width: 100%;height: 60px;line-height: 0px;">
+      <p>
+        Copyright <font style="font-size: 20px;">©</font> blogways.net 
+      </p>
+</footer>

@@ -21,9 +21,9 @@ pt_page_type: pt
     </script>
 
     <div class='container'>
-        <div class='row main-content'>
+        <div class='row main-content' style="margin-top: 15px;">
             <div class='mainbar col-md-12 col-sm-12 col-xs-12'>
-                <ol class=" breadcrumb " style="background: #fff;padding-left: 30px;padding-right: 30px;">
+                <ol class=" breadcrumb " style="background: #fff;">
                     <span class="glyphicon glyphicon-home"></span>
                     <a href="/" style="color: #000;">首页</a>>
                      {% for author in site.authors %}
@@ -39,20 +39,24 @@ pt_page_type: pt
                     <div class='panel panel-default pt-article-extra'>
                         <div class='panel-body'>
                             <div class='pt-article-pn row'>
-                                {% assign p = page.previous %}{% if p %}
-                                <div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>
-                                    <span>上一篇:
-                                        <a href='{{ p.url }}' title='{{ p.title }}'><u>{{ p.title }}</u></a>
-                                    </span>
-                                </div>
-                                {% endif %}
                                 {% assign n = page.next %}{% if n %}
                                 <div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>
-                                    <span class='pull-right hidden-sm hiden-xs visible-lg visible-md'>下一篇:
+                                    <span>上一篇:
                                         <a href='{{ n.url }}' title='{{ n.title }}'><u>{{ n.title }}</u></a>
                                     </span>
+                                </div>
+                                {% else %}
+                                <div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>
+                                </div>
+                                {% endif %}
+                                
+                                {% assign p = page.previous %}{% if p %}
+                                <div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>
+                                    <span class='pull-right hidden-sm hiden-xs visible-lg visible-md'>下一篇:
+                                        <a href='{{ p.url }}' title='{{ p.title }}'><u>{{ p.title }}</u></a>
+                                    </span>
                                     <span class='hidden-lg hiden-md visible-sm visible-xs'>下一篇:
-                                        <a href='{{ n.url }}' title='{{ n.title }}'><u>{{ n.title }}</u></a>
+                                        <a href='{{ p.url }}' title='{{ p.title }}'><u>{{ p.title }}</u></a>
                                     </span>
                                 </div>
                                 {% endif %}
@@ -118,14 +122,33 @@ pt_page_type: pt
             <div class='col-md-3 hidden-sm hidden-xs sidebar'>
 
                 <div class='authorbar panel panel-default'>
-                    <div class='panel-heading'>{% for auth in site.authors %}
+                    <div class='panel-heading'  style="height: 60px;line-height: 40px;background: #fff;box-shadow: 0px 3px 11px #bebdbd;">{% for auth in site.authors %}
                         {% if page.author == auth.name %}
                         <span class="glyphicon glyphicon-user"></span> 
                         <font style="font-weight: bold; color: #24292c;" >作者：{{ page.author }}</font>
                         {% endif %}{% endfor %}
                     </div>
-                    
-                        <div style="padding-right: 15px;padding-left: 15px;height: 40px;border: 1px solid #E0E0E0;line-height: 40px;">
+                    <div class='list-group' style="margin-top: 2px;">
+                        <a class='list-group-item list-group-item-default'  href="#">
+                            <span class="glyphicon glyphicon-tasks"></span>
+                            <font>文章</font>
+                            <span  class='badge pull-right' id='pt-article-num'>
+                            </span> 
+                            <div class='main-line'>
+                                
+                            </div>
+                    </a>
+                    <a class='list-group-item list-group-item-default'  href="#">
+                            <span class="glyphicon glyphicon-star"></span>
+                            <font>关注</font>
+                            <span  class='badge pull-right' >22
+                            </span> 
+                            <div class='main-line'>
+                                
+                            </div>
+                    </a>
+            </div>
+                       <!--  <div style="padding-right: 15px;padding-left: 15px;height: 40px;border: 1px solid #E0E0E0;line-height: 40px;">
                             <span class="glyphicon glyphicon-tasks"></span>
                             <font>文章</font>
                             <span class="badge pull-right" style="margin-top: 10px;" id='pt-article-num'></span>
@@ -134,7 +157,7 @@ pt_page_type: pt
                             <span class="glyphicon glyphicon-star"></span>
                             <font>关注</font>
                             <span class=" pull-right" >22</span>
-                        </div>
+                        </div> -->
                         
                         <!-- <div class='col-md-6 media-body'>
                             
@@ -147,11 +170,12 @@ pt_page_type: pt
                 </div><!--end of authorbar-->
                 {% if site.related_post != empty %}
                 <div class='newbar panel panel-default' id='newbar'>
-                    <div class='panel-heading'>
+                    <div class='panel-heading' style="height: 60px;line-height: 40px;background: #fff;box-shadow: 0px 3px 11px #bebdbd;">
                        <span class="glyphicon glyphicon-list-alt"></span> 
                        <font style="font-weight: bold; color: #24292c;" >博文推荐</font>
                     </div>
-                    <div class='list-group new-list'>
+
+                    <div class='list-group new-list' style="margin-top: 2px;">
                         {% for post in site.related_posts limit: 5 %}
                         <div class='list-group-item list-group-item-default'>
                             <h5 class='new-heading'>
@@ -171,6 +195,9 @@ pt_page_type: pt
                                     <span class='sr-only'>{{ page.posted_on }}&nbsp;:&nbsp;</span>
                                     {{ post.date | date: "%Y-%m-%d"  }}
                                 </span>
+                            </div>
+                            <div class='main-line'>
+                                
                             </div>
                         </div>{% endfor %}
                     </div>
